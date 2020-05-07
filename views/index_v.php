@@ -15,8 +15,8 @@
                 </div>
 
                 <div id="start_buttons">
-                    <button class="btn filled">S'inscrire</button>
-                    <button class="btn empty">Se connecter</button>
+                    <a class="btn filled" href="./register.php" draggable="false">S'inscrire</a>
+                    <a class="btn empty" href="./login.php" draggable="false">Se connecter</a>
                 </div>
             </header>
         </div>
