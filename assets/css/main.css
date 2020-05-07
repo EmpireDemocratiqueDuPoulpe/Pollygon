@@ -386,7 +386,7 @@ footer p {
  ****************************************/
 
 /*** Login / register box ***/
-#login {
+#login, #register {
     box-sizing: border-box;
     text-align: center;
     width: 450px;
@@ -398,7 +398,7 @@ footer p {
     box-shadow: 7px 7px 8px 0px rgba(0,0,0,0.25);
 }
 
-#login h1 {
+#login h1, #register h1 {
     font-size: 1.5em;
     margin-bottom: 35px;
 }
