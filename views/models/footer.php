@@ -1,3 +1,4 @@
+<div id="footer_spacer"></div>
 <footer>
     <div id="footerSocial">
         <p>Restez connectés à notre actualité, suivez-nous sur :</p>
@@ -9,7 +10,7 @@
 
     <div id="footerLinks">
         <div class="fLSection">
-            <img src="./assets/images/pollygon_l_white.png" alt="Pollygon Logo">
+            <a id="footerLogo" href="./index.php"><img src="./assets/images/pollygon_l_white.png" alt="Pollygon Logo"></a>
         </div>
         
         <div class="fLSection">
