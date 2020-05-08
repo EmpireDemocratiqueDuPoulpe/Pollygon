@@ -7,6 +7,9 @@
     </head>
 
     <body>
+        <!-- Error/success box -->
+        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
         <!-- Register box -->
         <div id="register">
             <h1>Inscription</h1>

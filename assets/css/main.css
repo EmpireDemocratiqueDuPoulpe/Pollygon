@@ -2,10 +2,6 @@
  * Global
  ****************************************/
 
-/*html.logreg {
-    height: 100%;
-}*/
-
 body {
     position: relative;
     height: 100%;
@@ -14,10 +10,6 @@ body {
 }
 
 html.logreg body {
-    /*display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;*/
     background: url("../images/logreg_bg_black.png") no-repeat center center;
     background-size: cover;
 }
@@ -71,6 +63,37 @@ header {
 
 #start_buttons .btn:not(:last-child) {
     margin-right: 25px;
+}
+
+/*** Success and errors messages ***/
+.errorBox, .successBox {
+    box-sizing: border-box;
+    width: 90%;
+    line-height: 1.5em;
+    margin: 20px auto 0 auto;
+    padding: 5px 10px;
+    word-break: break-word;
+}
+
+.errorBox {
+    background: #f44336;
+    color: #FFFFFF;
+}
+
+.successBox {
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+.errorBox a,
+.successBox a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.errorBox a:hover,
+.successBox a:hover {
+    text-decoration: underline;
 }
 
 /*** Forms ***/

@@ -2,11 +2,14 @@
 
 <html lang="fr" class="logreg">
     <head>
-        <title>Pollygon - Connexion</title>
+        <title>Pollygon - Inscription</title>
         <?php include_once(ROOT."/views/models/head.php"); ?>
     </head>
 
     <body>
+        <!-- Error/success box -->
+        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
         <!-- Login box -->
         <div id="login">
             <h1>Connexion</h1>
