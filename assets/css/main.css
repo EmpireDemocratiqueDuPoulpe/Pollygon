@@ -2,10 +2,6 @@
  * Global
  ****************************************/
 
-html.logreg {
-    height: 100%;
-}
-
 body {
     position: relative;
     height: 100%;
@@ -14,10 +10,6 @@ body {
 }
 
 html.logreg body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background: url("../images/logreg_bg_black.png") no-repeat center center;
     background-size: cover;
 }
@@ -73,6 +65,37 @@ header {
     margin-right: 25px;
 }
 
+/*** Success and errors messages ***/
+.errorBox, .successBox {
+    box-sizing: border-box;
+    width: 90%;
+    line-height: 1.5em;
+    margin: 20px auto 0 auto;
+    padding: 5px 10px;
+    word-break: break-word;
+}
+
+.errorBox {
+    background: #f44336;
+    color: #FFFFFF;
+}
+
+.successBox {
+    background: #4CAF50;
+    color: #FFFFFF;
+}
+
+.errorBox a,
+.successBox a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.errorBox a:hover,
+.successBox a:hover {
+    text-decoration: underline;
+}
+
 /*** Forms ***/
 /** Spacers **/
 .link_spacer {
@@ -90,6 +113,12 @@ form a:hover, form a:focus {
     text-decoration: underline;
 }
 
+/** Title **/
+form h3 {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
 /** Fields **/
 .field {
     display: block;
@@ -97,7 +126,8 @@ form a:hover, form a:focus {
     margin: 0 auto 2em auto;
 }
 
-.field input {
+/* All inputs */
+.field input, .field select {
     box-sizing: border-box;
     text-align: left;
     width: 100%;
@@ -105,13 +135,99 @@ form a:hover, form a:focus {
     background: #FAFAFA;
     border: none;
     border-bottom: 2px #eaeaea solid;
+    transition: background-color 100ms ease-in;
+}
+
+.field input:hover, .field select:hover {
+    background: #f6f6f6;
 }
 
 .field input:focus,
-.field input:not(:placeholder-shown) {
+.field input:not(:placeholder-shown),
+.field select:focus,
+.field select:not(:invalid) {
     outline: none;
     box-shadow: none;
     border-color: #009BFF;
+}
+
+.field input[type="date"] {
+    padding: 1em;
+    border-color: #eaeaea;
+    cursor: pointer;
+}
+
+.field select {
+    padding: 1em;
+    cursor: pointer;
+}
+
+/* Double fields */
+.double_field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto 2em auto;
+}
+
+.double_field .field {
+    width: 48%;
+    margin: 0;
+}
+
+/* Radio buttons */
+.field input[type="radio"] {
+    width: auto;
+    display: none;
+}
+
+.radio_label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 auto 5px auto;
+    cursor: pointer;
+    transition: color 100ms ease-in;
+}
+
+.radio_label:hover {
+    color: #009BFF;
+}
+
+.radio {
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background: transparent;
+    border: 2px #009BFF solid;
+    border-radius: 50%;
+}
+
+.radio:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    margin: auto;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 200ms ease-in-out;
+}
+
+input[type="radio"]:checked + .radio:after {
+    background: #009BFF;
 }
 
 /** Fields - Floating label **/
@@ -120,6 +236,11 @@ form a:hover, form a:focus {
     font-size: 0.9em;
     background: #FAFAFA;
     font-family: 'Jost', Arial, sans-serif;
+    transition: background-color 100ms ease-in;
+}
+
+.floating_label_wrapper:hover {
+    background: #f6f6f6;
 }
 
 /* Floating label - Input */
@@ -214,9 +335,9 @@ input[type="submit"] {
 }
 
 footer {
-    position: absolute;
+    /*position: absolute;
     bottom: 0;
-    left: 0;
+    left: 0;*/
     width: 100%;
     color: #FFFFFF;
 }
@@ -390,6 +511,7 @@ footer p {
     box-sizing: border-box;
     text-align: center;
     width: 450px;
+    margin: 2em auto;
     padding: 25px 15px;
     background: #FFFFFF;
     border-radius: 4px;
@@ -397,6 +519,8 @@ footer p {
     -moz-box-shadow: 7px 7px 8px 0px rgba(0,0,0,0.25);
     box-shadow: 7px 7px 8px 0px rgba(0,0,0,0.25);
 }
+
+#login { margin-bottom: 17.55em; }
 
 #login h1, #register h1 {
     font-size: 1.5em;
