@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 07 mai 2020 à 20:04
+-- Généré le :  ven. 08 mai 2020 à 14:13
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -39,7 +39,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `country` varchar(255) DEFAULT NULL,
   `job` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `gender`, `birthdate`, `country`, `job`) VALUES
+(1, 'Quechua', '293287@supinfo.com', '$argon2id$v=19$m=65536,t=4,p=1$d1VZY1AuZnZINWpXdnQ5NQ$TvCA3dD0eEQ5SkGuL9ExVx9aqmRtd7HUdMGbdoP6sBU', 'Homme', '2019-03-13', 'BRA', 'Indépendant'),
+(2, 'Louana', '292440@supinfo.com', '$argon2id$v=19$m=65536,t=4,p=1$SC93SzZHcS5wSW0ub3FCZA$QYNCh3RZnvMW/B1/Y96lRG/CtuSvo8pXzCVPoErjoto', 'Femme', '2020-05-23', 'ETH', 'Sans emploi'),
+(3, 'Maximiliana', '292582@supinfo.com', '$argon2id$v=19$m=65536,t=4,p=1$cWlYb09WTDcxZXVGZGE2Yg$oxuEe3tjZOaACWuwcLBZdxrhopUC66BXPxgVnQgC1jE', 'Femme', '2020-08-05', 'BTN', 'Retraité');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
