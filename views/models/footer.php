@@ -1,4 +1,4 @@
-<div id="footer_spacer"></div>
+<!--<div id="footer_spacer"></div>-->
 <footer>
     <div id="footerSocial">
         <p>Restez connectés à notre actualité, suivez-nous sur :</p>
