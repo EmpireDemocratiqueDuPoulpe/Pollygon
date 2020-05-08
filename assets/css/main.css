@@ -526,3 +526,43 @@ footer p {
     font-size: 1.5em;
     margin-bottom: 35px;
 }
+
+/****************************************
+ * Home
+ ****************************************/
+
+#new_survey_btn_div{
+    text-align: center;
+    margin-top: 4.40%;
+}
+
+#my_surveys_body{
+    margin: 3% auto 0 auto;
+    width: 70vw;
+    height: 50vh;
+}
+
+#surveys_list{
+    margin-top: 1%;
+    height: 85.5%;
+}
+
+.survey{
+    display: flex;
+    justify-content: space-between;
+    margin: 2% 0 2% 0;
+    padding: 1%;
+    background-color: whitesmoke;
+    border: #1D2331 solid 3px;
+}
+
+.survey img, #new_survey_btn_div img{
+    width: 30px;
+}
+.survey h3{
+    margin: auto 0 auto 0;
+}
+
+.div_img{
+    padding-top: 5px;
+}
