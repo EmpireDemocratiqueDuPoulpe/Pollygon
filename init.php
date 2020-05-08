@@ -15,9 +15,11 @@ define("COUNTRY_NOT_VALID", 6);
 define("JOB_NOT_VALID", 7);
 
 define("USR_ALREADY_USED", 20);
-define("EMAIL_ALREADY_USED", 21);
-define("PASSWORDS_DONT_MATCH", 22);
-define("PASSWORD_NOT_SECURE", 23);
+define("USR_NOT_FOUND", 21);
+define("EMAIL_ALREADY_USED", 22);
+define("PASSWORDS_DONT_MATCH", 23);
+define("PASSWORD_NOT_SECURE", 24);
+define("BAD_PASSWORD", 25);
 
 define("UNKNOWN_REGISTER_ERROR", 30);
 define("REGISTRATION_COMPLETE", 31);
@@ -101,12 +103,21 @@ function buildMessages() {
         USR_NOT_VALID => "Le nom d'utilisateur renseign&eacute; n'est pas valide <em>(max. 32 caract&egrave;res)</em>.",
         EMAIL_NOT_VALID => "L'email renseign&eacute; n'est pas valide. Veuillez respecter le format <em>\"locale@domaine.ext\"</em>.",
         PASSWORD_NOT_VALID => "Le mot de passe renseign&eacute; n'est pas valide <em>(une minuscule, une majuscule, un chiffre, un caract&egrave;re sp&eacute;cial, huit caract&egrave;res)</em>.",
+        GENDER_NOT_VALID => "Le sexe renseign&eacute; n'est pas valide.",
+        BIRTHDATE_NOT_VALID => "La date de naissance renseign&eacute;e n'est pas valide.",
+        COUNTRY_NOT_VALID => "Le pays renseign&eacute; n'est pas valide.",
+        JOB_NOT_VALID => "Le m&eacute;tier renseign&eacute; n'est pas valide.",
+
         USR_ALREADY_USED => "Le nom d'utilisateur renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
+        USR_NOT_FOUND => "Le nom d'utilisateur renseign&eacute; n'existe pas.",
         EMAIL_ALREADY_USED => "L'email renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
         PASSWORDS_DONT_MATCH => "Les mots de passes ne correspondent pas.",
         PASSWORD_NOT_SECURE => "Le mot de passe n'est pas s&eacute;curis&eacute; <em>(une minuscule, une majuscule, un chiffre, un caract&egrave;re sp&eacute;cial, huit caract&egrave;res)</em>.",
+        BAD_PASSWORD => "Le mot de passe renseign&eacute; est incorrect.",
+
         UNKNOWN_REGISTER_ERROR => "Erreur inconnue, impossible de vous enregistrer. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         REGISTRATION_COMPLETE => "Inscription r&eacute;ussie ! Vous pouvez d&eacute;sormais vous connecter.",
+
         "none" => "<em>Un probl&egrave;me est survenu lors de l'affichage de ce message</em>"
     ];
 
