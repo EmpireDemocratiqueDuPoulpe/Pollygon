@@ -402,3 +402,34 @@ footer p {
     font-size: 1.5em;
     margin-bottom: 35px;
 }
+
+/****************************************
+ * Home
+ ****************************************/
+
+#new_survey_btn_div{
+    text-align: center;
+    margin-top: 10%;
+}
+
+#my_surveys_body{
+    margin: 3% auto 0 auto;
+    width: 70vw;
+    height: 50vh;
+    border: red solid 1px;
+}
+
+#surveys_list{
+    margin-top: 1%;
+    height: 85.5%;
+    border: green solid 1px;
+}
+
+.survey{
+    display: flex;
+    justify-content: space-between;
+    margin: 2% 0 2% 0;
+    padding: 1%;
+    background-color: whitesmoke;
+    border: #1D2331 solid 3px;
+}
