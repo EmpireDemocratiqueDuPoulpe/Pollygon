@@ -435,9 +435,9 @@ footer p {
 .survey img, #new_survey_btn_div img{
     width: 30px;
 }
- .survey h3{
-     margin: auto 0 auto 0;
- }
+.survey h3{
+    margin: auto 0 auto 0;
+}
 
 .div_img{
     padding-top: 5px;

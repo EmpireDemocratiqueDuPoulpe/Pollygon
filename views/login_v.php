@@ -2,11 +2,14 @@
 
 <html lang="fr" class="logreg">
     <head>
-        <title>Pollygon - Connexion</title>
+        <title>Pollygon - Inscription</title>
         <?php include_once(ROOT."/views/models/head.php"); ?>
     </head>
 
     <body>
+        <!-- Error/success box -->
+        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
         <!-- Login box -->
         <div id="login">
             <h1>Connexion</h1>
@@ -20,7 +23,7 @@
 
                 <!-- Password -->
                 <div class="field floating_label_wrapper">
-                    <input type="password" id="password" class="floating_label_input" name="password" minlength="1" maxlength="255" placeholder="Mot de passe" required>
+                    <input type="password" id="password" class="floating_label_input" name="password" minlength="8" maxlength="255" placeholder="Mot de passe" required>
                     <label for="password" class="floating_label">Mot de passe</label>
                 </div>
 
