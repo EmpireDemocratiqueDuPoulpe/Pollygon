@@ -40,3 +40,5 @@
         <p>&copy; 2020 - Pollygon by Big Brother</p>
     </div>
 </footer>
+
+<script src="./assets/js/goToFooter.js"></script>

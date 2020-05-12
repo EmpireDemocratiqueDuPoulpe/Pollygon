@@ -402,6 +402,7 @@ footer p {
     height: 50px;
     line-height: 50px;
     background: #009BFF;
+    cursor: pointer;
 }
 
 #footerSocial p {
