@@ -2,7 +2,7 @@
 
 <html lang="fr" class="logreg">
     <head>
-        <title>Pollygon - Connexion</title>
+        <title>Pollygon - Inscription</title>
         <?php include_once(ROOT."/views/models/head.php"); ?>
     </head>
 

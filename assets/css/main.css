@@ -65,6 +65,13 @@ header {
     margin-right: 25px;
 }
 
+/*** Navbar ***/
+#navbar {
+    width: 100%;
+    height: 90px;
+    background-color: #009BFF;
+}
+
 /*** Success and errors messages ***/
 .errorBox, .successBox {
     box-sizing: border-box;
@@ -286,6 +293,7 @@ input[type="radio"]:checked + .radio:after {
     opacity: .25;
 }
 /** Buttons **/
+/* Button */
 .btn {
     box-sizing: border-box;
     display: inline-block;
@@ -310,23 +318,59 @@ input[type="radio"]:checked + .radio:after {
     outline: none;
 }
 
+/* Filled / empty */
 .btn.filled {
-    background: #009BFF;
+    background: #009bff;
 }
 
-.btn.filled:hover {
-    background: #0094f5;
-    border-color: #0094f5;
-}
-
+.btn.filled:hover,
 .btn.empty:hover {
     background: #0094f5;
     border-color: #0094f5;
 }
 
+/* Red */
+.btn.red {
+    background: #f44336;
+    border-color: #f44336;
+}
+
+.btn.filled.red:hover,
+.btn.empty.red:hover {
+    background: #ea3c36;
+    border-color: #ea3c36;
+}
+
+/* Smaller */
+.btn.smaller {
+    font-size: 0.9em;
+    width: 180px;
+    height: 35px;
+    line-height: 30px;
+}
+
 /* Submit button */
 input[type="submit"] {
     margin-top: 10px;
+}
+
+/*** Icons ***/
+
+i.svgImport {
+    position: relative;
+    display: inline;
+    margin: 0 5px;
+    padding: 0 12px;
+}
+
+i.svgImport svg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 24px;
+    width: 100%;
+    max-height: 24px;
+    margin: 0 auto;
 }
 
 /*** Footer ***/
@@ -335,9 +379,9 @@ input[type="submit"] {
 }
 
 footer {
-    /*position: absolute;
-    bottom: 0;
-    left: 0;*/
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: -230px;
     width: 100%;
     color: #FFFFFF;
 }
@@ -531,38 +575,72 @@ footer p {
  * Home
  ****************************************/
 
-#new_survey_btn_div{
+/*** Survey buttons ***/
+#surveys_btn {
     text-align: center;
     margin-top: 4.40%;
 }
 
-#my_surveys_body{
-    margin: 3% auto 0 auto;
-    width: 70vw;
-    height: 50vh;
+/*** Survey list ***/
+/** Survey container **/
+#surveys_container {
+    position: relative;
+    width: 100%;
+    margin-top: 30px;
 }
 
-#surveys_list{
-    margin-top: 1%;
-    height: 85.5%;
+#surveys_container h2 {
+    font-size: 1.1em;
+    margin: 0 0 15px 15%;
 }
 
-.survey{
-    display: flex;
-    justify-content: space-between;
-    margin: 2% 0 2% 0;
-    padding: 1%;
-    background-color: whitesmoke;
-    border: #1D2331 solid 3px;
+/** Survey list **/
+/* List */
+#surveys_list {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15%;
+    list-style: none;
 }
 
-.survey img, #new_survey_btn_div img{
-    width: 30px;
-}
-.survey h3{
-    margin: auto 0 auto 0;
+/* Surveys */
+.survey {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: 10px;
+    background: #f6f6f6;
+    border-radius: 3px;
+    transition: background-color 100ms ease-in;
 }
 
-.div_img{
-    padding-top: 5px;
+.survey::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border-radius: 5px;
+    -webkit-box-shadow: 7px 7px 8px 0 rgba(0, 0, 0, 0.20);
+    -moz-box-shadow: 7px 7px 8px 0 rgba(0, 0, 0, 0.20);
+    box-shadow: 7px 7px 8px 0 rgba(0, 0, 0, 0.20);
+    transition: opacity 200ms ease-in-out;
+}
+
+.survey:hover::after {
+    opacity: 1;
+}
+
+.surveyLink {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    color: #000000;
+    text-decoration: none;
 }
