@@ -67,64 +67,47 @@ header {
 
 /*** Navbar ***/
 #navbar {
-    width: 100%;
-    height: 75px;
-    background-color: rgba(0, 0, 0, 0.75);
-    border-bottom: 15px #009BFF solid;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 90px;
+    padding: 0 12px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-bottom: 15px #009BFF solid;
 }
 
-#navbar img{
-    width: 200px;
-    margin: 0 0 0 12px;
+/** Navbar logo **/
+#navbarLogo {
+    display: block;
+    height: 90%;
 }
 
-#navbar img:hover {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+#navbarLogo img {
+    height: 100%;
+}
+
+#navbarLogo img:hover {
+    animation: shake 620ms cubic-bezier(.36,.07,.19,.97) both;
     transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
 }
 
-@keyframes shake {
-    10%, 90% {
-        transform: translate3d(-1px, 0, 0);
-    }
-
-    20%, 80% {
-        transform: translate3d(2px, 0, 0);
-    }
-
-    30%, 50%, 70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-
-    40%, 60% {
-        transform: translate3d(4px, 0, 0);
-    }
-}
-
-#navbar i{
+/** Navbar link **/
+.navbarIcon {
+    display: inline-block;
     color: white;
-    margin-right: 12px;
+    transition: color 100ms linear;
     cursor: pointer;
 }
 
-#navbar i:hover{
-    color: #009BFF;
-    transition: color 0.1s linear;
-}
-
-#navbar i:not(:hover){
-    color: white;
-    transition: color 0.1s linear;
-}
-
-#navbar_i{
+.navbarIcon:not(:last-child) {
     margin-right: 12px;
+}
+
+.navbarIcon:hover {
+    color: #009BFF;
 }
 
 /*** Success and errors messages ***/
@@ -752,4 +735,26 @@ footer p {
 .stat img {
     max-width: 225px;
     max-height: 150px;
+}
+
+/****************************************
+ * Keyframes
+ ****************************************/
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
