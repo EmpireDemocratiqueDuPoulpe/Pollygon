@@ -1,5 +1,5 @@
 <?php
-require_once "../init.php";
+require_once "../../init.php";
 
 ############################
 # Destroy session
@@ -17,5 +17,5 @@ if (ini_get("session.use_cookies")) {
 }
 
 if (session_status() === PHP_SESSION_ACTIVE) {
-    redirectTo("../login.php");
+    redirectTo("../../login.php");
 }

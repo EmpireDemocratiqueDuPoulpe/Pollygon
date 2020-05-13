@@ -1,6 +1,7 @@
 <?php
-require_once "../init.php";
-$loginPage = "../login.php";
+require_once "../../init.php";
+$loginPage = "../../login.php";
+$homePage = "../../home.php";
 
 ############################
 # Check vars
@@ -42,4 +43,4 @@ $_SESSION["user_id"] = $user["user_id"];
 $_SESSION["username"] = $user["username"];
 $_SESSION["email"] = $user["email"];
 
-redirectTo("../home.php");
+redirectTo($homePage);

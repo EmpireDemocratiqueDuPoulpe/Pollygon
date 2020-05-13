@@ -1,7 +1,7 @@
 <?php
-require_once "../init.php";
-$registerPage = "../register.php";
-$loginPage = "../login.php";
+require_once "../../init.php";
+$registerPage = "../../register.php";
+$loginPage = "../../login.php";
 
 ############################
 # Check vars
