@@ -6,13 +6,14 @@
 
 define("ROOT", str_replace('\\', '/', __DIR__));
 
-define("USR_NOT_VALID", 1);
-define("EMAIL_NOT_VALID", 2);
-define("PASSWORD_NOT_VALID", 3);
-define("GENDER_NOT_VALID", 4);
-define("BIRTHDATE_NOT_VALID", 5);
-define("COUNTRY_NOT_VALID", 6);
-define("JOB_NOT_VALID", 7);
+define("USRID_NOT_VALID", 1);
+define("USR_NOT_VALID", 2);
+define("EMAIL_NOT_VALID", 3);
+define("PASSWORD_NOT_VALID", 4);
+define("GENDER_NOT_VALID", 5);
+define("BIRTHDATE_NOT_VALID", 6);
+define("COUNTRY_NOT_VALID", 7);
+define("JOB_NOT_VALID", 8);
 
 define("USR_ALREADY_USED", 20);
 define("USR_NOT_FOUND", 21);
@@ -100,6 +101,7 @@ function setSuccess($successCode) {
 
 function buildMessages() {
     $messages = [
+        USRID_NOT_VALID => "Erreur lors de la récupération de l'ID utilisateur.",
         USR_NOT_VALID => "Le nom d'utilisateur renseign&eacute; n'est pas valide <em>(max. 32 caract&egrave;res)</em>.",
         EMAIL_NOT_VALID => "L'email renseign&eacute; n'est pas valide. Veuillez respecter le format <em>\"locale@domaine.ext\"</em>.",
         PASSWORD_NOT_VALID => "Le mot de passe renseign&eacute; n'est pas valide <em>(une minuscule, une majuscule, un chiffre, un caract&egrave;re sp&eacute;cial, huit caract&egrave;res)</em>.",
