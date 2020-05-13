@@ -9,15 +9,18 @@
         <!-- Navbar -->
         <?php include_once(ROOT."/views/models/navbar.php"); ?>
 
+        <!-- Error/success box -->
+        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
         <!-- Buttons -->
         <div id="surveys_btn">
             <a class="btn filled smaller" href="#" draggable="false">
-                <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/surveys/add_survey.svg"); ?></i>
+                <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
                 Nouveau sondage
             </a>
 
             <a class="btn filled red smaller" href="#" draggable="false">
-                <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/surveys/del_survey.svg"); ?></i>
+                <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/del_survey.svg"); ?></i>
                 Supprimer sondage
             </a>
         </div>
