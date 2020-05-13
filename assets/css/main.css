@@ -645,3 +645,56 @@ footer p {
     color: #000000;
     text-decoration: none;
 }
+
+/****************************************
+ * My account
+ ****************************************/
+
+/*** Back link ***/
+#backToHome {
+    margin: 20px 0 0 5%;
+}
+
+/*** My account boxes ***/
+.account_box {
+    box-sizing: border-box;
+    width: 90%;
+    margin: 20px auto;
+    padding: 50px;
+    background: #FFFFFF;
+}
+
+/** Boxes **/
+.account_box h2 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.account_box form   { text-align: center; }
+.account_box .field { text-align: left; }
+
+/** Stats **/
+#stats_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Stat box */
+.stat {
+    box-sizing: border-box;
+    text-align: center;
+    width: 300px;
+    height: 200px;
+    padding: 5px;
+    background: #FAFAFA;
+    cursor: default;
+}
+
+.stat:hover { background: #f6f6f6; }
+
+.stat img {
+    max-width: 225px;
+    max-height: 150px;
+}
