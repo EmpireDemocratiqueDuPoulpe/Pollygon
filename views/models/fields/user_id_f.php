@@ -1,0 +1,1 @@
+<input type="hidden" id="user_id" name="user_id" value="<?php if(isset($_SESSION)) { if (isset($_SESSION["user_id"])) { echo $_SESSION["user_id"]; }} ?>" readonly>

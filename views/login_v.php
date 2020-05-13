@@ -14,7 +14,7 @@
         <div id="login">
             <h1>Connexion</h1>
 
-            <form action="./php/login_user.php" method="POST">
+            <form action="./php/user/login.php" method="POST">
                 <?php include ROOT."/views/models/fields/username_f.php"; ?>
                 <?php include ROOT."/views/models/fields/password_f.php"; ?>
 
