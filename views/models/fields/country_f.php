@@ -80,7 +80,7 @@
         <option value="FJI">Fidji</option>
         <option value="FIN">Finlande</option>
         <option value="FRA">France</option>
-        <option value="GUF">Guyane fran&&ccedil;aise</option>
+        <option value="GUF">Guyane fran&ccedil;aise</option>
         <option value="PYF">Polyn&eacute;sie fran&ccedil;aise</option>
         <option value="ATF">Terres australes fran&ccedil;aises</option>
         <option value="GAB">Gabon</option>
