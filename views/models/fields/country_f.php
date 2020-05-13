@@ -93,7 +93,7 @@
         <option value="GNQ">Guin&eacute;e &eacute;quatoriale</option>
         <option value="GNB">Guin&eacute;e-Bissau</option>
         <option value="GUY">Guyane</option>
-        <option value="GUF">Guyane fran&&ccedil;aise</option>
+        <option value="GUF">Guyane fran&ccedil;aise</option>
         <option value="HTI">Ha&iuml;ti</option>
         <option value="HND">Honduras</option>
         <option value="HKG">Hong Kong</option>
