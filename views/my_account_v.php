@@ -23,7 +23,7 @@
                 <?php include ROOT."/views/models/fields/user_id_f.php"; ?>
                 <?php include ROOT."/views/models/fields/username_f.php"; ?>
                 <?php include ROOT."/views/models/fields/email_f.php"; ?>
-                <?php include ROOT."/views/models/fields/password_double_f.php"; ?>
+                <?php include ROOT."/views/models/fields/password_f.php"; ?>
 
                 <input type="submit" class="btn filled" value="MODIFIER">
             </form>

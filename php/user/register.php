@@ -103,43 +103,12 @@ if (!checkdate($splitBirthdate[1], $splitBirthdate[2], $splitBirthdate[0])) {
 # Add user
 ############################
 
-// Get last ID before query
-$emptyDb = false;
+$UserManager = new Users($db);
 
-$lastIDBefore = PDOFactory::sendQuery($db, 'SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1');
-
-if (!$lastIDBefore) $emptyDb = true;
-else {
-    $lastIDBefore = $lastIDBefore[0]["user_id"];
-}
-
-// Add user
-$sql = 'INSERT INTO 
-            users(username, email, password, gender, birthdate, country, job) 
-        VALUES
-            (:username, :email, :password, :gender, STR_TO_DATE(:birthdate, \'%Y-%c-%d\'), :country, :job)';
-
-$vars = [
-    "username" => $username,
-    "email" => $email,
-    "password" => $password_hashed,
-    "gender" => $gender,
-    "birthdate" => $birthdate,
-    "country" => $country,
-    "job" => $job
-];
-
-PDOFactory::sendQuery($db, $sql, $vars, false);
-
-// Get last ID after query
-if (!$emptyDb)
-    $lastIDAfter = PDOFactory::sendQuery($db, 'SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1')[0]["user_id"];
-
-// Redirect to login page with error or success code
-if (!$emptyDb && ($lastIDBefore === $lastIDAfter)) {
-    setError(UNKNOWN_REGISTER_ERROR);
-    redirectTo($registerPage);
-} else {
+if ($UserManager->add($username, $email, $password_hashed, $gender, $birthdate, $country, $job)) {
     setSuccess(REGISTRATION_COMPLETE);
     redirectTo($loginPage);
+} else {
+    setError(UNKNOWN_REGISTER_ERROR);
+    redirectTo($registerPage);
 }

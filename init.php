@@ -24,6 +24,8 @@ define("BAD_PASSWORD", 25);
 
 define("UNKNOWN_REGISTER_ERROR", 30);
 define("REGISTRATION_COMPLETE", 31);
+define("UNKNOWN_ACCOUNT_EDIT_ERROR", 32);
+define("ACCOUNT_EDIT_COMPLETE", 33);
 
 ############################
 # Session
@@ -119,6 +121,8 @@ function buildMessages() {
 
         UNKNOWN_REGISTER_ERROR => "Erreur inconnue, impossible de vous enregistrer. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         REGISTRATION_COMPLETE => "Inscription r&eacute;ussie ! Vous pouvez d&eacute;sormais vous connecter.",
+        UNKNOWN_ACCOUNT_EDIT_ERROR => "Erreur inconnue, impossible de modifier vos informations de compte. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        ACCOUNT_EDIT_COMPLETE => "Modification de vos donn&eacute;es r&eacute;ussie !",
 
         "none" => "<em>Un probl&egrave;me est survenu lors de l'affichage de ce message</em>"
     ];
