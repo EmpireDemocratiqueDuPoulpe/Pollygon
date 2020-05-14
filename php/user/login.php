@@ -3,6 +3,8 @@ require_once "../../init.php";
 $loginPage = "../../login.php";
 $homePage = "../../home.php";
 
+$UserManager = new Users($db);
+
 ############################
 # Check vars
 ############################
@@ -28,12 +30,8 @@ if (!$user) {
 # Check password
 ############################
 
-$password_peppered = hash_hmac("sha256", $password, $config["SECURITY"]["pepper"]);
-
-if (!password_verify($password_peppered, $user["password"])) {
-    setError(BAD_PASSWORD);
+if (!$UserManager->checkPassword($password, $user["password"], $config["SECURITY"]["pepper"]))
     redirectTo($loginPage);
-}
 
 ############################
 # Connect user

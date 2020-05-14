@@ -3,6 +3,8 @@ require_once "../../init.php";
 $registerPage = "../../register.php";
 $loginPage = "../../login.php";
 
+$UserManager = new Users($db);
+
 ############################
 # Check vars
 ############################
@@ -28,87 +30,38 @@ if (is_null($job))          { setError(JOB_NOT_VALID); redirectTo($registerPage)
 # Check username
 ############################
 
-// Check length
-$usernameLen = strlen($username);
-
-if ($usernameLen < 1 OR $usernameLen > 32) {
-    setError(USR_NOT_VALID);
+if (!$UserManager->checkUsername($username))
     redirectTo($registerPage);
-}
-
-// Check availability
-$usrResult = PDOFactory::sendQuery($db, 'SELECT user_id FROM users WHERE username = :username', ["username" => $username]);
-
-if ($usrResult) {
-    setError(USR_ALREADY_USED);
-    redirectTo($registerPage);
-}
 
 ############################
 # Check email
 ############################
 
-// Check validity
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setError(EMAIL_NOT_VALID);
+if (!$UserManager->checkEmail($email))
     redirectTo($registerPage);
-}
-
-// Check availability
-$emailResult = PDOFactory::sendQuery($db, 'SELECT user_id FROM users WHERE email = :email', ["email" => $email]);
-
-if ($emailResult) {
-    setError(EMAIL_ALREADY_USED);
-    redirectTo($registerPage);
-}
 
 ############################
 # Check password
 ############################
 
-// Check if passwords match
-if ($password1 !== $password2) {
-    setError(PASSWORDS_DONT_MATCH);
+if (!$UserManager->checkNewPassword($password1, $password2))
     redirectTo($registerPage);
-}
 
-// Are the passwords secure?
-$p_length_valid = (strlen($password1) >= 8);
-$p_one_number = (preg_match("#[0-9]+#", $password1));
-$p_one_lower_char = (preg_match("#[a-z]+#", $password1));
-$p_one_upper_char = (preg_match("#[A-Z]+#", $password1));
-$p_one_special_char = (preg_match("#[\W]+#", $password1));
-
-if (!$p_length_valid OR !$p_one_number OR !$p_one_lower_char OR !$p_one_upper_char OR !$p_one_special_char) {
-    setError(PASSWORD_NOT_SECURE);
-    redirectTo($registerPage);
-}
-
-// Hash password
-$password_peppered = hash_hmac("sha256", $password1, $config["SECURITY"]["pepper"]);
-$password_hashed = password_hash($password_peppered, PASSWORD_ARGON2ID);
+$password_hashed = $UserManager->hashPassword($password1, $config["SECURITY"]["pepper"]);
 
 ############################
 # Check birthdate
 ############################
 
-$splitBirthdate = explode("-", $birthdate);
-
-if (!checkdate($splitBirthdate[1], $splitBirthdate[2], $splitBirthdate[0])) {
-    setError(BIRTHDATE_NOT_VALID);
+if (!$UserManager->checkBirthdate($birthdate))
     redirectTo($registerPage);
-}
 
 ############################
 # Add user
 ############################
 
-$UserManager = new Users($db);
-
 if ($UserManager->add($username, $email, $password_hashed, $gender, $birthdate, $country, $job)) {
-    setSuccess(REGISTRATION_COMPLETE);
     redirectTo($loginPage);
 } else {
-    setError(UNKNOWN_REGISTER_ERROR);
     redirectTo($registerPage);
 }

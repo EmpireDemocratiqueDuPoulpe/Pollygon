@@ -89,8 +89,10 @@ class Users {
 
         // Return true if the user is created
         if (!$emptyDb && ($lastIDBefore === $lastIDAfter)) {
+            setError(UNKNOWN_REGISTER_ERROR);
             return false;
         } else {
+            setSuccess(REGISTRATION_COMPLETE);
             return true;
         }
     }
@@ -210,7 +212,7 @@ class Users {
      * @param       string          $password           Password set by user
      * @param       string          $passwordPeppered   Password set in DB
      * @param       string          $pepper             Used pepper
-     * @return      boolean         Is the email valid.
+     * @return      boolean         Is the password valid.
      */
     public function checkPassword($password, $passwordPeppered, $pepper) {
         $password = hash_hmac("sha256", $password, $pepper);
@@ -221,5 +223,64 @@ class Users {
         }
 
         return true;
+    }
+
+    /**
+     * Check if the new password is valid and secure.
+     *
+     * @param       string          $password1      New password
+     * @param       string          $password2      New password (confirm)
+     * @return      boolean         Is the new password valid and secure.
+     */
+    public function checkNewPassword($password1, $password2) {
+        // Check if passwords match
+        if ($password1 !== $password2) {
+            setError(PASSWORDS_DONT_MATCH);
+            return false;
+        }
+
+        // Are the passwords secure?
+        $p_length_valid = (strlen($password1) >= 8);
+        $p_one_number = (preg_match("#[0-9]+#", $password1));
+        $p_one_lower_char = (preg_match("#[a-z]+#", $password1));
+        $p_one_upper_char = (preg_match("#[A-Z]+#", $password1));
+        $p_one_special_char = (preg_match("#[\W]+#", $password1));
+
+        if (!$p_length_valid or !$p_one_number or !$p_one_lower_char or !$p_one_upper_char or !$p_one_special_char) {
+            setError(PASSWORD_NOT_SECURE);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the birthdate is valid.
+     *
+     * @param       string          $birthdate      Birthdate
+     * @return      boolean         Is the birthdate valid.
+     */
+    public function checkBirthdate($birthdate) {
+        $splitBirthdate = explode("-", $birthdate);
+
+        if (!checkdate($splitBirthdate[1], $splitBirthdate[2], $splitBirthdate[0])) {
+            setError(BIRTHDATE_NOT_VALID);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the new password is valid and secure.
+     *
+     * @param       string          $password   Password to hash
+     * @param       string          $pepper     Used pepper
+     * @return      string          Hashed password
+     */
+    public function hashPassword($password, $pepper) {
+        // Hash password
+        $password_peppered = hash_hmac("sha256", $password, $pepper);
+        return password_hash($password_peppered, PASSWORD_ARGON2ID);
     }
 }
