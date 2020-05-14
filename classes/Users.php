@@ -192,6 +192,85 @@ class Users {
     }
 
     /**
+     * Update account personal infos of a user.
+     *
+     * @param       int|string      $user_id        User's id
+     * @param       string          $gender         Gender
+     * @param       string          $birthdate      Birthdate
+     * @param       string          $country        Country
+     * @param       string          $job            Job
+     * @return      boolean         Has the user been edited?
+     */
+    public function updatePersonal($user_id, $gender, $birthdate, $country, $job) {
+        // Get user's personal infos
+        $user = PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT gender, birthdate, country, job FROM users WHERE user_id = :user_id',
+            ["user_id" => $user_id]
+        );
+
+        if (!$user) {
+            setError(UNKNOWN_ACCOUNT_EDIT_ERROR);
+            return false;
+        } else {
+            $user = $user[0];
+        }
+
+        // Update user
+        PDOFactory::sendQuery(
+            $this->_db,
+            'UPDATE 
+                    users
+                SET
+                    gender = :gender,
+                    birthdate = :birthdate,
+                    country = :country,
+                    job = :job
+                WHERE 
+                    user_id = :user_id',
+            [
+                "gender" => $gender,
+                "birthdate" => $birthdate,
+                "country" => $country,
+                "job" => $job,
+                "user_id" => $user_id
+            ],
+            false
+        );
+
+        // Check if the user has been updated
+        $userNotEdited = PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT
+                    user_id
+                FROM
+                    users
+                WHERE
+                    user_id = :user_id &&
+                    gender = :gender &&
+                    birthdate = :birthdate &&
+                    country = :country &&
+                    job = :job',
+            [
+                "gender" => $user["gender"],
+                "birthdate" => $user["birthdate"],
+                "country" => $user["country"],
+                "job" => $user["job"],
+                "user_id" => $user_id
+            ]
+        );
+
+        // Return true if the user is created
+        if ($userNotEdited) {
+            setError(UNKNOWN_ACCOUNT_EDIT_ERROR);
+            return false;
+        } else {
+            setSuccess(ACCOUNT_EDIT_COMPLETE);
+            return true;
+        }
+    }
+
+    /**
      * Check username availability
      *
      * @param       string      $username       User name
@@ -299,6 +378,20 @@ class Users {
         }
 
         return true;
+    }
+
+    /**
+     * Check if the gender is valid.
+     *
+     * @param       string          $gender     Gender
+     * @return      string          Checked gender
+     */
+    public function checkGender($gender) {
+        if ($gender != "Homme" && $gender != "Femme")
+            return "Homme";
+
+        else
+            return $gender;
     }
 
     /**

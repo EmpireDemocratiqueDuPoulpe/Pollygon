@@ -50,6 +50,12 @@ if (!$UserManager->checkNewPassword($password1, $password2))
 $password_hashed = $UserManager->hashPassword($password1, $config["SECURITY"]["pepper"]);
 
 ############################
+# Check gender
+############################
+
+$gender = $UserManager->checkGender($gender);
+
+############################
 # Check birthdate
 ############################
 

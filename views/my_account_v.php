@@ -45,7 +45,7 @@
         <div class="account_box">
             <h2>Informations personnelles</h2>
 
-            <form action="#" method="POST">
+            <form action="./php/user/update_personal.php" method="POST">
                 <?php include ROOT."/views/models/fields/user_id_f.php"; ?>
                 <?php include ROOT."/views/models/fields/gender_f.php"; ?>
                 <?php include ROOT."/views/models/fields/birthdate_f.php"; ?>
