@@ -30,117 +30,54 @@
 
             <ul id="surveys_list">
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
                 <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
+                    <a class="surveyLink" href="#">
+                        <span class="surveyName">Nom du sondage</span>
+                        <span class="surveyDate">- 01/01/1970</span>
+                        <span class="surveyMembers">0 participant(s)</span>
+                    </a>
                 </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-                <li class="survey">
-                    <a class="surveyLink" href="#">Nom du sondage</a>
-                </li>
-
             </ul>
         </div>
 
