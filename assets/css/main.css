@@ -6,7 +6,12 @@ body {
     position: relative;
     height: 100%;
     font-family: 'Jost', Arial, sans-serif;
+    /* V1
     background: url("../images/bg_white.png") repeat 0 0;
+    */
+    /* V2 */
+    background: url("../images/bg_white_alt.jpg") no-repeat 0 0 fixed;
+    background-size: cover;
 }
 
 html.logreg body {
