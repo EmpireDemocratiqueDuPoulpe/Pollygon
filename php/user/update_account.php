@@ -55,13 +55,10 @@ if (!$UserManager->checkPassword($password, $usrPassword, $config["SECURITY"]["p
 if (($username == $_SESSION["username"]) && ($email == $_SESSION["email"])) {
     redirectTo($accountPage);
 } else if ($UserManager->updateAccount($user_id, $username, $email, $_SESSION["username"], $_SESSION["email"])) {
-    setSuccess(ACCOUNT_EDIT_COMPLETE);
-
     $_SESSION["username"] = $username;
     $_SESSION["email"] = $email;
 
     redirectTo($accountPage);
 } else {
-    setError(UNKNOWN_ACCOUNT_EDIT_ERROR);
     redirectTo($accountPage);
 }

@@ -29,6 +29,18 @@
             </form>
         </div>
 
+        <!-- "Security" box -->
+        <div class="account_box">
+            <h2>S&eacute;curit&eacute;</h2>
+            <form action="./php/user/update_password.php" method="POST">
+                <?php include ROOT."/views/models/fields/user_id_f.php"; ?>
+                <?php include ROOT."/views/models/fields/password_f.php"; ?>
+                <?php include ROOT."/views/models/fields/password_new_f.php"; ?>
+
+                <input type="submit" class="btn filled" value="MODIFIER">
+            </form>
+        </div>
+
         <!-- "Personal infos" box -->
         <div class="account_box">
             <h2>Informations personnelles</h2>

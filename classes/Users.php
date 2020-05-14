@@ -108,7 +108,7 @@ class Users {
      * @return      boolean         Has the user been edited?
      */
     public function updateAccount($user_id, $username, $email, $oldUsername, $oldEmail) {
-        // Add user
+        // Update user
         PDOFactory::sendQuery(
             $this->_db,
             'UPDATE 
@@ -138,8 +138,55 @@ class Users {
 
         // Return true if the user is created
         if ($userNotEdited) {
+            setError(UNKNOWN_ACCOUNT_EDIT_ERROR);
             return false;
         } else {
+            setSuccess(ACCOUNT_EDIT_COMPLETE);
+            return true;
+        }
+    }
+
+    /**
+     * Update account infos of a user.
+     *
+     * @param       int|string      $user_id        User's id
+     * @param       string          $password       New password
+     * @param       string          $oldPassword    Old password
+     * @return      boolean         Has the user been edited?
+     */
+    public function updatePassword($user_id, $password, $oldPassword) {
+        // Update user
+        PDOFactory::sendQuery(
+            $this->_db,
+            'UPDATE 
+                    users
+                SET
+                    password = :password
+                WHERE 
+                    user_id = :user_id',
+            [
+                "password" => $password,
+                "user_id" => $user_id
+            ],
+            false
+        );
+
+        // Check if the user has been updated
+        $userNotEdited = PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT user_id FROM users WHERE user_id = :user_id && password = :password',
+            [
+                "password" => $oldPassword,
+                "user_id" => $user_id
+            ]
+        );
+
+        // Return true if the user is created
+        if ($userNotEdited) {
+            setError(UNKNOWN_ACCOUNT_EDIT_ERROR);
+            return false;
+        } else {
+            setSuccess(ACCOUNT_EDIT_COMPLETE);
             return true;
         }
     }
