@@ -2,6 +2,12 @@
 require_once "./init.php";
 
 ############################
+# Check if he's connected
+############################
+
+if (!$is_connected) redirectTo("./login.php");
+
+############################
 # Get the user's surveys
 ############################
 
