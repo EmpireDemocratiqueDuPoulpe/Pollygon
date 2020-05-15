@@ -22,7 +22,7 @@
             </div>
 
             <div id="sVQuestionView">
-                <h2>Question X Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et fermentum lectus, et mollis risus.</h2>
+                <?= $questionView; ?>
             </div>
         </div>
 

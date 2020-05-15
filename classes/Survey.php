@@ -39,7 +39,7 @@ class Survey {
     public function addQuestion($question)      { $this->questionArray[] = $question; }
 
     // Methods
-    public function buildQuestions($selected = -1) {
+    public function buildQuestions($pageName, $selected = -1) {
         $html = "";
 
         for ($i = 0; $i < count($this->questionArray); $i++) {
@@ -48,7 +48,7 @@ class Survey {
             else
                 $class = '';
 
-            $html .= '<li '.$class.'><a href="./create_survey.php?selected='.$i.'">'.$this->questionArray[$i]->getTitle().'</a></li>';
+            $html .= '<li '.$class.'><a href="'.$pageName.'selected='.$i.'">'.$this->questionArray[$i]->getTitle().'</a></li>';
         }
 
         return $html;

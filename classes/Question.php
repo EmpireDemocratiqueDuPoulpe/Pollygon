@@ -18,5 +18,5 @@ abstract class Question {
         return '<h2>'.$this->title.'</h2>';
     }
 
-    public abstract function build();
+    public abstract function build($disabledInput);
 }

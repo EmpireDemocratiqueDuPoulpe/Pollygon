@@ -21,7 +21,25 @@ if (!$survey) {
     $survey = unserialize($survey[0]["survey"]);
 }
 
-$questions = $survey->buildQuestions();
+// Build question list
+$questions = "";
+
+if (isset($_GET["selected"])) {
+    $questions = $survey->buildQuestions("./view_survey.php?survey=".$_GET["survey"]."&", $_GET["selected"]);
+} else {
+    $questions = $survey->buildQuestions("./view_survey.php?survey=".$_GET["survey"]."&");
+}
+
+// Build the question view
+$questionView = '';
+
+if (isset($_GET["selected"])) {
+    $q = $survey->getQuestion($_GET["selected"]);
+
+    if (!is_null($q)) {
+        $questionView = $q->build(false);
+    }
+}
 
 ############################
 # Import the view

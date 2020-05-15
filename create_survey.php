@@ -31,9 +31,9 @@ if (isset($_GET["newQuestion"]) AND !empty($_GET["newQuestion"])) {
 $questions = "";
 
 if (isset($_GET["selected"])) {
-    $questions = $_SESSION["survey"]->buildQuestions($_GET["selected"]);
+    $questions = $_SESSION["survey"]->buildQuestions("./create_survey.php?", $_GET["selected"]);
 } else {
-    $questions = $_SESSION["survey"]->buildQuestions();
+    $questions = $_SESSION["survey"]->buildQuestions("./create_survey.php?");
 }
 
 // Build the URL for a new question
@@ -51,7 +51,7 @@ if (isset($_GET["selected"])) {
     $q = $_SESSION["survey"]->getQuestion($_GET["selected"]);
 
     if (!is_null($q)) {
-        $questionView = $q->build();
+        $questionView = $q->build(true);
     }
 }
 
