@@ -652,6 +652,12 @@ footer p {
     list-style: none;
 }
 
+#noSurvey {
+    text-align: center;
+    margin: 3em 0;
+    color: #8a8a8a;
+}
+
 /* Surveys */
 .survey {
     box-sizing: border-box;
@@ -774,6 +780,7 @@ footer p {
 #sVQuestionList {
     flex-shrink: 0;
     flex-grow: 0;
+    text-align: center;
     font-size: 1.1em;
     width: 25%;
     height: 100%;
@@ -782,6 +789,7 @@ footer p {
 }
 
 #sVQuestionList ul {
+    text-align: left;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -809,6 +817,12 @@ footer p {
     text-decoration: none;
 }
 
+/** Back button **/
+
+#sVQBack a {
+    color: #009BFF !important;
+}
+
 /** New question **/
 .newQuestion a {
     color: #c1c1c1 !important;
@@ -816,6 +830,11 @@ footer p {
 
 .newQuestion svg rect       { fill: #c1c1c1 !important; }
 .newQuestion svg polygon    { stroke: #c1c1c1 !important; }
+
+/** Finish survey **/
+#sVQuestionList > a.btn {
+    margin-top: 3em;
+}
 
 /*** Questions view ***/
 #sVQuestionView {

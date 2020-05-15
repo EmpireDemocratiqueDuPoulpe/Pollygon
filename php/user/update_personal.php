@@ -1,6 +1,5 @@
 <?php
 require_once "../../init.php";
-$accountPage = "../../my_account.php";
 
 $UserManager = new Users($db);
 
@@ -14,11 +13,11 @@ $birthdate = $_POST["birthdate"] ?? null;
 $country = $_POST["country"] ?? null;
 $job = $_POST["job"] ?? null;
 
-if (is_null($user_id)) { setError(USRID_NOT_VALID); redirectTo($accountPage); }
-if (is_null($gender)) { setError(GENDER_NOT_VALID); redirectTo($accountPage); }
-if (is_null($birthdate)) { setError(BIRTHDATE_NOT_VALID); redirectTo($accountPage); }
-if (is_null($country)) { setError(COUNTRY_NOT_VALID); redirectTo($accountPage); }
-if (is_null($job)) { setError(JOB_NOT_VALID); redirectTo($accountPage); }
+if (is_null($user_id)) { setError(USRID_NOT_VALID); redirectTo(ACCOUNT_PAGE); }
+if (is_null($gender)) { setError(GENDER_NOT_VALID); redirectTo(ACCOUNT_PAGE); }
+if (is_null($birthdate)) { setError(BIRTHDATE_NOT_VALID); redirectTo(ACCOUNT_PAGE); }
+if (is_null($country)) { setError(COUNTRY_NOT_VALID); redirectTo(ACCOUNT_PAGE); }
+if (is_null($job)) { setError(JOB_NOT_VALID); redirectTo(ACCOUNT_PAGE); }
 
 ############################
 # Check gender
@@ -31,14 +30,14 @@ $gender = $UserManager->checkGender($gender);
 ############################
 
 if (!$UserManager->checkBirthdate($birthdate))
-    redirectTo($accountPage);
+    redirectTo(ACCOUNT_PAGE);
 
 ############################
 # Update user
 ############################
 
 if ($UserManager->updatePersonal($user_id, $gender, $birthdate, $country, $job)) {
-    redirectTo($accountPage);
+    redirectTo(ACCOUNT_PAGE);
 } else {
-    redirectTo($accountPage);
+    redirectTo(ACCOUNT_PAGE);
 }

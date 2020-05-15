@@ -16,27 +16,8 @@
         <div id="survey_viewer">
             <div id="sVQuestionList">
                 <ul>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
-                    <li>Question X</li>
+                    <li id="sVQBack"><a href="./home"><i class="fas fa-chevron-left"></i> Retour</a></li>
+                    <?= $questions ?>
                 </ul>
             </div>
 

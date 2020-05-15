@@ -24,6 +24,9 @@
                         </a>
                     </li>
                 </ul>
+
+                <!-- Finish edit -->
+                <a class="btn filled" href="./php/survey/add.php">CR&Eacute;ER LE SONDAGE</a>
             </div>
 
             <div id="sVQuestionView">

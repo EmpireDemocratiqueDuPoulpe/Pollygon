@@ -6,6 +6,15 @@
 
 define("ROOT", str_replace('\\', '/', __DIR__));
 
+// ONLY FOR SCRIPTS IN ./php //////////////////////
+define("INDEX_PAGE", "../../index.php");
+define("LOGIN_PAGE", "../../login.php");
+define("REGISTER_PAGE", "../../register.php");
+define("HOME_PAGE", "../../home.php");
+define("ACCOUNT_PAGE", "../../my_account.php");
+define("CREATE_SURVEY_PAGE", "../../create_survey.php");
+///////////////////////////////////////////////////
+
 define("USRID_NOT_VALID", 1);
 define("USR_NOT_VALID", 2);
 define("EMAIL_NOT_VALID", 3);
@@ -14,6 +23,8 @@ define("GENDER_NOT_VALID", 5);
 define("BIRTHDATE_NOT_VALID", 6);
 define("COUNTRY_NOT_VALID", 7);
 define("JOB_NOT_VALID", 8);
+
+define("SURVEY_NOT_FOUND", 9);
 
 define("USR_ALREADY_USED", 20);
 define("USR_NOT_FOUND", 21);
@@ -26,6 +37,8 @@ define("UNKNOWN_REGISTER_ERROR", 30);
 define("REGISTRATION_COMPLETE", 31);
 define("UNKNOWN_ACCOUNT_EDIT_ERROR", 32);
 define("ACCOUNT_EDIT_COMPLETE", 33);
+define("UNKNOWN_SURVEY_ADD_ERROR", 34);
+define("SURVEY_ADDED", 35);
 
 ############################
 # Load classes
@@ -112,6 +125,8 @@ function buildMessages() {
         COUNTRY_NOT_VALID => "Le pays renseign&eacute; n'est pas valide.",
         JOB_NOT_VALID => "Le m&eacute;tier renseign&eacute; n'est pas valide.",
 
+        SURVEY_NOT_FOUND => "Le sondage n'a pas pu &ecirc;tre trouv&eacute;. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+
         USR_ALREADY_USED => "Le nom d'utilisateur renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
         USR_NOT_FOUND => "Le nom d'utilisateur renseign&eacute; n'existe pas.",
         EMAIL_ALREADY_USED => "L'email renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
@@ -123,6 +138,8 @@ function buildMessages() {
         REGISTRATION_COMPLETE => "Inscription r&eacute;ussie ! Vous pouvez d&eacute;sormais vous connecter.",
         UNKNOWN_ACCOUNT_EDIT_ERROR => "Erreur inconnue, impossible de modifier vos informations de compte. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         ACCOUNT_EDIT_COMPLETE => "Modification de vos donn&eacute;es r&eacute;ussie !",
+        UNKNOWN_SURVEY_ADD_ERROR => "Erreur inconnue, impossible de cr&eacute;er le sondage. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        SURVEY_ADDED => "Ajout du sondage r&eacute;ussi !",
 
         "none" => "<em>Un probl&egrave;me est survenu lors de l'affichage de ce message</em>"
     ];

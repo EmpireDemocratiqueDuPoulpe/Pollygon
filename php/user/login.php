@@ -1,7 +1,5 @@
 <?php
 require_once "../../init.php";
-$loginPage = "../../login.php";
-$homePage = "../../home.php";
 
 $UserManager = new Users($db);
 
@@ -12,8 +10,8 @@ $UserManager = new Users($db);
 $username = $_POST["username"] ?? null;
 $password = $_POST["password"] ?? null;
 
-if (is_null($username)) { setError(USR_NOT_VALID); redirectTo($registerPage); }
-if (is_null($password)) { setError(PASSWORD_NOT_VALID); redirectTo($registerPage); }
+if (is_null($username)) { setError(USR_NOT_VALID); redirectTo(LOGIN_PAGE); }
+if (is_null($password)) { setError(PASSWORD_NOT_VALID); redirectTo(LOGIN_PAGE); }
 
 ############################
 # Get user
@@ -23,7 +21,7 @@ $user = PDOFactory::sendQuery($db, 'SELECT user_id, username, email, password FR
 
 if (!$user) {
     setError(USR_NOT_FOUND);
-    redirectTo($loginPage);
+    redirectTo(LOGIN_PAGE);
 }
 
 ############################
@@ -31,7 +29,7 @@ if (!$user) {
 ############################
 
 if (!$UserManager->checkPassword($password, $user["password"], $config["SECURITY"]["pepper"]))
-    redirectTo($loginPage);
+    redirectTo(LOGIN_PAGE);
 
 ############################
 # Connect user
@@ -41,4 +39,4 @@ $_SESSION["user_id"] = $user["user_id"];
 $_SESSION["username"] = $user["username"];
 $_SESSION["email"] = $user["email"];
 
-redirectTo($homePage);
+redirectTo(HOME_PAGE);

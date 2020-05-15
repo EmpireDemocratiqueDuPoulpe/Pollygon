@@ -1,7 +1,5 @@
 <?php
 require_once "../../init.php";
-$registerPage = "../../register.php";
-$loginPage = "../../login.php";
 
 $UserManager = new Users($db);
 
@@ -18,34 +16,34 @@ $birthdate = $_POST["birthdate"] ?? null;
 $country = $_POST["country"] ?? null;
 $job = $_POST["job"] ?? null;
 
-if (is_null($username))     { setError(USR_NOT_VALID); redirectTo($registerPage); }
-if (is_null($email))        { setError(EMAIL_NOT_VALID); redirectTo($registerPage); }
-if (is_null($password1))    { setError(PASSWORD_NOT_VALID); redirectTo($registerPage); }
-if (is_null($password2))    { setError(PASSWORD_NOT_VALID); redirectTo($registerPage); }
-if (is_null($gender))       { setError(GENDER_NOT_VALID); redirectTo($registerPage); }
-if (is_null($country))      { setError(COUNTRY_NOT_VALID); redirectTo($registerPage); }
-if (is_null($job))          { setError(JOB_NOT_VALID); redirectTo($registerPage); }
+if (is_null($username))     { setError(USR_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($email))        { setError(EMAIL_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($password1))    { setError(PASSWORD_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($password2))    { setError(PASSWORD_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($gender))       { setError(GENDER_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($country))      { setError(COUNTRY_NOT_VALID); redirectTo(REGISTER_PAGE); }
+if (is_null($job))          { setError(JOB_NOT_VALID); redirectTo(REGISTER_PAGE); }
 
 ############################
 # Check username
 ############################
 
 if (!$UserManager->checkUsername($username))
-    redirectTo($registerPage);
+    redirectTo(REGISTER_PAGE);
 
 ############################
 # Check email
 ############################
 
 if (!$UserManager->checkEmail($email))
-    redirectTo($registerPage);
+    redirectTo(REGISTER_PAGE);
 
 ############################
 # Check password
 ############################
 
 if (!$UserManager->checkNewPassword($password1, $password2))
-    redirectTo($registerPage);
+    redirectTo(REGISTER_PAGE);
 
 $password_hashed = $UserManager->hashPassword($password1, $config["SECURITY"]["pepper"]);
 
@@ -60,14 +58,14 @@ $gender = $UserManager->checkGender($gender);
 ############################
 
 if (!$UserManager->checkBirthdate($birthdate))
-    redirectTo($registerPage);
+    redirectTo(REGISTER_PAGE);
 
 ############################
 # Add user
 ############################
 
 if ($UserManager->add($username, $email, $password_hashed, $gender, $birthdate, $country, $job)) {
-    redirectTo($loginPage);
+    redirectTo(LOGIN_PAGE);
 } else {
-    redirectTo($registerPage);
+    redirectTo(REGISTER_PAGE);
 }
