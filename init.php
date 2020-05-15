@@ -28,6 +28,13 @@ define("UNKNOWN_ACCOUNT_EDIT_ERROR", 32);
 define("ACCOUNT_EDIT_COMPLETE", 33);
 
 ############################
+# Load classes
+############################
+
+function loadClasses($classname) { require_once ROOT . "/classes/$classname.php"; }
+spl_autoload_register("loadClasses");
+
+############################
 # Session
 ############################
 
@@ -40,13 +47,6 @@ $is_connected = (isset($_SESSION["user_id"]) AND !empty($_SESSION["user_id"]));
 ############################
 
 $config = parse_ini_file(ROOT . "/config/config.ini", true);
-
-############################
-# Load classes
-############################
-
-function loadClasses($classname) { require_once ROOT . "/classes/$classname.php"; }
-spl_autoload_register("loadClasses");
 
 ############################
 # Connect to database

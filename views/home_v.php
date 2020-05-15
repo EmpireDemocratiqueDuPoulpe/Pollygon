@@ -14,7 +14,7 @@
 
         <!-- Buttons -->
         <div id="surveys_btn">
-            <a class="btn filled smaller" href="#" draggable="false">
+            <a class="btn filled smaller" href="./create_survey.php" draggable="false">
                 <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
                 Nouveau sondage
             </a>
