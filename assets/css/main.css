@@ -636,6 +636,10 @@ footer p {
     margin-top: 4.40%;
 }
 
+#surveys_btn .btn {
+    margin: 0;
+}
+
 /*** Survey list ***/
 /** Survey container **/
 #surveys_container {
