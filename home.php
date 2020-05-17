@@ -24,8 +24,17 @@ if ($surveys) {
                     <span class="surveyDate">- <?= $s->getCreationDate(); ?></span>
                     <span class="surveyMembers"><?= $s->getMembersCountStr() ?></span>
                 </a>
-            </li>
         <?php
+
+        if (isset($_GET["deleteMode"])) {
+            ?>
+                <div class="surveyDeletor">
+                    <input type="checkbox" name="survey_delete" value="<?= $survey["survey_id"]; ?>">
+                </div>
+            <?php
+        }
+
+        echo '</li>';
     }
 } else {
     echo '<p id="noSurvey">Uh oh, il semble que vous n\'ayez cr&eacute;&eacute; aucun sondage.</p>';
