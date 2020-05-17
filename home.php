@@ -13,7 +13,7 @@ if (!$is_connected) redirectTo("./login.php");
 
 $surveys = PDOFactory::sendQuery(
         $db,
-        'SELECT survey_id, survey FROM surveys WHERE owner_id = :owner_id',
+        'SELECT survey_id, survey FROM surveys WHERE owner_id = :owner_id ORDER BY survey_id',
         ["owner_id" => $_SESSION["user_id"]]
 );
 ob_start();
