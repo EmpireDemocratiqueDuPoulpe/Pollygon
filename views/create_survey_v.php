@@ -9,12 +9,10 @@
         <!-- Navbar -->
         <?php include_once(ROOT."/views/models/navbar.php"); ?>
 
-        <!-- Error/success box -->
-        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
-
         <!-- Survey viewer -->
         <div id="survey_viewer">
             <div id="sVQuestionList">
+                <!-- Question list -->
                 <ul>
                     <?= $questions; ?>
                     <li class="newQuestion">
@@ -29,7 +27,23 @@
                 <a class="btn filled" href="./php/survey/add.php">CR&Eacute;ER LE SONDAGE</a>
             </div>
 
+            <!-- Question view -->
             <div id="sVQuestionView">
+                <!-- Error/success box -->
+                <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
+                <!-- Survey title -->
+                <div id="sVQTitle">
+                    <form action="./php/survey/set_survey_title.php" method="POST">
+                        <h1>
+                            <textarea name="survey_name" placeholder="Nouveau sondage"><?= $_SESSION["survey"]->getTitle(); ?></textarea>
+                        </h1>
+
+                        <input class="btn filled smaller-2" type="submit" value="CHANGER"/>
+                    </form>
+                </div>
+
+                <!-- Question -->
                 <?= $questionView; ?>
             </div>
         </div>

@@ -25,6 +25,17 @@ if (is_null($question)) {
 }
 
 ############################
+# Check the question name
+############################
+
+$question_name = trim($question_name);
+
+if (strlen($question_name) == 0) {
+    setError(QUESTION_NOT_VALID);
+    redirectTo(CREATE_SURVEY_PAGE."?selected=".$question_id);
+}
+
+############################
 # Change the name
 ############################
 
