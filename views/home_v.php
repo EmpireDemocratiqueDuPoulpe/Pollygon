@@ -12,6 +12,8 @@
         <!-- Error/success box -->
         <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
 
+        <?php if(isset($_GET["deleteMode"])) echo '<form action="./php/survey/delete.php" method="POST">'?>
+
         <!-- Buttons -->
         <div id="surveys_btn">
             <?php if(isset($_GET["deleteMode"])) { ?>
@@ -19,10 +21,11 @@
                     <i class="fas fa-chevron-left"></i> Annuler
                 </a>
 
-                <a class="btn filled red smaller" href="./php/survey/delete.php" draggable="false">
+                <input class="btn filled red smaller" type="submit" value="Supprimer">
+                <!--<a class="btn filled red smaller" href="./php/survey/delete.php" draggable="false">
                     <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/del_survey.svg"); ?></i>
                     Supprimer
-                </a>
+                </a>-->
             <?php } else { ?>
                 <a class="btn filled smaller" href="./create_survey.php" draggable="false">
                     <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
@@ -43,6 +46,8 @@
                 <?= $surveysHTML ?>
             </ul>
         </div>
+
+        <?php if(isset($_GET["deleteMode"])) echo '</form>'?>
 
         <!-- Footer -->
         <?php include_once(ROOT."/views/models/footer.php"); ?>

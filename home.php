@@ -11,7 +11,11 @@ if (!$is_connected) redirectTo("./login.php");
 # Get the user's surveys
 ############################
 
-$surveys = PDOFactory::sendQuery($db, 'SELECT survey_id, survey FROM surveys WHERE owner_id = :owner_id', ["owner_id" => $_SESSION["user_id"]]);
+$surveys = PDOFactory::sendQuery(
+        $db,
+        'SELECT survey_id, survey FROM surveys WHERE owner_id = :owner_id',
+        ["owner_id" => $_SESSION["user_id"]]
+);
 ob_start();
 
 if ($surveys) {
@@ -29,7 +33,7 @@ if ($surveys) {
         if (isset($_GET["deleteMode"])) {
             ?>
                 <div class="surveyDeletor">
-                    <input type="checkbox" name="survey_delete" value="<?= $survey["survey_id"]; ?>">
+                    <input type="checkbox" name="survey_delete[]" value="<?= $survey["survey_id"]; ?>">
                 </div>
             <?php
         }
