@@ -14,8 +14,11 @@ abstract class Question {
     public function setTitle($title) { $this->title = $title; }
 
     // Methods
-    protected function buildTitle() {
-        return '<h2>'.$this->title.'</h2>';
+    protected function buildTitle($editable) {
+        if ($editable)
+            return '<h2><textarea name="question_name" placeholder="Nouvelle question">'.$this->title.'</textarea></h2>';
+        else
+            return '<h2>'.$this->title.'</h2>';
     }
 
     public abstract function build($disabledInput);

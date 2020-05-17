@@ -35,6 +35,13 @@ class Survey {
     public function setTitle($title)            { $this->title = $title; }
     public function setCreationDate($date)      { $this->creationDate = $date; }
     public function setMembersCount($count)     { $this->membersCount = $count; }
+    public function setQuestion($id, $question) {
+        if ($id < count($this->questionArray)) {
+            $this->questionArray[$id] = $question;
+            return true;
+        }
+        return false;
+    }
     public function setQuestions($questions)    { $this->questionArray = $questions; }
     public function addQuestion($question)      { $this->questionArray[] = $question; }
 

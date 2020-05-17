@@ -23,8 +23,10 @@ define("GENDER_NOT_VALID", 5);
 define("BIRTHDATE_NOT_VALID", 6);
 define("COUNTRY_NOT_VALID", 7);
 define("JOB_NOT_VALID", 8);
+define("QUESTION_NOT_VALID", 9);
 
-define("SURVEY_NOT_FOUND", 9);
+define("SURVEY_NOT_FOUND", 10);
+define("QUESTION_NOT_FOUND", 11);
 
 define("USR_ALREADY_USED", 20);
 define("USR_NOT_FOUND", 21);
@@ -124,8 +126,10 @@ function buildMessages() {
         BIRTHDATE_NOT_VALID => "La date de naissance renseign&eacute;e n'est pas valide.",
         COUNTRY_NOT_VALID => "Le pays renseign&eacute; n'est pas valide.",
         JOB_NOT_VALID => "Le m&eacute;tier renseign&eacute; n'est pas valide.",
+        QUESTION_NOT_VALID => "Le nom de la question renseign&eacute; n'est pas valide.",
 
         SURVEY_NOT_FOUND => "Le sondage n'a pas pu &ecirc;tre trouv&eacute;. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        QUESTION_NOT_FOUND => "La question n'a pas pu &ecirc;tre trouv&eacute;e. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
 
         USR_ALREADY_USED => "Le nom d'utilisateur renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
         USR_NOT_FOUND => "Le nom d'utilisateur renseign&eacute; n'existe pas.",
