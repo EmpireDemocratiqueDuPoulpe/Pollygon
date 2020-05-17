@@ -54,7 +54,7 @@ function scrollIt(duration = 200, easing = 'linear', callback) {
     const destinationOffset = documentHeight;
     const destinationOffsetToScroll = Math.round(documentHeight - destinationOffset < windowHeight ? documentHeight - windowHeight : destinationOffset);
 
-    if ('requestAnimationFrame' in window === false) {
+    if ('requestAnimationFrame' in window) {
         window.scroll(0, destinationOffsetToScroll);
         if (callback) {
             callback();
@@ -81,9 +81,32 @@ function scrollIt(duration = 200, easing = 'linear', callback) {
     scroll();
 }
 
-/* Add event on footer */
+function fixFooterPos() {
+    const footer = document.querySelector("footer");
+
+    // Get window height
+    const visibleHeight = window.innerHeight;
+
+    // Get body height
+    const body = document.body,
+        html = document.documentElement;
+
+    const height = Math.max( body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+    // Fix the position
+    if (height <= visibleHeight) {
+        footer.style.position = "absolute";
+        footer.style.bottom = "0";
+    }
+}
+
 window.onload = () => {
-    document.querySelector("#footerSocial").addEventListener('click', () => {
+    const footerSocial = document.querySelector("#footerSocial");
+    fixFooterPos();
+
+    /* Scroll event */
+    footerSocial.addEventListener('click', () => {
         scrollIt(
             300,
             'easeOutQuad',
