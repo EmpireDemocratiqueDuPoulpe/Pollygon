@@ -28,6 +28,9 @@ if ($surveys) {
                     <span class="surveyDate">- <?= $s->getCreationDate(); ?></span>
                     <span class="surveyMembers"><?= $s->getMembersCountStr() ?></span>
                 </a>
+                <div class="surveyURIContainer">
+                    <span class="surveyURI">http://localhost/2PROJ-Pollygon/answer_survey.php?survey=<?= $survey["survey_id"]; ?></span>
+                </div>
         <?php
 
         if (isset($_GET["deleteMode"])) {
