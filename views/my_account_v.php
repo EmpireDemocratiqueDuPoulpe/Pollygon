@@ -63,7 +63,7 @@
             <div id="stats_container">
                 <div class="stat">
                     <img src="./assets/images/pollygon_l_black.png" alt="icon"/>
-                    <p><span>Formulaire(s) crée(s) :</span> 0</p>
+                    <p><span>Formulaire(s) crée(s) :</span> <?= $surveys_number; ?></p>
                 </div>
 
                 <div class="stat">
@@ -73,7 +73,7 @@
 
                 <div class="stat">
                     <img src="./assets/images/pollygon_l_black.png" alt="icon"/>
-                    <p><span>Participant(s) à vos formulaires :</span> 0</p>
+                    <p><span>Participant(s) à vos formulaires :</span> <?= $surveys_participators ?></p>
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ foreach ($surveys_to_delete as $survey){
         ["owner_id" => $_SESSION["user_id"],
          "survey_id" => intval($survey)], false
     );
-    ob_start();
 }
 
 header('Location: ../../home.php');
