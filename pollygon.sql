@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 15 mai 2020 à 13:32
+-- Généré le :  mer. 27 mai 2020 à 17:41
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -25,6 +25,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `answers`
+--
+
+DROP TABLE IF EXISTS `answers`;
+CREATE TABLE IF NOT EXISTS `answers` (
+  `answer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`answer_id`),
+  KEY `question_id` (`question_id`),
+  KEY `survey_id` (`survey_id`),
+  KEY `owner_id` (`owner_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `questions`
+--
+
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE IF NOT EXISTS `questions` (
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
+  `survey_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT 'Nouvelle question',
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`question_id`),
+  KEY `survey_id` (`survey_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `surveys`
 --
 
@@ -32,23 +67,13 @@ DROP TABLE IF EXISTS `surveys`;
 CREATE TABLE IF NOT EXISTS `surveys` (
   `survey_id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_id` int(11) NOT NULL,
-  `survey` text NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT 'Nouveau sondage',
+  `creation_date` date NOT NULL DEFAULT current_timestamp(),
+  `members` int(11) NOT NULL DEFAULT 0,
+  `finished` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`survey_id`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `surveys`
---
-
-INSERT INTO `surveys` (`survey_id`, `owner_id`, `survey`) VALUES
-(8, 1, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:1:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(6, 1, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:4:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:1;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:2;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:3;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(7, 1, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:11:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:1;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:2;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:3;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:4;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:5;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:6;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:7;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:8;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:9;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:10;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(9, 1, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:2:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:1;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(10, 1, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:3:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:1;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:2;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(11, 2, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:1:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}'),
-(12, 6, 'O:6:\"Survey\":4:{s:13:\"\0Survey\0title\";s:15:\"Nouveau sondage\";s:20:\"\0Survey\0creationDate\";s:10:\"15/05/2020\";s:20:\"\0Survey\0membersCount\";i:0;s:21:\"\0Survey\0questionArray\";a:9:{i:0;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:1;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:2;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:3;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:4;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:5;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:6;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:7;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}i:8;O:13:\"QuestionInput\":1:{s:8:\"\0*\0title\";s:17:\"Nouvelle question\";}}}');
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
