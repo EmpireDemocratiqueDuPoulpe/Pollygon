@@ -8,6 +8,12 @@ require_once "./init.php";
 if ($is_connected) redirectTo("./home.php");
 
 ############################
+# Get messages
+############################
+
+$messages = buildMessages();
+
+############################
 # Import the view
 ############################
 

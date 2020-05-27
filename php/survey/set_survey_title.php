@@ -1,15 +1,16 @@
 <?php
 require_once "../../init.php";
+$SurveyManager = new Survey($db);
 
 ############################
 # Check vars
 ############################
 
+$survey_id = $_POST["survey_id"] ?? null;
 $survey_name = $_POST["survey_name"] ?? null;
-$survey = $_SESSION["survey"] ?? null;
 
+if (is_null($survey_id)) { setError(SURVEY_NOT_FOUND); redirectTo(CREATE_SURVEY_PAGE); }
 if (is_null($survey_name)) { setError(SURVEY_NAME_NOT_VALID); redirectTo(CREATE_SURVEY_PAGE); }
-if (is_null($survey)) { setError(SURVEY_NOT_FOUND); redirectTo(CREATE_SURVEY_PAGE); }
 
 ############################
 # Check the survey name
@@ -26,7 +27,8 @@ if (strlen($survey_name) == 0) {
 # Change the name and save
 ############################
 
-$survey->setTitle($survey_name);
+if (!$SurveyManager->setTitle($survey_id, $survey_name)) {
+    setError(SURVEY_NOT_FOUND);
+}
 
-$_SESSION["survey"] = $survey;
-redirectTo(CREATE_SURVEY_PAGE);
+redirectTo(CREATE_SURVEY_PAGE."?survey=".$survey_id);

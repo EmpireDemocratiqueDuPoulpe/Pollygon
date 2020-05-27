@@ -1,44 +1,55 @@
 <?php
 require_once "./init.php";
 
+$SurveyManager = new Survey($db);
+$QuestionManager = new Question($db);
+
+############################
+# Check if he's connected
+############################
+
+if (!$is_connected) redirectTo("./login.php");
+
 ############################
 # Get the survey
 ############################
 
-// Check if the survey id is present
+// Get the survey id
 if (!isset($_GET["survey"]) OR empty($_GET["survey"])) {
     setError(SURVEY_NOT_FOUND);
     redirectTo("./home.php");
 }
 
-// Get the survey
-$survey = PDOFactory::sendQuery($db, 'SELECT survey FROM surveys WHERE survey_id = :survey_id', ["survey_id" => $_GET["survey"]]);
+$survey_id = $_GET["survey"];
+
+// Get the survey and the selected question id
+$survey = $SurveyManager->getSurvey($survey_id);
 
 if (!$survey) {
     setError(SURVEY_NOT_FOUND);
     redirectTo("./home.php");
 } else {
-    $survey = unserialize($survey[0]["survey"]);
+    $survey = $survey[0];
 }
+
+$survey_title = $survey["title"];
+$survey_creation_date = $survey["creation_date"];
+$survey_members = $survey["members"];
+
+$selected_id = isset($_GET["selected"]) ? $_GET["selected"] : -1;
+
+############################
+# Build the view
+############################
 
 // Build question list
-$questions = "";
-
-if (isset($_GET["selected"])) {
-    $questions = $survey->buildQuestions("./view_survey.php?survey=".$_GET["survey"]."&", $_GET["selected"]);
-} else {
-    $questions = $survey->buildQuestions("./view_survey.php?survey=".$_GET["survey"]."&");
-}
+$questions = $QuestionManager->buildList($survey_id, false, true, $selected_id);
 
 // Build the question view
 $questionView = '';
 
-if (isset($_GET["selected"])) {
-    $q = $survey->getQuestion($_GET["selected"]);
-
-    if (!is_null($q)) {
-        $questionView = $q->build(false);
-    }
+if ($selected_id >= 0) {
+    $questionView = $QuestionManager->buildView($survey_id, $selected_id, false, true);
 }
 
 ############################

@@ -1,24 +1,16 @@
 <?php
 
 class Users {
+    // Attributes
     private $_db;
 
-    /**
-     * Users constructor.
-     *
-     * @param       PDO         $db     PDO Object connected to the database
-     * @return      void
-     */
+    // Constructor
     public function __construct(PDO $db) {
         $this->_db = $db;
     }
 
-    /**
-     * Get a user by his ID.
-     *
-     * @param       int|string      $user_id    User id
-     * @return      array|string    User or an error.
-     */
+    // Methods
+    // GET
     public function get($user_id) {
         return PDOFactory::sendQuery(
             $this->_db,
@@ -27,12 +19,6 @@ class Users {
         );
     }
 
-    /**
-     * Get a user password.
-     *
-     * @param       int|string      $user_id    User id
-     * @return      array|string    User password or an error.
-     */
     public function getPassword($user_id) {
         return PDOFactory::sendQuery(
             $this->_db,
@@ -41,18 +27,7 @@ class Users {
         );
     }
 
-    /**
-     * Add a user.
-     *
-     * @param       string          $username   User name
-     * @param       string          $email      Email
-     * @param       string          $password   Password
-     * @param       string          $gender     Gender
-     * @param       string          $birthdate  Birthdate
-     * @param       string          $country    Country
-     * @param       string          $job        Job
-     * @return      boolean         Has the user been created?
-     */
+    // ADD
     public function add($username, $email, $password, $gender, $birthdate, $country, $job) {
         // Get last ID before query
         $emptyDb = false;
@@ -84,6 +59,8 @@ class Users {
         );
 
         // Get last ID after query
+        $lastIDAfter = -1;
+
         if (!$emptyDb)
             $lastIDAfter = PDOFactory::sendQuery($this->_db, 'SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1')[0]["user_id"];
 
@@ -97,16 +74,7 @@ class Users {
         }
     }
 
-    /**
-     * Update account infos of a user.
-     *
-     * @param       int|string      $user_id        User's id
-     * @param       string          $username       User name
-     * @param       string          $email          Email
-     * @param       string          $oldUsername    Old user name
-     * @param       string          $oldEmail       Old email
-     * @return      boolean         Has the user been edited?
-     */
+    // UPDATE
     public function updateAccount($user_id, $username, $email, $oldUsername, $oldEmail) {
         // Update user
         PDOFactory::sendQuery(
@@ -146,14 +114,6 @@ class Users {
         }
     }
 
-    /**
-     * Update account infos of a user.
-     *
-     * @param       int|string      $user_id        User's id
-     * @param       string          $password       New password
-     * @param       string          $oldPassword    Old password
-     * @return      boolean         Has the user been edited?
-     */
     public function updatePassword($user_id, $password, $oldPassword) {
         // Update user
         PDOFactory::sendQuery(
@@ -191,16 +151,6 @@ class Users {
         }
     }
 
-    /**
-     * Update account personal infos of a user.
-     *
-     * @param       int|string      $user_id        User's id
-     * @param       string          $gender         Gender
-     * @param       string          $birthdate      Birthdate
-     * @param       string          $country        Country
-     * @param       string          $job            Job
-     * @return      boolean         Has the user been edited?
-     */
     public function updatePersonal($user_id, $gender, $birthdate, $country, $job) {
         // Get user's personal infos
         $user = PDOFactory::sendQuery(
@@ -270,13 +220,9 @@ class Users {
         }
     }
 
-    /**
-     * Check username availability
-     *
-     * @param       string      $username       User name
-     * @param       string      $oldUsername    Old user name
-     * @return      boolean     Is the user name valid.
-     */
+    // REMOVE
+
+    // CHECK
     public function checkUsername($username, $oldUsername = "") {
         if ($oldUsername) {
             if ($username == $oldUsername)
@@ -302,13 +248,6 @@ class Users {
         return true;
     }
 
-    /**
-     * Check email validity
-     *
-     * @param       string      $email      Email
-     * @param       string      $oldEmail   Old email
-     * @return      boolean     Is the email valid.
-     */
     public function checkEmail($email, $oldEmail = "") {
         if ($oldEmail) {
             if ($email == $oldEmail)
@@ -332,14 +271,6 @@ class Users {
         return true;
     }
 
-    /**
-     * Check if it's the good password
-     *
-     * @param       string          $password           Password set by user
-     * @param       string          $passwordPeppered   Password set in DB
-     * @param       string          $pepper             Used pepper
-     * @return      boolean         Is the password valid.
-     */
     public function checkPassword($password, $passwordPeppered, $pepper) {
         $password = hash_hmac("sha256", $password, $pepper);
 
@@ -351,13 +282,6 @@ class Users {
         return true;
     }
 
-    /**
-     * Check if the new password is valid and secure.
-     *
-     * @param       string          $password1      New password
-     * @param       string          $password2      New password (confirm)
-     * @return      boolean         Is the new password valid and secure.
-     */
     public function checkNewPassword($password1, $password2) {
         // Check if passwords match
         if ($password1 !== $password2) {
@@ -380,12 +304,6 @@ class Users {
         return true;
     }
 
-    /**
-     * Check if the gender is valid.
-     *
-     * @param       string          $gender     Gender
-     * @return      string          Checked gender
-     */
     public function checkGender($gender) {
         if ($gender != "Homme" && $gender != "Femme")
             return "Homme";
@@ -394,12 +312,6 @@ class Users {
             return $gender;
     }
 
-    /**
-     * Check if the birthdate is valid.
-     *
-     * @param       string          $birthdate      Birthdate
-     * @return      boolean         Is the birthdate valid.
-     */
     public function checkBirthdate($birthdate) {
         $splitBirthdate = explode("-", $birthdate);
 
@@ -411,13 +323,7 @@ class Users {
         return true;
     }
 
-    /**
-     * Check if the new password is valid and secure.
-     *
-     * @param       string          $password   Password to hash
-     * @param       string          $pepper     Used pepper
-     * @return      string          Hashed password
-     */
+    // OTHER
     public function hashPassword($password, $pepper) {
         // Hash password
         $password_peppered = hash_hmac("sha256", $password, $pepper);

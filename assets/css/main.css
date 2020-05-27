@@ -29,6 +29,14 @@ a {
     outline: none;
 }
 
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
 /*** Header ***/
 #header_wrapper {
     filter: drop-shadow(0 7px 5px rgba(0, 0, 0, 0.75));
@@ -122,6 +130,7 @@ header {
 /*** Success and errors messages ***/
 .errorBox, .successBox {
     box-sizing: border-box;
+    text-align: left;
     width: 90%;
     line-height: 1.5em;
     margin: 20px auto 0 auto;
@@ -438,6 +447,7 @@ footer {
     bottom: -230px;
     width: 100%;
     color: #FFFFFF;
+    z-index: 4000;
 }
 
 footer p {
@@ -640,6 +650,10 @@ footer p {
     margin: 0;
 }
 
+#surveys_btn p {
+    font-size: 0.8em;
+}
+
 /*** Survey list ***/
 /** Survey container **/
 #surveys_container {
@@ -712,24 +726,23 @@ footer p {
     text-decoration: none;
 }
 
+.surveyLink:hover { text-decoration: none; }
+
+.surveyName {
+    color: #000000;
+    transition: color 100ms ease-in;
+}
+
 .surveyDate {
     font-size: 0.8em;
     color: #c1c1c1;
+    transition: color 100ms ease-in;
 }
 
 .surveyMembers {
     float: right;
-}
-
-.surveyDeletor {
-    position: absolute;
-    top: 0;
-    right: -60px;
-    text-align: center;
-    width: 60px;
-    height: 60px;
-    background: #f6f6f6;
-    border-left: thin #c1c1c1 solid;
+    color: #000000;
+    transition: color 100ms ease-in;
 }
 
 .surveyURIContainer {
@@ -740,11 +753,32 @@ footer p {
     line-height: 20px;
     padding: 0 10px;
     background: #eaeaea;
+    transition: background-color 100ms ease-in;
 }
 
 .surveyURI {
     color: #8d8d8d;
+    transition: color 100ms ease-in;
 }
+
+.surveyDeletor {
+    position: relative;
+    cursor: pointer;
+}
+
+.sDBox {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.sDBox:checked ~ .survey                        { background: #f44336; }
+.sDBox:checked ~ .survey .surveyName            { color: #FFFFFF; }
+.sDBox:checked ~ .survey .surveyDate            { color: #bf0e01; }
+.sDBox:checked ~ .survey .surveyMembers         { color: #FFFFFF; }
+.sDBox:checked ~ .survey .surveyURIContainer    { background: #e8372a; }
+.sDBox:checked ~ .survey .surveyURI             { color: #8b0000; }
 
 /****************************************
  * My account
@@ -868,7 +902,7 @@ footer p {
 .newQuestion svg polygon    { stroke: #c1c1c1 !important; }
 
 /** Finish survey **/
-#sVQuestionList > a.btn {
+#sVQuestionList > form {
     margin-top: 3em;
 }
 
@@ -884,7 +918,8 @@ footer p {
     font-weight: normal;
 }
 
-#sVQuestionView .errorBox {
+#sVQuestionView .errorBox,
+#sVQuestionView .successBox {
     margin: 0 auto 20px auto;
 }
 
@@ -925,6 +960,7 @@ footer p {
 /** Question view **/
 /* Question title */
 #sVQuestionView h2 {
+    text-align: left;
     font-size: 1.2em;
     margin-bottom: 20px;
 }

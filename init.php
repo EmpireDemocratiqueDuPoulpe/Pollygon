@@ -13,6 +13,7 @@ define("REGISTER_PAGE", "../../register.php");
 define("HOME_PAGE", "../../home.php");
 define("ACCOUNT_PAGE", "../../my_account.php");
 define("CREATE_SURVEY_PAGE", "../../create_survey.php");
+define("ANSWER_SURVEY_PAGE", "../../answer_survey.php");
 ///////////////////////////////////////////////////
 
 define("USRID_NOT_VALID", 1);
@@ -25,9 +26,11 @@ define("COUNTRY_NOT_VALID", 7);
 define("JOB_NOT_VALID", 8);
 define("SURVEY_NAME_NOT_VALID", 9);
 define("QUESTION_NOT_VALID", 10);
+define("ANSWER_NOT_VALID", 11);
 
-define("SURVEY_NOT_FOUND", 11);
-define("QUESTION_NOT_FOUND", 12);
+define("SURVEY_NOT_FOUND", 12);
+define("QUESTION_NOT_FOUND", 13);
+define("ANSWER_NOT_FOUND", 14);
 
 define("USR_ALREADY_USED", 20);
 define("USR_NOT_FOUND", 21);
@@ -42,6 +45,12 @@ define("UNKNOWN_ACCOUNT_EDIT_ERROR", 32);
 define("ACCOUNT_EDIT_COMPLETE", 33);
 define("UNKNOWN_SURVEY_ADD_ERROR", 34);
 define("SURVEY_ADDED", 35);
+define("SURVEY_EMPTY", 36);
+define("UNKNOWN_QUESTION_ADD_ERROR", 37);
+define("QUESTION_ADDED", 38);
+define("UNKNOWN_ANSWER_ADD_ERROR", 39);
+define("ANSWER_ADDED", 40);
+define("SURVEY_ANSWERED", 41);
 
 ############################
 # Load classes
@@ -71,12 +80,6 @@ $config = parse_ini_file(ROOT . "/config/config.ini", true);
 $db = PDOFactory::mySql($config["DB"]["host"], $config["DB"]["dbname"], $config["DB"]["user"], $config["DB"]["password"]);
 
 ############################
-# Get messages
-############################
-
-$messages = buildMessages();
-
-############################
 # Functions
 ############################
 
@@ -96,7 +99,6 @@ $messages = buildMessages();
  * @return      void
  */
 function redirectTo($filePath) {
-
     header("Location: $filePath");
     exit;
 }
@@ -117,7 +119,7 @@ function setSuccess($successCode) {
     $_SESSION["success"] = $successCode;
 }
 
-function buildMessages() {
+function buildMessages(bool $error = true, bool $success = true) {
     $messages = [
         USRID_NOT_VALID => "Erreur lors de la récupération de l'ID utilisateur.",
         USR_NOT_VALID => "Le nom d'utilisateur renseign&eacute; n'est pas valide <em>(max. 32 caract&egrave;res)</em>.",
@@ -129,9 +131,11 @@ function buildMessages() {
         JOB_NOT_VALID => "Le m&eacute;tier renseign&eacute; n'est pas valide.",
         SURVEY_NAME_NOT_VALID => "Le nom du sondage renseign&eacute; n'est pas valide.",
         QUESTION_NOT_VALID => "Le nom de la question renseign&eacute; n'est pas valide.",
+        ANSWER_NOT_VALID => "La r&eacute;ponse donn&eacute;e n'est pas valide.",
 
         SURVEY_NOT_FOUND => "Le sondage n'a pas pu &ecirc;tre trouv&eacute;. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         QUESTION_NOT_FOUND => "La question n'a pas pu &ecirc;tre trouv&eacute;e. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        ANSWER_NOT_FOUND => "Une erreur est survenue pendant l'enregistrement de votre r&eacute;ponse. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
 
         USR_ALREADY_USED => "Le nom d'utilisateur renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
         USR_NOT_FOUND => "Le nom d'utilisateur renseign&eacute; n'existe pas.",
@@ -146,6 +150,12 @@ function buildMessages() {
         ACCOUNT_EDIT_COMPLETE => "Modification de vos donn&eacute;es r&eacute;ussie !",
         UNKNOWN_SURVEY_ADD_ERROR => "Erreur inconnue, impossible de cr&eacute;er le sondage. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         SURVEY_ADDED => "Ajout du sondage r&eacute;ussi !",
+        SURVEY_EMPTY => "Le sondage doit &ecirc;tre compos&eacute; d'au moins une question.",
+        UNKNOWN_QUESTION_ADD_ERROR => "Erreur inconnue, impossible de cr&eacute;er la question. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        QUESTION_ADDED => "Ajout de la question r&eacute;ussi !",
+        UNKNOWN_ANSWER_ADD_ERROR => "Erreur inconnue, impossible de r&eacute;pondre &agrave; la question. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        ANSWER_ADDED => "Question r&eacute;pondue !",
+        SURVEY_ANSWERED => "Vous avez répondu à toutes les questions de ce sondage.",
 
         "none" => "<em>Un probl&egrave;me est survenu lors de l'affichage de ce message</em>"
     ];
@@ -154,23 +164,27 @@ function buildMessages() {
     ob_start();
 
     // Process errors
-    if (isset($_SESSION["err"]) AND !empty($_SESSION["err"])) {
-        ?>
-            <div class="errorBox">
-                <p><?= $messages[$_SESSION["err"]] ?? $messages["none"]; ?></p>
-            </div>
-        <?php
-        unset($_SESSION["err"]);
+    if ($error) {
+        if (isset($_SESSION["err"]) AND !empty($_SESSION["err"])) {
+            ?>
+                <div class="errorBox">
+                    <p><?= $messages[$_SESSION["err"]] ?? $messages["none"]; ?></p>
+                </div>
+            <?php
+            unset($_SESSION["err"]);
+        }
     }
 
     // Process success
-    if (isset($_SESSION["success"]) AND !empty($_SESSION["success"])) {
-        ?>
-            <div class="successBox">
-                <p><?= $messages[$_SESSION["success"]] ?? $messages["none"] ?></p>
-            </div>
-        <?php
-        unset($_SESSION["success"]);
+    if ($success) {
+        if (isset($_SESSION["success"]) AND !empty($_SESSION["success"])) {
+            ?>
+                <div class="successBox">
+                    <p><?= $messages[$_SESSION["success"]] ?? $messages["none"] ?></p>
+                </div>
+            <?php
+            unset($_SESSION["success"]);
+        }
     }
 
     // Get the final HTML code and stop the output buffering

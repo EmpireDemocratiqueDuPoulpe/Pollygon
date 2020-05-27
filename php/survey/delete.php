@@ -1,21 +1,31 @@
 <?php
-
 require_once "../../init.php";
 
-$surveys_to_delete = $_POST["survey_delete"];
+############################
+# Check vars
+############################
 
+$surveys = $_POST["survey_delete"] ?? null;
 
-foreach ($surveys_to_delete as $survey){
-    $surveys = PDOFactory::sendQuery(
+if (is_null($surveys)) { setError(SURVEY_NOT_FOUND); redirectTo(HOME_PAGE); }
+
+############################
+# Delete surveys
+############################
+
+foreach ($surveys as $survey){
+    PDOFactory::sendQuery(
         $db,
-        'DELETE FROM surveys WHERE owner_id = :owner_id AND survey_id = :survey_id',
+        'DELETE FROM surveys WHERE owner_id = :owner_id AND survey_id = :survey_id;
+            DELETE FROM questions WHERE survey_id = :survey_id;
+            DELETE FROM answers WHERE survey_id = :survey_id;',
         ["owner_id" => $_SESSION["user_id"],
-         "survey_id" => intval($survey)], false
+         "survey_id" => intval($survey)],
+        false
     );
-    ob_start();
 }
 
-header('Location: ../../home.php');
+redirectTo(HOME_PAGE);
 
 
 

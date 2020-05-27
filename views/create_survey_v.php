@@ -2,7 +2,7 @@
 
 <html lang="fr">
     <head>
-        <title>Pollygon - <?php echo $_SESSION["survey"]->getTitle(); ?></title>
+        <title>Pollygon - <?= $survey_title ?></title>
         <?php include_once(ROOT."/views/models/head.php"); ?>
     </head>
     <body>
@@ -17,14 +17,17 @@
                     <?= $questions; ?>
                     <li class="newQuestion">
                         <a href="<?= $newQuestionUrl ?>">
-                            <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
+                            <i class="svgImport insideBtn"><?= file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
                             Ajouter une question
                         </a>
                     </li>
                 </ul>
 
                 <!-- Finish edit -->
-                <a class="btn filled" href="./php/survey/add.php">CR&Eacute;ER LE SONDAGE</a>
+                <form action="./php/survey/add.php" method="POST">
+                    <input type="hidden" name="survey_id" value="<?= $survey_id; ?>">
+                    <input class="btn filled" type="submit" value="CR&Eacute;ER LE SONDAGE">
+                </form>
             </div>
 
             <!-- Question view -->
@@ -35,8 +38,10 @@
                 <!-- Survey title -->
                 <div id="sVQTitle">
                     <form action="./php/survey/set_survey_title.php" method="POST">
+
+                        <input type="hidden" name="survey_id" value="<?= $survey_id ?>">
                         <h1>
-                            <textarea name="survey_name" placeholder="Nouveau sondage"><?= $_SESSION["survey"]->getTitle(); ?></textarea>
+                            <textarea name="survey_name" placeholder="Nouveau sondage"><?= $survey_title ?></textarea>
                         </h1>
 
                         <input class="btn filled smaller-2" type="submit" value="CHANGER"/>

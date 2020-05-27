@@ -1,6 +1,9 @@
 <?php
 require_once "./init.php";
 
+$SurveyManager = new Survey($db);
+$QuestionManager = new Question($db);
+
 ############################
 # Check if he's connected
 ############################
@@ -11,55 +14,48 @@ if (!$is_connected) redirectTo("./login.php");
 # Create the survey
 ############################
 
-// Create the survey
-if (!isset($_SESSION["survey"]) OR empty($_SESSION["survey"]))
-    $_SESSION["survey"] = new Survey("Nouveau sondage");
+// Get the survey and the selected question id
+$survey = $SurveyManager->getWIPSurvey($_SESSION["user_id"]);
+$survey_id = $survey["survey_id"];
+$survey_title = $survey["title"];
+
+$selected_id = isset($_GET["selected"]) ? $_GET["selected"] : -1;
 
 // Check if a question is added
 if (isset($_GET["newQuestion"]) AND !empty($_GET["newQuestion"])) {
 
-    $type = $_GET["newQuestion"];
+    $QuestionManager->addQuestion($survey_id, $_GET["newQuestion"]);
 
-    switch ($type) {
-        case "input":
-            $_SESSION["survey"]->addQuestion(new QuestionInput("Nouvelle question"));
-            break;
-    }
-
-    if (isset($_GET["selected"])) {
-        redirectTo("./create_survey.php?selected=".$_GET["selected"]);
+    if ($selected_id >= 0) {
+        redirectTo("./create_survey.php?survey=".$survey_id."&selected=".$selected_id);
     } else {
-        redirectTo("./create_survey.php");
+        redirectTo("./create_survey.php?survey=".$survey_id);
     }
 }
 
 // Build question list
-$questions = "";
-
-if (isset($_GET["selected"])) {
-    $questions = $_SESSION["survey"]->buildQuestions("./create_survey.php?", $_GET["selected"]);
-} else {
-    $questions = $_SESSION["survey"]->buildQuestions("./create_survey.php?");
-}
+$questions = $QuestionManager->buildList($survey_id, true, false, $selected_id);
 
 // Build the URL for a new question
-$newQuestionUrl = "./create_survey.php?";
+$newQuestionUrl = "./create_survey.php?survey=".$survey_id."&";
 
-if (isset($_GET["selected"]))
-    $newQuestionUrl .= "selected=".$_GET["selected"]."&";
+if ($selected_id >= 0)
+    $newQuestionUrl .= "selected=".$selected_id."&";
 
 $newQuestionUrl .= "newQuestion=input";
 
 // Build the question view
 $questionView = '';
 
-if (isset($_GET["selected"])) {
-    $q = $_SESSION["survey"]->getQuestion($_GET["selected"]);
-
-    if (!is_null($q)) {
-        $questionView = $q->build(true);
-    }
+if ($selected_id >= 0) {
+    $questionView = $QuestionManager->buildView($survey_id, $selected_id, true, false);
 }
+
+############################
+# Get messages
+############################
+
+$messages = buildMessages(true, false);
 
 ############################
 # Import the view

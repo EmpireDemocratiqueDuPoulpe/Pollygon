@@ -63,17 +63,17 @@
             <div id="stats_container">
                 <div class="stat">
                     <img src="./assets/images/pollygon_l_black.png" alt="icon"/>
-                    <p><span>Formulaire(s) crée(s) :</span> 0</p>
+                    <p><span>Sondage(s) cr&eacute;&eacute;(s) :</span> <?= $surveys_count ?></p>
                 </div>
 
                 <div class="stat">
                     <img src="./assets/images/pollygon_l_black.png" alt="icon"/>
-                    <p><span>Formulaire(s) répondu(s) :</span> 0</p>
+                    <p><span>Sondage(s) r&eacute;pondu(s) :</span> <?= $surveys_answered_count ?></p>
                 </div>
 
                 <div class="stat">
                     <img src="./assets/images/pollygon_l_black.png" alt="icon"/>
-                    <p><span>Participant(s) à vos formulaires :</span> 0</p>
+                    <p><span>Participant(s) à vos sondages :</span> <?= $surveys_members ?></p>
                 </div>
             </div>
         </div>

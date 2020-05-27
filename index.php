@@ -2,6 +2,12 @@
 require_once "./init.php";
 
 ############################
+# Get messages
+############################
+
+$messages = buildMessages(false, true);
+
+############################
 # Import the view
 ############################
 

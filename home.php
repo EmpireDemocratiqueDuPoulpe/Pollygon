@@ -13,35 +13,40 @@ if (!$is_connected) redirectTo("./login.php");
 
 $surveys = PDOFactory::sendQuery(
         $db,
-        'SELECT survey_id, survey FROM surveys WHERE owner_id = :owner_id ORDER BY survey_id',
+        'SELECT survey_id, title, creation_date, members FROM surveys WHERE owner_id = :owner_id AND finished = 1 ORDER BY survey_id',
         ["owner_id" => $_SESSION["user_id"]]
 );
+$delete_mode = isset($_GET["deleteMode"]);
+
 ob_start();
 
 if ($surveys) {
     foreach ($surveys as $survey) {
-        $s = unserialize($survey["survey"]);
+        $membersText = $survey["members"] > 1 ? " participants" : " participant";
+        $deletor_id = "survey_deletor".$survey["survey_id"];
         ?>
+            <?php if ($delete_mode) { ?>
+                <label for="<?= $deletor_id ?>" class="surveyDeletor">
+                    <input type="checkbox" id="<?= $deletor_id ?>" class="sDBox" name="survey_delete[]" value="<?= $survey["survey_id"]; ?>">
+            <?php } ?>
             <li class="survey">
-                <a class="surveyLink" href="./view_survey.php?survey=<?= $survey["survey_id"]; ?>">
-                    <span class="surveyName"><?= $s->getTitle(); ?></span>
-                    <span class="surveyDate">- <?= $s->getCreationDate(); ?></span>
-                    <span class="surveyMembers"><?= $s->getMembersCountStr() ?></span>
+                <?php if ($delete_mode) { ?>
+                    <a class="surveyLink">
+                <?php } else { ?>
+                    <a class="surveyLink" href="./view_survey.php?survey=<?= $survey["survey_id"]; ?>">
+                <?php } ?>
+                    <span class="surveyName"><?= $survey["title"] ?></span>
+                    <span class="surveyDate">- <?= $survey["creation_date"] ?></span>
+                    <span class="surveyMembers"><?= $survey["members"].$membersText ?></span>
                 </a>
                 <div class="surveyURIContainer">
                     <span class="surveyURI">http://localhost/2PROJ-Pollygon/answer_survey.php?survey=<?= $survey["survey_id"]; ?></span>
                 </div>
+            </li>
+            <?php if ($delete_mode) { ?>
+                </label>
+            <?php } ?>
         <?php
-
-        if (isset($_GET["deleteMode"])) {
-            ?>
-                <div class="surveyDeletor">
-                    <input type="checkbox" name="survey_delete[]" value="<?= $survey["survey_id"]; ?>">
-                </div>
-            <?php
-        }
-
-        echo '</li>';
     }
 } else {
     echo '<p id="noSurvey">Uh oh, il semble que vous n\'ayez cr&eacute;&eacute; aucun sondage.</p>';
@@ -49,6 +54,12 @@ if ($surveys) {
 
 $surveysHTML = ob_get_contents();
 ob_end_clean();
+
+############################
+# Get messages
+############################
+
+$messages = buildMessages();
 
 ############################
 # Import the view

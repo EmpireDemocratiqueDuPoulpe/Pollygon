@@ -16,7 +16,6 @@
         <div id="survey_viewer">
             <div id="sVQuestionList">
                 <ul>
-                    <li id="sVQBack"><a href="./home.php"><i class="fas fa-chevron-left"></i> Retour</a></li>
                     <?= $questions ?>
                 </ul>
             </div>

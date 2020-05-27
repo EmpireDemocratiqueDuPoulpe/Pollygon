@@ -17,21 +17,27 @@
         <!-- Buttons -->
         <div id="surveys_btn">
             <?php if(isset($_GET["deleteMode"])) { ?>
+                <!-- Delete Mode -->
                 <a class="btn filled smaller" href="./home.php" draggable="false">
                     <i class="fas fa-chevron-left"></i> Annuler
                 </a>
 
                 <input class="btn filled red smaller" type="submit" value="Supprimer">
+
+                <p><em>Cliquez sur le(s) sondage(s) que vous souhaitez supprimer puis sur le bouton "Supprimer" ci-dessus.</em></p>
             <?php } else { ?>
+                <!-- Normal mode -->
                 <a class="btn filled smaller" href="./create_survey.php" draggable="false">
-                    <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
+                    <i class="svgImport insideBtn"><?= file_get_contents(ROOT."/assets/images/icons/add_survey.svg"); ?></i>
                     Nouveau sondage
                 </a>
 
-                <a class="btn filled red smaller" href="./home.php?deleteMode" draggable="false">
-                    <i class="svgImport insideBtn"><?php echo file_get_contents(ROOT."/assets/images/icons/del_survey.svg"); ?></i>
-                    Supprimer sondage
-                </a>
+                <?php if ($surveys) { ?>
+                    <a class="btn filled red smaller" href="./home.php?deleteMode" draggable="false">
+                        <i class="svgImport insideBtn"><?= file_get_contents(ROOT."/assets/images/icons/del_survey.svg"); ?></i>
+                        Supprimer sondage
+                    </a>
+                <?php } ?>
             <?php } ?>
         </div>
 

@@ -1,45 +1,45 @@
 <?php
 require_once "../../init.php";
 
+$SurveyManager = new Survey($db);
+
 ############################
-# Check the survey
+# Check vars
 ############################
 
-if (!isset($_SESSION["survey"]) OR empty($_SESSION["survey"])) {
-    setError(SURVEY_NOT_FOUND);
-    redirectTo(HOME_PAGE);
+$survey_id = $_POST["survey_id"] ?? null;
+
+if (is_null($survey_id)) { setError(SURVEY_NOT_FOUND); redirectTo(HOME_PAGE); }
+
+############################
+# Check if the survey has questions
+############################
+
+if (!$SurveyManager->hasQuestions($survey_id)) {
+    setError(SURVEY_EMPTY);
+    redirectTo(CREATE_SURVEY_PAGE);
 }
 
 ############################
 # Add the survey
 ############################
 
-// Get last ID before query
-$emptyDb = false;
-
-$lastIDBefore = PDOFactory::sendQuery($db, 'SELECT survey_id FROM surveys ORDER BY survey_id DESC LIMIT 1');
-
-if (!$lastIDBefore) $emptyDb = true;
-else {
-    $lastIDBefore = $lastIDBefore[0]["survey_id"];
-}
-
 // Add the survey
 PDOFactory::sendQuery(
     $db,
-    'INSERT INTO surveys(owner_id, survey) VALUES (:owner_id, :survey)',
-    ["owner_id" => $_SESSION["user_id"], "survey" => serialize($_SESSION["survey"])],
+    'UPDATE surveys SET finished = 1 WHERE survey_id = :survey_id AND owner_id = :owner_id',
+    ["survey_id" => $survey_id, "owner_id" => $_SESSION["user_id"]],
     false
 );
 
-// Get last ID after query
-if (!$emptyDb)
-    $lastIDAfter = PDOFactory::sendQuery($db, 'SELECT survey_id FROM surveys ORDER BY survey_id DESC LIMIT 1')[0]["survey_id"];
+// Check if the survey is added
+$survey = PDOFactory::sendQuery(
+    $db,
+    'SELECT survey_id FROM surveys WHERE survey_id = :survey_id AND finished = 0',
+    ["survey_id" => $survey_id]
+);
 
-// Set the message and redirect
-unset($_SESSION["survey"]);
-
-if (!$emptyDb && ($lastIDBefore === $lastIDAfter)) {
+if ($survey) {
     setError(UNKNOWN_SURVEY_ADD_ERROR);
     redirectTo(CREATE_SURVEY_PAGE);
 } else {

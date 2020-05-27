@@ -1,5 +1,6 @@
 <?php
 require_once "../../init.php";
+$QuestionManager = new Question($db);
 
 ############################
 # Check vars
@@ -7,22 +8,9 @@ require_once "../../init.php";
 
 $question_id = $_POST["question_id"] ?? null;
 $question_name = $_POST["question_name"] ?? null;
-$survey = $_SESSION["survey"] ?? null;
 
 if (is_null($question_id)) { setError(QUESTION_NOT_FOUND); redirectTo(CREATE_SURVEY_PAGE); }
 if (is_null($question_name)) { setError(QUESTION_NOT_VALID); redirectTo(CREATE_SURVEY_PAGE); }
-if (is_null($survey)) { setError(SURVEY_NOT_FOUND); redirectTo(CREATE_SURVEY_PAGE); }
-
-############################
-# Get the question
-############################
-
-$question = $survey->getQuestion($question_id);
-
-if (is_null($question)) {
-    setError(QUESTION_NOT_FOUND);
-    redirectTo(CREATE_SURVEY_PAGE);
-}
 
 ############################
 # Check the question name
@@ -39,16 +27,8 @@ if (strlen($question_name) == 0) {
 # Change the name
 ############################
 
-$question->setTitle($question_name);
-
-if (!$survey->setQuestion($question_id, $question)) {
+if (!$QuestionManager->setTitle($question_id, $question_name)) {
     setError(QUESTION_NOT_FOUND);
-    redirectTo(CREATE_SURVEY_PAGE);
 }
 
-############################
-# Save
-############################
-
-$_SESSION["survey"] = $survey;
 redirectTo(CREATE_SURVEY_PAGE."?selected=".$question_id);
