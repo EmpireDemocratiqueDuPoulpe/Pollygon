@@ -36,7 +36,7 @@ if ($surveys) {
                     <a class="surveyLink" href="./view_survey.php?survey=<?= $survey["survey_id"]; ?>">
                 <?php } ?>
                     <span class="surveyName"><?= $survey["title"] ?></span>
-                    <span class="surveyDate">- <?= $survey["creation_date"] ?></span>
+                    <span class="surveyDate">- <?= date('d/m/Y', strtotime($survey["creation_date"])); ?></span>
                     <span class="surveyMembers"><?= $survey["members"].$membersText ?></span>
                 </a>
                 <div class="surveyURIContainer">
