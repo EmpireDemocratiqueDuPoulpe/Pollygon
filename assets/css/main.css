@@ -997,3 +997,52 @@ footer p {
         transform: translate3d(4px, 0, 0);
     }
 }
+
+/****************************************
+ * Analytics
+ ****************************************/
+
+/** Table **/
+#DataTables_Table_0_filter{
+    margin: 0 25px 0 0;
+}
+
+#DataTables_Table_0_filter label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#DataTables_Table_0_filter label input{
+    width: 200px;
+    padding: 10px;
+}
+
+#DataTables_Table_0_length label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px;
+}
+
+#DataTables_Table_0_length label select{
+    padding: 2px 2px 2px 2px;
+    margin: 0 5px;
+}
+
+.sorting_1{
+    text-align: left;
+}
+
+#DataTables_Table_0_info{
+    margin-left: 10px;
+}
+
+#DataTables_Table_0_paginate{
+    padding: 1px 0 1px 0;
+}
+
+#DataTables_Table_0_paginate a{
+    margin: 0;
+    padding: 5px 9px;
+}
