@@ -32,6 +32,6 @@
 
         <script type="text/javascript" src="./assets/js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="./assets/js/datatables/datatables.min.js"></script>
-        <script type="text/javascript" src="./assets/js/datatables/init-datatables-temp.js"></script>
+        <script type="text/javascript" src="./assets/js/datatables/init-datatables.js"></script>
     </body>
 </html>

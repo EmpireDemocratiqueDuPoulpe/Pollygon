@@ -32,55 +32,49 @@ class Question {
 
         $question_answer = PDOFactory::sendQuery(
             $this->_db,
-            'SELECT value, owner_id FROM answers WHERE survey_id = :survey_id AND question_id = :question_id',
+            'SELECT answer_id, value, owner_id FROM answers WHERE survey_id = :survey_id AND question_id = :question_id',
             ["survey_id" => $survey_id, "question_id" => $question_id]
         );
 
         foreach ($question_answer as $answer){
-            $question_answer_value = $answer["value"];
-            $question_answer_userid = $answer["owner_id"];
+            $answer_id = $answer["answer_id"];
+            $answer_value = $answer["value"];
+            $user_id = $answer["owner_id"];
 
-            $question_answer_user_infos = PDOFactory::sendQuery(
+            $user_infos = PDOFactory::sendQuery(
                 $this->_db,
                 'SELECT gender, birthdate, country, job FROM users WHERE user_id = :user_id',
-                ["user_id" => $question_answer_userid]
+                ["user_id" => $user_id]
             );
 
-            $question_answer_usergender = $question_answer_user_infos[0]["gender"];
-            $question_answer_userbirthdate = $question_answer_user_infos[0]["birthdate"];
-            $datetimenow = new DateTime("now");
-            //$datetimenow = date_format($datetimenow,"Y-m-d");
-            $datetimebirthday = new DateTime($question_answer_userbirthdate);
-            //$datetimebirthday = date_format($datetimebirthday,"Y-m-d");
+            $user_gender = $user_infos[0]["gender"];
 
-            $age = date_diff($datetimenow,$datetimebirthday)->format("%Y");
+            try {
+                $user_birthdate = $user_infos[0]["birthdate"];
 
-            $question_answer_usercountry = $question_answer_user_infos[0]["country"];
-            $question_answer_userjob = $question_answer_user_infos[0]["job"];
+                $date_now = new DateTime("now");
+                $date_birthday = new DateTime($user_birthdate);
+                $user_age = date_diff($date_now, $date_birthday)->format("%Y") . " ans";
+            } catch (Exception $e) {
+                $user_age = "error";
+            }
 
-            $country = $this->getCountryFromCode($question_answer_usercountry);
 
-            $final_return .= htmlspecialchars("<tr>");
-            $final_return .= htmlspecialchars("<td>");
-            $final_return .= $question_answer_value;
-            $final_return .= htmlspecialchars("</td>");
-            $final_return .= htmlspecialchars("<td>");
-            $final_return .= $question_answer_usergender;
-            $final_return .= htmlspecialchars("</td>");
-            $final_return .= htmlspecialchars("<td>");
-            $final_return .= $age;
-            $final_return .= htmlspecialchars("</td>");
-            $final_return .= htmlspecialchars("<td>");
-            $final_return .= $country;
-            $final_return .= htmlspecialchars("</td>");
-            $final_return .= htmlspecialchars("<td>");
-            $final_return .= $question_answer_userjob;
-            $final_return .= htmlspecialchars("</td>");
-            $final_return .= htmlspecialchars("</tr>");
+            $user_country = $this->getCountryFromCode($user_infos[0]["country"]);
+            $user_job = $user_infos[0]["job"];
+
+            $final_return .=
+                "<tr>" .
+                    "<td>".htmlspecialchars($answer_id)."</td>" .
+                    "<td>".htmlspecialchars($answer_value)."</td>" .
+                    "<td>".htmlspecialchars($user_gender)."</td>" .
+                    "<td>".htmlspecialchars($user_age)."</td>" .
+                    "<td>".htmlspecialchars($user_country)."</td>" .
+                    "<td>".htmlspecialchars($user_job)."</td>" .
+                "</tr>";
         }
 
         return $final_return;
-
     }
 
     public function getCountryFromCode(string $country_code) : string {
@@ -494,6 +488,7 @@ class Question {
                 <table class="table">
                     <thead>
                         <tr>
+                            <th class="no-display">ID</th>
                             <th>R&eacute;ponse</th>
                             <th>Sexe</th>
                             <th>&Acirc;ge</th>
@@ -502,7 +497,7 @@ class Question {
                         </tr>
                     </thead>
                     <tbody>
-                        ' . html_entity_decode($answers) . '
+                        ' . $answers . '
                     </tbody>
                 </table>';
             }
