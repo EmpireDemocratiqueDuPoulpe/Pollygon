@@ -1046,3 +1046,151 @@ footer p {
     margin: 0;
     padding: 5px 9px;
 }
+
+/* RESPONSIVE */
+
+
+@media all and (max-device-width: 767px)
+{
+
+    /* INDEX */
+    header{
+        clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 25% 90%, 0% 80%);
+    }
+
+    .btn{
+        width: 450px;
+        height: 100px;
+        font-size: 3em;
+        line-height: 90px;
+    }
+
+    #catchphrase{
+        font-size: 3.50em;
+    }
+
+    #brand_wrapper, #logo{
+        width: 90%;
+    }
+
+    .fLSection a{
+        font-size: 1.25em;
+    }
+
+    #footerSocial i{
+        font-size: 3.5rem;
+        width: 90px;
+    }
+
+    #footerSocial p{
+        display: none;
+    }
+    #footerSocial{
+        height: 75px;
+    }
+
+    #start_buttons {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    body > .index_content_wrapper {
+        margin-top: 0;
+    }
+
+    body > .index_content_wrapper ~ .index_content_wrapper {
+        margin-top: 40px;
+    }
+
+    /* HOME */
+    #navbar{
+        height: 110px;
+    }
+
+    #navbar i{
+        font-size: 3.5rem;
+        width: 90px;
+    }
+
+    #surveys_btn .btn{
+        width: 250px;
+        height: 55px;
+        font-size: 1.5em;
+        line-height: 50px;
+        margin: 0 20px;
+    }
+
+    #surveys_container h2{
+        font-size: 2.25em;
+        margin-left: 10%;
+    }
+
+    #surveys_list{
+        padding: 0 10%;
+    }
+
+    .surveyName{
+        font-size: 1.9em;
+    }
+
+    .surveyMembers{
+        display: none;
+    }
+
+    .surveyURI{
+        font-size: 1.50em;
+        line-height: 25px;
+    }
+
+    .surveyURIContainer{
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .surveyDate{
+        display: none;
+    }
+
+    .survey{
+        height: 85px;
+    }
+
+    /* ANALYTICS */
+
+    #survey_viewer{
+        flex-direction: column;
+    }
+
+    #sVQuestionList{
+        height: 20%;
+        width: 100%;
+    }
+
+    #sVQBack{
+        font-size: 1.1em;
+    }
+
+    #sVQuestionList ul li a{
+        font-size: 1.6em;
+    }
+
+    #sVQuestionView h2{
+        font-size: 2em;
+    }
+
+}
+
+@media all and (min-device-width: 768px) and (max-device-width: 1024px){
+    header{
+        height: 40vh;
+    }
+
+    #brand_wrapper, #logo{
+        width: 65%;
+    }
+
+    #catchphrase{
+        font-size: 2em;
+    }
+
+}

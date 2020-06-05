@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
 <html lang="fr" class="logreg">
+
+
     <head>
         <title>Pollygon - Connexion</title>
         <?php include_once(ROOT."/views/models/head.php"); ?>
