@@ -33,7 +33,7 @@ if ($surveys) {
                 <?php if ($delete_mode) { ?>
                     <a class="surveyLink">
                 <?php } else { ?>
-                    <a class="surveyLink" href="./view_survey.php?survey=<?= $survey["survey_id"]; ?>">
+                    <a class="surveyLink" href="./analytics.php?survey=<?= $survey["survey_id"]; ?>">
                 <?php } ?>
                     <span class="surveyName"><?= $survey["title"] ?></span>
                     <span class="surveyDate">- <?= date('d/m/Y', strtotime($survey["creation_date"])); ?></span>

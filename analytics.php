@@ -11,7 +11,7 @@ $QuestionManager = new Question($db);
 if (!$is_connected) redirectTo("./login.php");
 
 ############################
-# Get the survey
+# Get the survey id
 ############################
 
 // Get the survey id
@@ -21,6 +21,19 @@ if (!isset($_GET["survey"]) OR empty($_GET["survey"])) {
 }
 
 $survey_id = $_GET["survey"];
+
+############################
+# Check if he's the owner of the survey
+############################
+
+if (!$SurveyManager->doesUserOwnThisSurvey($_SESSION["user_id"], $survey_id)) {
+    setError(UNAUTHORIZED_SURVEY_ACCESS);
+    redirectTo("./home.php");
+}
+
+############################
+# Get the survey
+############################
 
 // Get the survey and the selected question id
 $survey = $SurveyManager->getSurvey($survey_id);
@@ -43,15 +56,13 @@ $selected_id = isset($_GET["selected"]) ? $_GET["selected"] : -1;
 ############################
 
 // Build question list
-//$questions = $QuestionManager->buildList($survey_id, false, true, $selected_id);
-$questions = $QuestionManager->buildListAnalytics($survey_id, false, true, true, $selected_id);
+$questions = $QuestionManager->buildList($survey_id, false, true, $selected_id);
 
 // Build the question view
 $questionView = '';
 
 if ($selected_id >= 0) {
-    //$questionView = $QuestionManager->buildView($survey_id, $selected_id, false, true);
-    $questionView = $QuestionManager->buildViewAnalytics($survey_id, $selected_id, false, true, true);
+    $questionView = $QuestionManager->buildViewAnalytics($survey_id, $selected_id);
 }
 
 require_once "./views/analytics_v.php";

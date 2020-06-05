@@ -52,6 +52,9 @@ define("UNKNOWN_ANSWER_ADD_ERROR", 39);
 define("ANSWER_ADDED", 40);
 define("SURVEY_ANSWERED", 41);
 
+
+define("UNAUTHORIZED_SURVEY_ACCESS", 100);
+
 ############################
 # Load classes
 ############################
@@ -156,6 +159,8 @@ function buildMessages(bool $error = true, bool $success = true) {
         UNKNOWN_ANSWER_ADD_ERROR => "Erreur inconnue, impossible de r&eacute;pondre &agrave; la question. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         ANSWER_ADDED => "Question r&eacute;pondue !",
         SURVEY_ANSWERED => "Vous avez répondu à toutes les questions de ce sondage.",
+
+        UNAUTHORIZED_SURVEY_ACCESS => "Vous n'avez pas la permission d'acc&eacute;der &agrave; cette page.",
 
         "none" => "<em>Un probl&egrave;me est survenu lors de l'affichage de ce message</em>"
     ];

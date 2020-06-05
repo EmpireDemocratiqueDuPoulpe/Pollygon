@@ -130,6 +130,14 @@ class Survey {
     // REMOVE
 
     // CHECK
+    public function doesUserOwnThisSurvey(int $user_id, int $survey_id) : bool {
+        return (boolean) PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT survey_id FROM surveys WHERE survey_id = :survey_id AND owner_id = :owner_id',
+            ["survey_id" => $survey_id, "owner_id" => $user_id]
+        );
+    }
+
     public function doesUserHaveWIPSurvey(int $user_id) : bool {
         return (boolean) PDOFactory::sendQuery(
             $this->_db,

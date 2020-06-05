@@ -413,44 +413,12 @@ class Question {
     // CHECK
 
     // OTHER
-
-    // BUILD LIST VIEW SURVEY
-    public function buildList(int $survey_id, bool $editMode, bool $viewMode, int $selected = -1) : string {
+    public function buildList(int $survey_id, bool $editMode, bool $analytics, int $selected = -1) : string {
         $questions = $this->getAll($survey_id);
         $html = "";
 
         if ($editMode) {
             $page = "./create_survey.php";
-        } elseif ($viewMode) {
-            $page = "./view_survey.php";
-        } else {
-            $page = null;
-        }
-
-        foreach ($questions as $question) {
-            $question_id = $question["question_id"];
-            $question_title = $question["title"];
-            $class = ($question_id == $selected) ? 'class="selected"' : '';
-            $linkURI = "";
-
-            if (!is_null($page))
-                $linkURI = 'href="'.$page.'?survey='.$survey_id.'&selected='.$question_id.'"';
-
-            $html .= '<li '.$class.'><a '.$linkURI.'>'.$question_title.'</a></li>';
-        }
-
-        return $html;
-    }
-
-    //BUILD LIST ANALYTICS
-    public function buildListAnalytics(int $survey_id, bool $editMode, bool $viewMode, bool $analytics = false, int $selected = -1) : string {
-        $questions = $this->getAll($survey_id);
-        $html = "";
-
-        if ($editMode) {
-            $page = "./create_survey.php";
-        } elseif ($viewMode AND !$analytics) {
-            $page = "./view_survey.php";
         } elseif ($analytics) {
             $page = "./analytics.php";
         } else {
@@ -472,7 +440,6 @@ class Question {
         return $html;
     }
 
-    // VIEW SURVEY BUILD VIEW
     public function buildView(int $survey_id, int $question_id, bool $editMode, bool $viewMode, int $answer_id = null) : string {
         $question = $this->get($survey_id, $question_id);
         $question_title = $question["title"];
@@ -512,69 +479,34 @@ class Question {
             </form>';
     }
 
-    // BUILD VIEW ANALYTICS
-    public function buildViewAnalytics(int $survey_id, int $question_id, bool $editMode, bool $viewMode, bool $analytics, int $answer_id = null) : string {
+    public function buildViewAnalytics(int $survey_id, int $question_id) : string {
         $question = $this->get($survey_id, $question_id);
         $question_title = $question["title"];
         $question_type = $question["type"];
-        $formURI = $editMode ? "./php/survey/set_question_title.php" : "./php/survey/set_question_response.php";
-        $disabledAnswer = $editMode ? "disabled" : "";
-        $html = "";
-        $final_input = "";
+        $question_view = "";
 
         // Set title
-        if ($editMode)
-            $question_title = '<textarea name="question_name" placeholder="Nouvelle question">'.$question_title.'</textarea>';
-
         $question_title = '<h2>'.$question_title.'</h2>';
 
-        // Set ID inputs used in scripts
-        $id_inputs = '
-            <input type="hidden" id="survey_id" name="survey_id" value="'.$survey_id.'">
-            <input type="hidden" id="question_id" name="question_id" value="'.$question_id.'">';
-
-
-
-        if (!$editMode AND !$viewMode)
-            if (!is_null($answer_id))
-                $id_inputs .= '<input type="hidden" id="answer_id" name="answer_id" value="'.$answer_id.'">';
-
-        if (!$analytics){
-            $final_question_view = '<input type="text" id="question_input" class="floating_label_input" name="question_input" placeholder="R&eacute;ponse" required '.$disabledAnswer.'>
-                    <label for="question_input" class="floating_label">R&eacute;ponse</label>';
-
-            $final_input = '<input class="btn filled" type="submit" value="VALIDER">';
-        }else{
-            if($question_type = "input"){
-                $answers = $this->getResponseInput($survey_id, $question_id);
-                $final_question_view = '
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Réponse</th>
-                                <th>Sexe</th>
-                                <th>Âge</th>
-                                <th>Pays</th>
-                                <th>Métier</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ' . html_entity_decode($answers) . '
-                        </tbody>
-                    </table>';
+        if($question_type = "input") {
+            $answers = $this->getResponseInput($survey_id, $question_id);
+            $question_view = '
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>R&eacute;ponse</th>
+                            <th>Sexe</th>
+                            <th>&Acirc;ge</th>
+                            <th>Pays</th>
+                            <th>M&eacute;tier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ' . html_entity_decode($answers) . '
+                    </tbody>
+                </table>';
             }
-        }
 
-        return
-            '<form action="'.$formURI.'" method="POST">
-                '.$id_inputs.'
-                
-                '.$question_title.'
-
-                <div class="field floating_label_wrapper">
-                    '. $final_question_view .'
-                </div>
-                    ' . $final_input . '
-            </form>';
+        return $question_title . $question_view;
     }
 }
