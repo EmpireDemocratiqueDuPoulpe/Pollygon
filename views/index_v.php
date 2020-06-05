@@ -25,20 +25,15 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Aliquam lobortis metus non nisi dignissim, eget gravida mauris suscipit.</h2>
+                    <h2>Créez vos sondages en toute simplicité.</h2>
                 </div>
 
                 <div class="iCBody">
                     <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu erat in diam vestibulum euismod.
-                        Cras maximus augue ut sagittis viverra. Quisque congue lectus arcu, quis convallis nulla mollis sit amet.
-                        Pellentesque id molestie dui. Sed ac vulputate diam, at vestibulum odio. Maecenas pretium vel ipsum ac
-                        porta. Integer tincidunt justo imperdiet, posuere enim ac, facilisis nulla. Morbi pharetra fringilla
-                        lorem, ac mollis augue maximus ac. Etiam ultricies enim mauris, ut tempor orci vestibulum non. Donec
-                        eget sem vehicula, hendrerit urna faucibus, fringilla neque. Nam eget risus nisi. Morbi rhoncus eros
-                        augue, suscipit elementum enim aliquam a. Duis eget ex vel tellus blandit facilisis ut in elit. Integer
-                        blandit ante non elit dictum eleifend.
+                        Pollygon propose un système de création de sondage simple, accessible aux entreprises et aux particuliers.
+                        Avec son design épuré et moderne il permet de créer facilement et rapidement un sondage que vous pourrez 
+                        partager.
                     </p>
                 </div>
             </div>
@@ -47,19 +42,14 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Aliquam lobortis metus non nisi dignissim, eget gravida mauris suscipit.</h2>
+                    <h2>Analysez vos sondages afin d’améliorer votre vision.</h2>
                 </div>
 
                 <div class="iCBody">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu erat in diam vestibulum euismod.
-                        Cras maximus augue ut sagittis viverra. Quisque congue lectus arcu, quis convallis nulla mollis sit amet.
-                        Pellentesque id molestie dui. Sed ac vulputate diam, at vestibulum odio. Maecenas pretium vel ipsum ac
-                        porta. Integer tincidunt justo imperdiet, posuere enim ac, facilisis nulla. Morbi pharetra fringilla
-                        lorem, ac mollis augue maximus ac. Etiam ultricies enim mauris, ut tempor orci vestibulum non. Donec
-                        eget sem vehicula, hendrerit urna faucibus, fringilla neque. Nam eget risus nisi. Morbi rhoncus eros
-                        augue, suscipit elementum enim aliquam a. Duis eget ex vel tellus blandit facilisis ut in elit. Integer
-                        blandit ante non elit dictum eleifend.
+                        La fonction Analyse de Pollygon permet de tirer le meilleur parti des résultats de vos sondages 
+                        à l’aide de graphiques simples et explicites.La visualisation de données peut être filtrée pour affiner 
+                        au mieux vos résultats. 
                     </p>
                     <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
                 </div>
@@ -69,20 +59,14 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Aliquam lobortis metus non nisi dignissim, eget gravida mauris suscipit.</h2>
+                    <h2>Améliorez vos sondages.</h2>
                 </div>
 
                 <div class="iCBody">
                     <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu erat in diam vestibulum euismod.
-                        Cras maximus augue ut sagittis viverra. Quisque congue lectus arcu, quis convallis nulla mollis sit amet.
-                        Pellentesque id molestie dui. Sed ac vulputate diam, at vestibulum odio. Maecenas pretium vel ipsum ac
-                        porta. Integer tincidunt justo imperdiet, posuere enim ac, facilisis nulla. Morbi pharetra fringilla
-                        lorem, ac mollis augue maximus ac. Etiam ultricies enim mauris, ut tempor orci vestibulum non. Donec
-                        eget sem vehicula, hendrerit urna faucibus, fringilla neque. Nam eget risus nisi. Morbi rhoncus eros
-                        augue, suscipit elementum enim aliquam a. Duis eget ex vel tellus blandit facilisis ut in elit. Integer
-                        blandit ante non elit dictum eleifend.
+                        Pollygon propose des offres adaptées à votre situation, dans le but de répondre le plus fidèlement à vos besoins.
+                        Pour plus d’informations,<a href="" draggable="false">cliquez ici.</a>
                     </p>
                 </div>
             </div>
@@ -91,19 +75,13 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Aliquam lobortis metus non nisi dignissim, eget gravida mauris suscipit.</h2>
+                    <h2>Vos sondages accessibles partout.</h2>
                 </div>
 
                 <div class="iCBody">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu erat in diam vestibulum euismod.
-                        Cras maximus augue ut sagittis viverra. Quisque congue lectus arcu, quis convallis nulla mollis sit amet.
-                        Pellentesque id molestie dui. Sed ac vulputate diam, at vestibulum odio. Maecenas pretium vel ipsum ac
-                        porta. Integer tincidunt justo imperdiet, posuere enim ac, facilisis nulla. Morbi pharetra fringilla
-                        lorem, ac mollis augue maximus ac. Etiam ultricies enim mauris, ut tempor orci vestibulum non. Donec
-                        eget sem vehicula, hendrerit urna faucibus, fringilla neque. Nam eget risus nisi. Morbi rhoncus eros
-                        augue, suscipit elementum enim aliquam a. Duis eget ex vel tellus blandit facilisis ut in elit. Integer
-                        blandit ante non elit dictum eleifend.
+                        Pollygon vous permet de gérer vos sondages depuis une large sélection de supports. 
+                        Afin d’être disponible où et quand vous le souhaitez.
                     </p>
                     <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
                 </div>
