@@ -17,8 +17,8 @@
             <h3>Liens utiles</h3>
 
             <ul>
-                <li><a href="#">Votre compte</a></li>
-                <li><a href="#">Vos sondages</a></li>
+                <li><a href="./my_account.php">Votre compte</a></li>
+                <li><a href="./home.php">Vos sondages</a></li>
                 <li><a href="#">Politique de confidentialit&eacute;</a></li>
                 <li><a href="#">Aide</a></li>
             </ul>
@@ -29,7 +29,7 @@
 
             <ul>
                 <li><a href="#">Notre &eacute;quipe</a></li>
-                <li><a href="#">Big Brother</a></li>
+                <li><a href="https://www.cia.gov/fr">Big Brother</a></li>
                 <li><a href="mailto:pollygon-support@gmail.com"><i class="fas fa-envelope"></i> pollygon-support@gmail.com</a></li>
                 <li><a href="tel:+33629328714"><i class="fas fa-phone-alt"></i> +33 6 29 32 87 14</a></li>
             </ul>
