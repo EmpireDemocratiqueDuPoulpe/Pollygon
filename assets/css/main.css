@@ -90,16 +90,16 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 90px;
-    padding: 0 12px;
-    background-color: rgba(0, 0, 0, 0.75);
+    height: 110px;
+    padding: 0 0 0 12px;
+    background-color: #1D2331;
     border-bottom: 15px #009BFF solid;
 }
 
 /** Navbar logo **/
 #navbarLogo {
     display: block;
-    height: 90%;
+    height: 80%;
 }
 
 #navbarLogo img {
@@ -112,19 +112,43 @@ header {
 }
 
 /** Navbar link **/
+#navbar_links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    width: 400px;
+    height: 95px;
+}
+
 .navbarIcon {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125em;
+    height: 95px;
+    line-height: 95px;
+    padding: 0 10%;
+    text-decoration: none;
     color: white;
     transition: color 100ms linear;
     cursor: pointer;
 }
 
-.navbarIcon:not(:last-child) {
-    margin-right: 12px;
+.navbarIcon span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+.navbarIcon i, .navbarIcon span { line-height: 95px; }
+.navbarIcon.leftIcon i          { margin-right: 15px; }
+.navbarIcon.rightIcon i         { margin-left: 15px; }
 
 .navbarIcon:hover {
     color: #009BFF;
+    background: #161D27;
 }
 
 /*** Success and errors messages ***/
@@ -974,6 +998,135 @@ footer p {
     padding: 10px;
     background: none;
     border: thin #c1c1c1 solid;
+}
+
+/****************************************
+ * Responsive
+ ****************************************/
+
+@media all and (max-device-width: 767px) {
+
+    /****************************************
+     * Global
+     ****************************************/
+
+    /** Buttons **/
+    .btn {
+        font-size: 3em;
+        width: 450px;
+        height: 100px;
+        line-height: 95px;
+        border-radius: 50px;
+    }
+
+    .btn.smaller {
+        font-size: 1.5em;
+        width: 250px;
+        height: 55px;
+        line-height: 50px;
+    }
+
+    /** Navbar **/
+    .navbarIcon         { padding-left: 0; }
+    .navbarIcon span    { display: none; }
+    .navbarIcon i       { font-size: 3.5rem; }
+
+    /** Footer **/
+    #footerSocial   { height: 75px; }
+    #footerSocial p { display: none; }
+
+    #footerSocial i {
+        font-size: 3.5rem;
+        width: 90px;
+    }
+
+    .fLSection a { font-size: 1.25em; }
+
+    /****************************************
+     * Index
+     ****************************************/
+
+    /** Header **/
+    header { clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 25% 90%, 0% 80%); }
+
+    #brand_wrapper, #logo{ width: 90%; }
+
+    #catchphrase { font-size: 3.2em; }
+
+    #start_buttons { margin: 100px 0; }
+
+    /*** Index container ***/
+    body > .index_content_wrapper { margin-top: 0; }
+    body > .index_content_wrapper ~ .index_content_wrapper { margin-top: 40px; }
+
+    /****************************************
+    * Home
+    ****************************************/
+
+    /** Buttons **/
+    #surveys_btn .btn:not(:last-child)  { margin-right: 10px; }
+    #surveys_btn em                     { display: none; }
+
+    /** Surveys **/
+    #surveys_container h2 {
+        font-size: 2.25em;
+        margin-left: 10%;
+    }
+
+    #surveys_list { padding: 0 10%; }
+
+    .survey {
+        height: 85px;
+        margin-bottom: 20px;
+    }
+
+    .surveyName     { font-size: 1.9em; }
+    .surveyDate     { display: none; }
+    .surveyMembers  { display: none; }
+
+    .surveyURIContainer {
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .surveyURI{
+        font-size: 1.50em;
+        line-height: 25px;
+    }
+
+    /****************************************
+    * Analytics
+    ****************************************/
+
+    /** Survey Viewer **/
+    #survey_viewer { flex-direction: column; }
+
+    /* Question list */
+    #sVQuestionList {
+        width: 100%;
+        height: 20%;
+    }
+
+    #sVQuestionList ul { font-size: 1.6em; }
+
+    #sVQBack { font-size: 1.1em; }
+
+    /* Question view */
+    #sVQuestionView h2 { font-size: 2em; }
+}
+
+@media all and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+    /****************************************
+    * Home
+    ****************************************/
+
+    header { height: 40vh; }
+
+    #brand_wrapper, #logo { width: 65%; }
+
+    #catchphrase { font-size: 1.7em; }
+
 }
 
 /****************************************
