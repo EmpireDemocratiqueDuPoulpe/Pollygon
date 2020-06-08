@@ -4,7 +4,6 @@ var T = {
     table: undefined,
     settings: {
         dom: '<"top"fl>rt<"bottom"ip><"clear">',
-        responsive: true,
         autoWidth: false,
         paging: true,
         pagingType: "simple_numbers",

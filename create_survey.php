@@ -22,14 +22,16 @@ $survey_title = $survey["title"];
 $selected_id = isset($_GET["selected"]) ? $_GET["selected"] : -1;
 
 // Check if a question is added
-if (isset($_GET["newQuestion"]) AND !empty($_GET["newQuestion"])) {
+if (isset($_GET["newQuestion"])) {
 
-    $QuestionManager->addQuestion($survey_id, $_GET["newQuestion"]);
+    if (!empty($_GET["newQuestion"])) {
+        $QuestionManager->addQuestion($survey_id, $_GET["newQuestion"]);
 
-    if ($selected_id >= 0) {
-        redirectTo("./create_survey.php?survey=".$survey_id."&selected=".$selected_id);
-    } else {
-        redirectTo("./create_survey.php?survey=".$survey_id);
+        if ($selected_id >= 0) {
+            redirectTo("./create_survey.php?survey=".$survey_id."&selected=".$selected_id);
+        } else {
+            redirectTo("./create_survey.php?survey=".$survey_id);
+        }
     }
 }
 
@@ -42,7 +44,7 @@ $newQuestionUrl = "./create_survey.php?survey=".$survey_id."&";
 if ($selected_id >= 0)
     $newQuestionUrl .= "selected=".$selected_id."&";
 
-$newQuestionUrl .= "newQuestion=input";
+$newQuestionUrl .= "newQuestion";
 
 // Build the question view
 $questionView = '';
