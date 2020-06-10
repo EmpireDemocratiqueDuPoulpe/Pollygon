@@ -27,10 +27,12 @@ define("JOB_NOT_VALID", 8);
 define("SURVEY_NAME_NOT_VALID", 9);
 define("QUESTION_NOT_VALID", 10);
 define("ANSWER_NOT_VALID", 11);
+define("CHOICE_NAME_NOT_VALID", 12);
 
-define("SURVEY_NOT_FOUND", 12);
-define("QUESTION_NOT_FOUND", 13);
-define("ANSWER_NOT_FOUND", 14);
+define("SURVEY_NOT_FOUND", 13);
+define("QUESTION_NOT_FOUND", 14);
+define("ANSWER_NOT_FOUND", 15);
+define("CHOICE_NOT_FOUND", 16);
 
 define("USR_ALREADY_USED", 20);
 define("USR_NOT_FOUND", 21);
@@ -39,19 +41,22 @@ define("PASSWORDS_DONT_MATCH", 23);
 define("PASSWORD_NOT_SECURE", 24);
 define("BAD_PASSWORD", 25);
 
-define("UNKNOWN_REGISTER_ERROR", 30);
-define("REGISTRATION_COMPLETE", 31);
-define("UNKNOWN_ACCOUNT_EDIT_ERROR", 32);
-define("ACCOUNT_EDIT_COMPLETE", 33);
-define("UNKNOWN_SURVEY_ADD_ERROR", 34);
-define("SURVEY_ADDED", 35);
-define("SURVEY_EMPTY", 36);
-define("UNKNOWN_QUESTION_ADD_ERROR", 37);
-define("QUESTION_ADDED", 38);
-define("UNKNOWN_ANSWER_ADD_ERROR", 39);
-define("ANSWER_ADDED", 40);
-define("SURVEY_ANSWERED", 41);
+define("UNKNOWN_ERROR", 30);
+define("UNKNOWN_REGISTER_ERROR", 31);
+define("REGISTRATION_COMPLETE", 32);
+define("UNKNOWN_ACCOUNT_EDIT_ERROR", 33);
+define("ACCOUNT_EDIT_COMPLETE", 34);
+define("UNKNOWN_SURVEY_ADD_ERROR", 35);
+define("SURVEY_ADDED", 36);
+define("SURVEY_EMPTY", 37);
+define("UNKNOWN_QUESTION_ADD_ERROR", 38);
+define("QUESTION_ADDED", 39);
+define("UNKNOWN_ANSWER_ADD_ERROR", 40);
+define("ANSWER_ADDED", 41);
+define("SURVEY_ANSWERED", 42);
+define("UNKNOWN_CHOICE_ADD_ERROR", 43);
 
+define("NO_SURVEY_SELECTED", 60);
 
 define("UNAUTHORIZED_SURVEY_ACCESS", 100);
 
@@ -135,10 +140,12 @@ function buildMessages(bool $error = true, bool $success = true) {
         SURVEY_NAME_NOT_VALID => "Le nom du sondage renseign&eacute; n'est pas valide.",
         QUESTION_NOT_VALID => "Le nom de la question renseign&eacute; n'est pas valide.",
         ANSWER_NOT_VALID => "La r&eacute;ponse donn&eacute;e n'est pas valide.",
+        CHOICE_NAME_NOT_VALID => "Le nom de l'option n'est pas valide.",
 
         SURVEY_NOT_FOUND => "Le sondage n'a pas pu &ecirc;tre trouv&eacute;. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         QUESTION_NOT_FOUND => "La question n'a pas pu &ecirc;tre trouv&eacute;e. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         ANSWER_NOT_FOUND => "Une erreur est survenue pendant l'enregistrement de votre r&eacute;ponse. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+        CHOICE_NOT_FOUND => "L'option n'a pas pu &ecirc;tre trouv&eacute;e. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
 
         USR_ALREADY_USED => "Le nom d'utilisateur renseign&eacute; est d&eacute;j&agrave; utilis&eacute;.",
         USR_NOT_FOUND => "Le nom d'utilisateur renseign&eacute; n'existe pas.",
@@ -147,6 +154,7 @@ function buildMessages(bool $error = true, bool $success = true) {
         PASSWORD_NOT_SECURE => "Le mot de passe n'est pas s&eacute;curis&eacute; <em>(une minuscule, une majuscule, un chiffre, un caract&egrave;re sp&eacute;cial, huit caract&egrave;res)</em>.",
         BAD_PASSWORD => "Le mot de passe renseign&eacute; est incorrect.",
 
+        UNKNOWN_ERROR => "Erreur inconnue. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         UNKNOWN_REGISTER_ERROR => "Erreur inconnue, impossible de vous enregistrer. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         REGISTRATION_COMPLETE => "Inscription r&eacute;ussie ! Vous pouvez d&eacute;sormais vous connecter.",
         UNKNOWN_ACCOUNT_EDIT_ERROR => "Erreur inconnue, impossible de modifier vos informations de compte. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
@@ -159,6 +167,9 @@ function buildMessages(bool $error = true, bool $success = true) {
         UNKNOWN_ANSWER_ADD_ERROR => "Erreur inconnue, impossible de r&eacute;pondre &agrave; la question. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
         ANSWER_ADDED => "Question r&eacute;pondue !",
         SURVEY_ANSWERED => "Vous avez répondu à toutes les questions de ce sondage.",
+        UNKNOWN_CHOICE_ADD_ERROR => "Erreur inconnue, impossible d'ajouter une option &agrave; la question. Veuillez r&eacute;essayer plus tard ou contactez le <a href=\"#\">support</a>.",
+
+        NO_SURVEY_SELECTED => "Vous n'avez s&eacute;lectionn&eacute; aucun sondage.",
 
         UNAUTHORIZED_SURVEY_ACCESS => "Vous n'avez pas la permission d'acc&eacute;der &agrave; cette page.",
 
@@ -197,4 +208,25 @@ function buildMessages(bool $error = true, bool $success = true) {
     ob_end_clean();
 
     return $messages;
+}
+
+// Filter array
+function array_filter_key($input, $callback) {
+    if (!is_array($input)) {
+        trigger_error( 'array_filter_key() expects parameter 1 to be array, '.gettype($input).' given', E_USER_WARNING);
+        return null;
+    }
+
+    if (empty($input)) {
+        return $input;
+    }
+
+    $filteredKeys = array_filter(array_keys($input), $callback);
+    if (empty($filteredKeys)) {
+        return array();
+    }
+
+    $input = array_intersect_key($input, array_flip($filteredKeys));
+
+    return $input;
 }

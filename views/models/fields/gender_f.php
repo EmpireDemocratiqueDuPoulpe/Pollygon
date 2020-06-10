@@ -18,6 +18,7 @@
         <span class="radio"></span>
         <span>Homme</span>
     </label>
+
     <label for="gender2" class="radio_label">
         <input type="radio" id="gender2" name="gender" value="Femme" required  <?php if ($defaultCheck == "female") { echo "checked"; } ?>>
         <span class="radio"></span>

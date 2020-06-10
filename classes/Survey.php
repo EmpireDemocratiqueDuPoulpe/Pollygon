@@ -111,6 +111,10 @@ class Survey {
             $old_title = $old_title[0]["title"];
         }
 
+        if ($old_title == $title) {
+            return true;
+        }
+
         // Update the title
         PDOFactory::sendQuery(
             $this->_db,
@@ -147,6 +151,23 @@ class Survey {
     }
 
     public function hasQuestions(int $survey_id) : bool {
-        return (boolean) PDOFactory::sendQuery($this->_db, 'SELECT question_id FROM questions WHERE survey_id = :survey_id', ["survey_id" => $survey_id]);
+        $questions = PDOFactory::sendQuery($this->_db, 'SELECT question_id, title, type FROM questions WHERE survey_id = :survey_id', ["survey_id" => $survey_id]);
+
+        foreach ($questions as $question) {
+            $type = $question["type"];
+
+            if ($type == "input") continue;
+            else if ($type == "unique" OR $type == "multiple") {
+                $choices = PDOFactory::sendQuery(
+                    $this->_db,
+                    'SELECT choice_id FROM choices WHERE question_id = :question_id LIMIT 2',
+                    ["question_id" => $question["question_id"]]
+                );
+
+                if (count($choices) < 2) return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -19,19 +19,19 @@
                     <div id="new_question_body">
                         <div id="new_question_list">
                             <a class="nQ_item" href="?survey=<?= $survey_id; ?>&newQuestion=input">
-                                <img src="./assets/images/pollygon_l_black.png" alt="Ic&ocirc;ne">
+                                <?= file_get_contents(ROOT."/assets/images/icons/free_question.svg"); ?>
                                 <span>Question ouverte</span>
                             </a>
                             <a class="nQ_item" href="?survey=<?= $survey_id; ?>&newQuestion=unique">
-                                <img src="./assets/images/pollygon_l_black.png" alt="Ic&ocirc;ne">
+                                <?= file_get_contents(ROOT."/assets/images/icons/unique_question.svg"); ?>
                                 <span>Choix unique</span>
                             </a>
                             <a class="nQ_item" href="?survey=<?= $survey_id; ?>&newQuestion=multiple">
-                                <img src="./assets/images/pollygon_l_black.png" alt="Ic&ocirc;ne">
+                                <?= file_get_contents(ROOT."/assets/images/icons/multiple_question.svg"); ?>
                                 <span>Choix multiple</span>
                             </a>
                             <a class="nQ_item" href="?survey=<?= $survey_id; ?>&newQuestion=number">
-                                <img src="./assets/images/pollygon_l_black.png" alt="Ic&ocirc;ne">
+                                <?= file_get_contents(ROOT."/assets/images/icons/number_question.svg"); ?>
                                 <span>R&eacute;ponse num&eacute;rique</span>
                             </a>
                             <div class="nQ_break"></div>
@@ -73,17 +73,23 @@
 
                         <input type="hidden" name="survey_id" value="<?= $survey_id ?>">
                         <h1>
-                            <textarea name="survey_name" placeholder="Nouveau sondage"><?= $survey_title ?></textarea>
+                            <textarea name="survey_name" placeholder="Nouveau sondage" minlength="1" maxlength="255"><?= $survey_title ?></textarea>
                         </h1>
 
-                        <input class="btn filled smaller-2" type="submit" value="CHANGER"/>
+                        <input class="btn filled inputFixed" type="submit" value="CHANGER"/>
                     </form>
                 </div>
+
+                <div class="delimiter"></div>
 
                 <!-- Question -->
                 <?= $questionView; ?>
             </div>
         </div>
+
+        <!-- Script -->
+        <script type="text/javascript" src="./assets/js/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="./assets/js/input_verif.js"></script>
 
         <!-- Footer -->
         <?php include_once(ROOT."/views/models/footer.php"); ?>

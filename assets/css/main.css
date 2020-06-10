@@ -274,20 +274,27 @@ form h3 {
     display: none;
 }
 
-.radio_label {
+.radio_label,
+.new_radio_label {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100px;
     height: 20px;
     line-height: 20px;
     margin: 0 auto 5px auto;
+    padding: 0 0 0 40%;
     cursor: pointer;
-    transition: color 100ms ease-in;
+    transition: color 150ms ease-in;
 }
 
-.radio_label:hover {
-    color: #009BFF;
+.new_radio_label { color: #c1c1c1; }
+
+.radio_label:hover      { color: #009BFF; }
+.new_radio_label:hover  { color: #b0b0b0; }
+
+.field > .radio_label,
+.field > .new_radio_label {
+    margin-bottom: 10px;
 }
 
 .radio {
@@ -302,6 +309,9 @@ form h3 {
     border-radius: 50%;
 }
 
+.new_radio_label .radio         { border-color: #c1c1c1; }
+.new_radio_label:hover .radio   { border-color: #b0b0b0; }
+
 .radio:after {
     content: "";
     position: absolute;
@@ -314,11 +324,38 @@ form h3 {
     margin: auto;
     background: transparent;
     border-radius: 50%;
-    transition: background-color 200ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
 }
 
 input[type="radio"]:checked + .radio:after {
     background: #009BFF;
+}
+
+.radio_label input,
+.new_radio_label input {
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+    background: none;
+    color: #000000;
+}
+
+.radio_label input:hover,
+.new_radio_label input:hover {
+    background: none;
+    color: #000000;
+}
+
+.radio_label .btn,
+.new_radio_label .btn {
+    text-align: center;
+    margin: 0 0 0 10px;
+    color: #FFFFFF;
+}
+
+.radio_label .btn:hover,
+.new_radio_label .btn:hover {
+    color: #FFFFFF;
 }
 
 /** Fields - Floating label **/
@@ -376,6 +413,22 @@ input[type="radio"]:checked + .radio:after {
     transform: translate(1%, -30%) scale(.8);
     opacity: .25;
 }
+
+/** Charcount **/
+.charCount {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    color: #8a8a8a;
+    pointer-events: none;
+}
+
+.charCount.limitReached {
+    color: #f44336;
+}
+
 /** Buttons **/
 /* Button */
 .btn {
@@ -440,9 +493,26 @@ input[type="radio"]:checked + .radio:after {
     line-height: 23px;
 }
 
+/* Fixed on input */
+.btn.inputFixed {
+    display: block;
+    font-size: 1em;
+    width: 125px;
+    border-radius: 0 20px 20px 0;
+}
+
 /* Submit button */
 input[type="submit"] {
     margin-top: 10px;
+}
+
+/*** Delimiter ***/
+
+.delimiter {
+    width: 95%;
+    height: 1px;
+    background: #1D2331;
+    margin: 20px auto;
 }
 
 /*** Icons ***/
@@ -757,11 +827,19 @@ footer p {
 .surveyLink:hover { text-decoration: none; }
 
 .surveyName {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 50%;
     color: #000000;
     transition: color 100ms ease-in;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .surveyDate {
+    display: inline-block;
+    vertical-align: middle;
     font-size: 0.8em;
     color: #c1c1c1;
     transition: color 100ms ease-in;
@@ -856,7 +934,7 @@ footer p {
 
 .stat:hover { background: #f6f6f6; }
 
-.stat img {
+.stat svg {
     max-width: 225px;
     max-height: 150px;
 }
@@ -953,8 +1031,9 @@ footer p {
 
 /** Survey title **/
 #sVQTitle {
+    position: relative;
+    height: 85px;
     margin-bottom: 20px;
-    border-bottom: thin #c1c1c1 solid;
 }
 
 /* Form */
@@ -963,46 +1042,91 @@ footer p {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 85px;
 }
 
 #sVQTitle .btn {
-    margin: 0 0 0 50px;
+    height: 100%;
+    margin: 0;
+}
+
+#sVQTitle .charCount {
+    right: 145px;
 }
 
 /* Survey title */
 #sVQTitle h1 {
     flex-grow: 1;
     font-size: 1.4em;
+    height: 100%;
 }
 
 #sVQTitle h1 textarea {
+    box-sizing: border-box;
     width: 100%;
-    height: 2.8em; /* line-height * 2 */
+    height: 100%;
     line-height: 1.4em;
     resize: none;
     padding: 10px;
-    background: none;
+    background: #ffffff;
     border: none;
+    border-radius: 20px 0 0 20px;
 }
 
 /** Question view **/
 /* Question title */
-#sVQuestionView h2 {
-    text-align: left;
-    font-size: 1.2em;
-    margin-bottom: 20px;
+#questionTitle {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    margin-bottom: 50px;
 }
 
-#sVQuestionView h2 textarea {
+#questionTitle h2 {
+    flex-grow: 1;
+    text-align: left;
+    font-size: 1.2em;
+    height: 100%;
+}
+
+#questionTitle h2 textarea {
     box-sizing: border-box;
     width: 100%;
-    height: 4.8em; /* line-height * 4 */
+    height: 100%;
     line-height: 1.2em;
     resize: none;
     padding: 10px;
-    background: none;
-    border: thin #c1c1c1 solid;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 20px 0 0 20px;
 }
+
+#questionTitle .btn {
+    margin: 0;
+    height: 100%;
+}
+
+#questionTitle .charCount {
+    right: 145px;
+}
+
+/* Question content */
+#sVQuestionView .deleteChoice {
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+}
+
+#sVQuestionView .deleteChoice svg polygon,
+#sVQuestionView .deleteChoice svg rect {
+    stroke: #f44336;
+    color: #f44336;
+}
+
+#sVQuestionView .deleteChoice svg rect { fill: #f44336; }
 
 /** New question **/
 #new_question_wrapper {
@@ -1068,10 +1192,22 @@ footer p {
 
 #new_question_list .nQ_item:hover { background: #eaeaea; }
 
-#new_question_list .nQ_item img {
+#new_question_list .nQ_item svg {
     max-width: 80%;
     max-height: 80%;
 }
+
+#new_question_list .nQ_item svg path,
+#new_question_list .nQ_item svg line,
+#new_question_list .nQ_item svg polygon,
+#new_question_list .nQ_item svg rect,
+#new_question_list .nQ_item svg circle,
+#new_question_list .nQ_item svg polyline {
+    stroke: #1D2331;
+    color: #1D2331;
+}
+#new_question_list .nQ_item svg path,
+#new_question_list .nQ_item svg circle.cls-5 { fill: #1D2331; }
 
 #new_question_list .nQ_break {
     display: block;

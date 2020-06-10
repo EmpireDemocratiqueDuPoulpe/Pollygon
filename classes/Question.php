@@ -20,7 +20,7 @@ class Question {
     public function get(int $survey_id, int $question_id) : array {
         $question = PDOFactory::sendQuery(
             $this->_db,
-            'SELECT title, type FROM questions WHERE survey_id = :survey_id AND question_id = :question_id',
+            'SELECT question_id, title, type FROM questions WHERE survey_id = :survey_id AND question_id = :question_id',
             ["survey_id" => $survey_id, "question_id" => $question_id]
         );
 
@@ -331,6 +331,77 @@ class Question {
         }
     }
 
+    public function getHTMLForQuestion(int $survey_id, array $question, bool $editMode, bool $analytics, string $disabledAnswer = "") : string {
+        switch ($question["type"]) {
+            case "input":
+                return '
+                    <div class="field floating_label_wrapper">
+                        <input type="text" id="question_input" class="floating_label_input" name="question_input" placeholder="R&eacute;ponse" required '.$disabledAnswer.'>
+                        <label for="question_input" class="floating_label">R&eacute;ponse</label>
+                    </div>
+                ';
+
+            case "unique":
+                $ChoiceManager = new Choice($this->_db);
+
+                $html = '<div class="field">';
+                $radios = $ChoiceManager->get($question["question_id"]);
+                $checked = "checked";
+
+                foreach ($radios as $key => $choice) {
+                    $id = $choice["choice_id"];
+                    $value = $choice["title"];
+                    $display = $choice["title"];
+                    $delete = "";
+
+                    if ($editMode) {
+                        $display = '<input type="text" id="question_unique_title_'.$id.'" name="question_unique_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
+                        $delete = file_get_contents(ROOT."/assets/images/icons/del_survey.svg");
+                    }
+
+                    $html .= '
+                        <label for="question_unique_'.$id.'" class="radio_label">
+                            <input type="radio" id="question_unique_'.$id.'" name="question_unique" value="'.$value.'" required '.$checked.' '.$disabledAnswer.'>
+                            <span class="radio"></span>
+                            <span>'.$display.'</span>
+                            <a class="deleteChoice" href="./php/survey/deleteChoice?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">'.$delete.'</a>
+                        </label>
+                    ';
+
+                    $checked = "";
+                }
+
+                if ($editMode) {
+                    if (isset($_GET["newChoice"])) {
+                        $html .= '
+                        <div class="new_radio_label">
+                            <span class="radio"></span>
+                            <span><input type="text" name="newChoiceName" placeholder="Nouvelle option"></span>
+                        </div>
+                    ';
+                    } else {
+                        $html .= '
+                        <a class="new_radio_label" href="./php/survey/addChoice.php?survey='.$survey_id.'&selected='.$question["question_id"].'">
+                            <span class="radio"></span>
+                            <span>Nouvelle option</span>
+                        </a>
+                    ';
+                    }
+
+                    $html .= '
+                        <div class="radio_label">
+                            <input class="btn filled smaller-2" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
+                        </div>
+                    ';
+                }
+
+                return $html.'</div>';
+
+            default:
+                return '';
+        }
+    }
+
     // ADD
     public function addQuestion(int $survey_id, string $type) : bool {
         // Get last ID before query
@@ -386,6 +457,10 @@ class Question {
             $old_title = $old_title[0]["title"];
         }
 
+        if ($old_title == $title) {
+            return true;
+        }
+
         // Update the title
         PDOFactory::sendQuery(
             $this->_db,
@@ -434,73 +509,92 @@ class Question {
         return $html;
     }
 
-    public function buildView(int $survey_id, int $question_id, bool $editMode, bool $viewMode, int $answer_id = null) : string {
+    public function buildView(int $survey_id, int $question_id, bool $editMode, bool $analytics, int $answer_id = null) : string {
         $question = $this->get($survey_id, $question_id);
         $question_title = $question["title"];
+        $question_type = $question["type"];
         $formURI = $editMode ? "./php/survey/set_question_title.php" : "./php/survey/set_question_response.php";
         $disabledAnswer = $editMode ? "disabled" : "";
-        $html = "";
 
         // Set title
         if ($editMode)
-            $question_title = '<textarea name="question_name" placeholder="Nouvelle question">'.$question_title.'</textarea>';
+            $question_title = '<textarea name="question_name" placeholder="Nouvelle question" minlength="1" maxlength="255">'.$question_title.'</textarea>';
 
         $question_title = '<h2>'.$question_title.'</h2>';
+
+        if ($editMode)
+            $question_title .= '<input class="btn filled inputFixed" type="submit" name="setQuestionTitle" value="CHANGER">';
 
         // Set ID inputs used in scripts
         $id_inputs = '
             <input type="hidden" id="survey_id" name="survey_id" value="'.$survey_id.'">
             <input type="hidden" id="question_id" name="question_id" value="'.$question_id.'">';
 
+        $submit_btn = "";
 
+        if (!$editMode AND !$analytics) {
+            $submit_btn = '<input class="btn filled" type="submit" name="setAnswer" value="ENVOYER">';
 
-        if (!$editMode AND !$viewMode)
             if (!is_null($answer_id))
                 $id_inputs .= '<input type="hidden" id="answer_id" name="answer_id" value="'.$answer_id.'">';
+        }
+
 
         return
             '<form action="'.$formURI.'" method="POST">
                 '.$id_inputs.'
                 
-                '.$question_title.'
+                <div id="questionTitle">'.$question_title.'</div>
 
-                <div class="field floating_label_wrapper">
-                    <input type="text" id="question_input" class="floating_label_input" name="question_input" placeholder="R&eacute;ponse" required '.$disabledAnswer.'>
-                    <label for="question_input" class="floating_label">R&eacute;ponse</label>
-                </div>
+                '.$this->getHTMLForQuestion($survey_id, $question, $editMode, $analytics, $disabledAnswer).'
                 
-                <input class="btn filled" type="submit" value="VALIDER">
+                '.$submit_btn.'
             </form>';
     }
 
     public function buildViewAnalytics(int $survey_id, int $question_id) : string {
-        $question = $this->get($survey_id, $question_id);
-        $question_title = $question["title"];
-        $question_type = $question["type"];
+        $question_title = "";
         $question_view = "";
-
-        // Set title
-        $question_title = '<h2>'.$question_title.'</h2>';
-
-        if($question_type = "input") {
-            $answers = $this->getResponseInput($survey_id, $question_id);
+        if($question_id == -2){
+            $question_title = '<h2>Statistiques g&eacute;n&eacute;rales</h2>';
             $question_view = '
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="no-display">ID</th>
-                            <th>R&eacute;ponse</th>
-                            <th>Sexe</th>
-                            <th>&Acirc;ge</th>
-                            <th>Pays</th>
-                            <th>M&eacute;tier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ' . $answers . '
-                    </tbody>
-                </table>';
+                <div id="AgeChart"></div>
+                <div style="display: flex; flex-direction: row; justify-content: space-around; background-color: white">
+                    <div id="GenderChart"></div>
+                    <div id="CountryChart"></div>
+                </div>
+                <div id="JobChart"></div>
+                ';
+            return $question_title . $question_view;
+        }else {
+            $question = $this->get($survey_id, $question_id);
+            $question_title = $question["title"];
+            $question_type = $question["type"];
+            $question_view = "";
+
+            // Set title
+            $question_title = '<h2>' . $question_title . '</h2>';
+
+            if ($question_type = "input") {
+                $answers = $this->getResponseInput($survey_id, $question_id);
+                $question_view = '
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="no-display">ID</th>
+                                <th>R&eacute;ponse</th>
+                                <th>Sexe</th>
+                                <th>&Acirc;ge</th>
+                                <th>Pays</th>
+                                <th>M&eacute;tier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ' . $answers . '
+                        </tbody>
+                    </table>';
             }
+        }
 
         return $question_title . $question_view;
     }

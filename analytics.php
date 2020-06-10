@@ -61,7 +61,7 @@ $questions = $QuestionManager->buildList($survey_id, false, true, $selected_id);
 // Build the question view
 $questionView = '';
 
-if ($selected_id >= 0) {
+if ($selected_id >= 0 OR $selected_id == -2) {
     $questionView = $QuestionManager->buildViewAnalytics($survey_id, $selected_id);
 }
 

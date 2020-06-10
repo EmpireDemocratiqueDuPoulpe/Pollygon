@@ -18,6 +18,7 @@
             <div id="sVQuestionList">
                 <ul>
                     <li id="sVQBack"><a href="./home.php"><i class="fas fa-chevron-left"></i> Retour</a></li>
+                    <li id="sVQGeneralStats" class="<?php if($selected_id == -2){echo "selected";} ?>"><a href="?survey=<?= $survey_id ?>&selected=-2">Statistiques générales</a></li>
                     <?= $questions ?>
                 </ul>
             </div>
@@ -33,5 +34,7 @@
         <script type="text/javascript" src="./assets/js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="./assets/js/datatables/datatables.min.js"></script>
         <script type="text/javascript" src="./assets/js/datatables/init-datatables.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="./assets/js/analytics.js"></script>
     </body>
 </html>

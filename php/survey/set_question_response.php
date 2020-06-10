@@ -9,23 +9,33 @@ $AnswerManager = new Answer($db);
 
 $survey_id = $_POST["survey_id"] ?? null;
 $answer_id = $_POST["answer_id"] ?? null;
-$answer_response = $_POST["question_input"] ?? null;
+$answer_response_input = $_POST["question_input"] ?? null;
+$answer_response_unique = $_POST["question_unique"] ?? null;
 
+$answer_response = "";
 $URI = "?survey=".$survey_id;
 
 if (is_null($survey_id)) { setError(SURVEY_NOT_FOUND); redirectTo(ANSWER_SURVEY_PAGE); }
 if (is_null($answer_id)) { setError(ANSWER_NOT_FOUND); redirectTo(ANSWER_SURVEY_PAGE.$URI); }
 if (is_null($answer_response)) { setError(ANSWER_NOT_VALID); redirectTo(ANSWER_SURVEY_PAGE.$URI); }
 
-############################
-# Check the question response
-############################
+// INPUT
+if (!is_null($answer_response_input)) {
 
-$answer_response = trim($answer_response);
+    ############################
+    # Check the question response
+    ############################
 
-if (strlen($answer_response) == 0) {
-    setError(ANSWER_NOT_VALID);
-    redirectTo(ANSWER_SURVEY_PAGE.$URI);
+    $answer_response = trim($answer_response_input);
+
+    if (strlen($answer_response) == 0) {
+        setError(ANSWER_NOT_VALID);
+        redirectTo(ANSWER_SURVEY_PAGE.$URI);
+    }
+
+// UNIQUE
+} else if (!is_null($answer_response_unique)) {
+    $answer_response = trim($answer_response_unique);
 }
 
 ############################

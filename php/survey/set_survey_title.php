@@ -17,8 +17,9 @@ if (is_null($survey_name)) { setError(SURVEY_NAME_NOT_VALID); redirectTo(CREATE_
 ############################
 
 $survey_name = trim($survey_name);
+$len = strlen($survey_name);
 
-if (strlen($survey_name) == 0) {
+if ($len == 0 OR $len > 255) {
     setError(SURVEY_NAME_NOT_VALID);
     redirectTo(CREATE_SURVEY_PAGE);
 }

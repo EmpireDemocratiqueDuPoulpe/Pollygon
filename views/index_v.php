@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="iCBody">
-                    <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
+                    <img src="./assets/images/index_img/create.png" alt="Create picture">
                     <p>
                         Pollygon propose un système de création de sondage simple, accessible aux entreprises et aux particuliers.
                         Avec son design épuré et moderne il permet de créer facilement et rapidement un sondage que vous pourrez 
@@ -51,7 +51,7 @@
                         à l’aide de graphiques simples et explicites.La visualisation de données peut être filtrée pour affiner 
                         au mieux vos résultats. 
                     </p>
-                    <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
+                    <img src="./assets/images/index_img/analyze.jpg" alt="Analyze picture">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="iCBody">
-                    <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
+                    <img src="./assets/images/index_img/upgrade.png" alt="Upgrade picture">
                     <p>
                         Pollygon propose des offres adaptées à votre situation, dans le but de répondre le plus fidèlement à vos besoins.
                         Pour plus d’informations,<a href="" draggable="false">cliquez ici.</a>
@@ -83,7 +83,7 @@
                         Pollygon vous permet de gérer vos sondages depuis une large sélection de supports. 
                         Afin d’être disponible où et quand vous le souhaitez.
                     </p>
-                    <img src="./assets/images/index_img/stat1.jpg" alt="Stats picture">
+                    <img src="./assets/images/index_img/responsive.png" alt="Responsive picture">
                 </div>
             </div>
         </div>
