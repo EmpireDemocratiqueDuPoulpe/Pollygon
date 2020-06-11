@@ -1226,6 +1226,13 @@ footer p {
      * Global
      ****************************************/
 
+    /*** Forms ***/
+    /** Input **/
+    input, select,
+    .floating_label_wrapper { font-size: 1.6em; }
+
+    label.radio_label       { font-size: 1.8em; margin-bottom: 25px !important; }
+
     /** Buttons **/
     .btn {
         font-size: 3em;
@@ -1276,6 +1283,24 @@ footer p {
     body > .index_content_wrapper ~ .index_content_wrapper { margin-top: 40px; }
 
     /****************************************
+     * Login / register
+     ****************************************/
+
+    /** Forms **/
+    #register .btn,
+    #login .btn {
+        font-size: 1.5em;
+        width: 250px;
+        height: 55px;
+        line-height: 50px;
+    }
+
+    #register a,
+    #login a {
+        font-size: 1.5em;
+    }
+
+    /****************************************
     * Home
     ****************************************/
 
@@ -1308,6 +1333,34 @@ footer p {
     .surveyURI{
         font-size: 1.50em;
         line-height: 25px;
+    }
+
+    /****************************************
+    * My account
+    ****************************************/
+
+    /* Account boxes */
+    .account_box h2         { font-size: 2em; }
+    .account_box h3         { font-size: 1.8em; }
+
+    .account_box label      { font-size: 1.6em; }
+    label.radio_label       { font-size: 2em; }
+
+    .account_box .btn {
+        font-size: 1.5em;
+        width: 250px;
+        height: 55px;
+        line-height: 50px;
+    }
+
+    /* Stats */
+    .account_box .stat svg {
+        max-width: 175px;
+        max-height: 100px;
+    }
+
+    .account_box .stat p {
+        font-size: 1.5em;
     }
 
     /****************************************
