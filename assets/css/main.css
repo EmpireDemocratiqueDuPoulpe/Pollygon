@@ -1024,6 +1024,9 @@ footer p {
     padding: 0 50px;
     color: #000000;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /** Back button **/
