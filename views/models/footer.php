@@ -12,6 +12,8 @@
         <div class="fLSection">
             <a id="footerLogo" href="./index.php"><img src="./assets/images/pollygon_l_white.png" alt="Pollygon Logo"></a>
         </div>
+
+        <div class="fLBreak"></div>
         
         <div class="fLSection">
             <h3>Liens utiles</h3>

@@ -610,6 +610,7 @@ footer p {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     width: 100%;
     height: 200px;
     background: #1D2331;
@@ -657,6 +658,12 @@ footer p {
 .fLSection a:hover {
     color: #009BFF;
     text-decoration: underline;
+}
+
+.fLBreak {
+    display: none;
+    flex-basis: 100%;
+    width: 0;
 }
 
 #footerLogo {
@@ -1288,7 +1295,14 @@ footer p {
         width: 90px;
     }
 
-    .fLSection a { font-size: 1.25em; }
+    #footerLinks { height: 600px; }
+
+    .fLSection      { height: auto; }
+    .fLSection h3   { font-size: 1.65em; }
+    .fLSection li   { margin-bottom: 20px; }
+    .fLSection a    { font-size: 1.5em; }
+
+    .fLBreak { display: block }
 
     /****************************************
      * Index
