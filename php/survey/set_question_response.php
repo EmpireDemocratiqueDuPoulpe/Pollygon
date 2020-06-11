@@ -11,12 +11,14 @@ $survey_id = $_POST["survey_id"] ?? null;
 $answer_id = $_POST["answer_id"] ?? null;
 $answer_response_input = $_POST["question_input"] ?? null;
 $answer_response_unique = $_POST["question_unique"] ?? null;
-$answer_response_multiple = $_POST["question_multiple"] ?? null;
-
+$answer_response_number = $_POST["question_number"] ?? null;
 
 $answer_response_multiple = array_filter_key($_POST, function ($key) {
     return strpos($key, 'question_multiple_') === 0;
-}) ?? null;
+});
+
+if (count($answer_response_multiple) == 0)
+    $answer_response_multiple = null;
 
 $answer_response = "";
 $URI = "?survey=".$survey_id;
@@ -45,6 +47,14 @@ if (!is_null($answer_response_input)) {
 } else if (!is_null($answer_response_multiple)) {
     $answer_response = str_replace("%", "&#37;", $answer_response_multiple);
     $answer_response = trim(implode("%", $answer_response_multiple));
+// NUMBER
+} else if (!is_null($answer_response_number)) {
+    $answer_response = filter_var(trim($answer_response_number), FILTER_VALIDATE_FLOAT);
+
+    if (!is_int($answer_response) AND !is_float($answer_response) AND !is_double($answer_response)) {
+        setError(ANSWER_NOT_VALID);
+        redirectTo(ANSWER_SURVEY_PAGE.$URI);
+    }
 }
 
 ############################

@@ -55,16 +55,17 @@ if ($answers_count == count($questions_id)) {
     redirectTo("./home.php");
 }
 
+$last_answer_value = end($answers)["value"];
+
 if ($last_answer < 0) {
     $AnswerManager->add($questions_id[0]["question_id"], $survey_id, $_SESSION["user_id"]);
     $last_answer = $AnswerManager->getLastAnswerFromUser($survey_id, $_SESSION["user_id"]);
     $selected_id = $questions_id[0]["question_id"];
-} else if (end($answers)["value"]) {
+} else if (strlen($last_answer_value) > 0) {
     $AnswerManager->add($questions_id[$answers_count]["question_id"], $survey_id, $_SESSION["user_id"]);
     $last_answer = $AnswerManager->getLastAnswerFromUser($survey_id, $_SESSION["user_id"]);
     $selected_id = $questions_id[$answers_count]["question_id"];
 } else {
-
     if (end($answers)["value"])
         $selected_id = $questions_id[count($answers)]["question_id"];
     else

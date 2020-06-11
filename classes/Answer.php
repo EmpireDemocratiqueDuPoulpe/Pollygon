@@ -91,6 +91,7 @@ class Answer {
 
     // UPDATE
     public function setValue(int $answer_id, int $user_id, string $answer_response) : bool {
+
         // Get old value
         $old_value = PDOFactory::sendQuery(
             $this->_db,

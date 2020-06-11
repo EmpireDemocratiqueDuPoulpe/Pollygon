@@ -8,6 +8,7 @@ require_once "../../init.php";
 $set_choice = $_POST["setChoices"] ?? null;
 $set_question_name = $_POST["setQuestionTitle"] ?? null;
 
+// Set options
 if (!is_null($set_choice)) {
 
     $ChoiceManager = new Choice($db);
@@ -23,7 +24,7 @@ if (!is_null($set_choice)) {
     ############################
 
     $choices = array_filter_key($_POST, function ($key) {
-        return (strpos($key, 'question_unique_title_') === 0) OR (strpos($key, 'question_multiple_title_') === 0);
+        return (strpos($key, 'question_unique_title_') === 0) or (strpos($key, 'question_multiple_title_') === 0);
     });
 
     ############################
@@ -45,11 +46,12 @@ if (!is_null($set_choice)) {
     }
 
     if (!is_null($question_id))
-        redirectTo(CREATE_SURVEY_PAGE."?selected=".$question_id);
+        redirectTo(CREATE_SURVEY_PAGE . "?selected=" . $question_id);
 
     else
         redirectTo(CREATE_SURVEY_PAGE);
 
+// Set question title
 } else if (!is_null($set_question_name)) {
 
     $QuestionManager = new Question($db);

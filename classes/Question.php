@@ -460,6 +460,32 @@ class Question {
 
                 return $html.'</div>';
 
+            case "number":
+                /*
+                 * return '
+                        <div class="double_field">
+                            <div class="field floating_label_wrapper">
+                                <input type="number" id="question_number_min" class="floating_label_input" name="question_number_min" placeholder="Minimum" required>
+                                <label for="question_number_min" class="floating_label">Minimum</label>
+                            </div>
+
+                            <div class="field floating_label_wrapper">
+                                <input type="number" id="question_number_max" class="floating_label_input" name="question_number_max" placeholder="Maximum" required>
+                                <label for="question_number_max" class="floating_label">Maximum</label>
+                            </div>
+                        </div>
+
+                        <input class="btn filled smaller" type="submit" name="setNumberRange" value="ENREGISTRER PLAGE">
+                    ';
+                 */
+
+                return '
+                    <div class="field floating_label_wrapper">
+                        <input type="number" id="question_number" class="floating_label_input" name="question_number" placeholder="Nombre" step="0.1" required '.$disabledAnswer.'>
+                        <label for="question_number" class="floating_label">Nombre</label>
+                    </div>
+                ';
+
             default:
                 return '';
         }
