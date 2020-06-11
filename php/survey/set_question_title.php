@@ -23,7 +23,7 @@ if (!is_null($set_choice)) {
     ############################
 
     $choices = array_filter_key($_POST, function ($key) {
-        return strpos($key, 'question_unique_title_') === 0;
+        return (strpos($key, 'question_unique_title_') === 0) OR (strpos($key, 'question_multiple_title_') === 0);
     });
 
     ############################

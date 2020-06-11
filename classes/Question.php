@@ -342,12 +342,14 @@ class Question {
                 ';
 
             case "unique":
+                // Init vars
                 $ChoiceManager = new Choice($this->_db);
 
                 $html = '<div class="field">';
                 $radios = $ChoiceManager->get($question["question_id"]);
                 $checked = "checked";
 
+                // Create each radio button
                 foreach ($radios as $key => $choice) {
                     $id = $choice["choice_id"];
                     $value = $choice["title"];
@@ -356,7 +358,9 @@ class Question {
 
                     if ($editMode) {
                         $display = '<input type="text" id="question_unique_title_'.$id.'" name="question_unique_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
-                        $delete = file_get_contents(ROOT."/assets/images/icons/del_survey.svg");
+                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
+                                        '.file_get_contents(ROOT."/assets/images/icons/del_survey.svg").'
+                                    </a>';
                     }
 
                     $html .= '
@@ -364,13 +368,14 @@ class Question {
                             <input type="radio" id="question_unique_'.$id.'" name="question_unique" value="'.$value.'" required '.$checked.' '.$disabledAnswer.'>
                             <span class="radio"></span>
                             <span>'.$display.'</span>
-                            <a class="deleteChoice" href="./php/survey/deleteChoice?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">'.$delete.'</a>
+                            '.$delete.'
                         </label>
                     ';
 
                     $checked = "";
                 }
 
+                // Add a "Add option" button if in edit mode
                 if ($editMode) {
                     if (isset($_GET["newChoice"])) {
                         $html .= '
@@ -390,6 +395,64 @@ class Question {
 
                     $html .= '
                         <div class="radio_label">
+                            <input class="btn filled smaller-2" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
+                        </div>
+                    ';
+                }
+
+                return $html.'</div>';
+
+            case "multiple":
+                // Init vars
+                $ChoiceManager = new Choice($this->_db);
+
+                $html = '<div class="field">';
+                $checkboxes = $ChoiceManager->get($question["question_id"]);
+
+                // Create each checkboxes
+                foreach ($checkboxes as $key => $choice) {
+                    $id = $choice["choice_id"];
+                    $value = $choice["title"];
+                    $display = $choice["title"];
+                    $delete = "";
+
+                    if ($editMode) {
+                        $display = '<input type="text" id="question_multiple_title_'.$id.'" name="question_multiple_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
+                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
+                                        '.file_get_contents(ROOT."/assets/images/icons/del_survey.svg").'
+                                    </a>';
+                    }
+
+                    $html .= '
+                        <label for="question_multiple_'.$id.'" class="checkbox_label">
+                            <input type="checkbox" id="question_multiple_'.$id.'" name="question_multiple_'.$id.'" value="'.$value.'" '.$disabledAnswer.'>
+                            <span class="checkbox"></span>
+                            <span>'.$display.'</span>
+                            '.$delete.'
+                        </label>
+                    ';
+                }
+
+                // Add a "Add option" button if in edit mode
+                if ($editMode) {
+                    if (isset($_GET["newChoice"])) {
+                        $html .= '
+                        <div class="new_checkbox_label">
+                            <span class="checkbox"></span>
+                            <span><input type="text" name="newChoiceName" placeholder="Nouvelle option"></span>
+                        </div>
+                    ';
+                    } else {
+                        $html .= '
+                        <a class="new_checkbox_label" href="./php/survey/addChoice.php?survey='.$survey_id.'&selected='.$question["question_id"].'">
+                            <span class="checkbox"></span>
+                            <span>Nouvelle option</span>
+                        </a>
+                    ';
+                    }
+
+                    $html .= '
+                        <div class="checkbox_label">
                             <input class="btn filled smaller-2" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
                         </div>
                     ';
@@ -538,7 +601,6 @@ class Question {
             if (!is_null($answer_id))
                 $id_inputs .= '<input type="hidden" id="answer_id" name="answer_id" value="'.$answer_id.'">';
         }
-
 
         return
             '<form action="'.$formURI.'" method="POST">

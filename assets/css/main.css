@@ -269,14 +269,17 @@ form h3 {
     margin: 0;
 }
 
-/* Radio buttons */
-.field input[type="radio"] {
+/* Radio buttons and checkboxes */
+.field input[type="radio"],
+.field input[type="checkbox"] {
     width: auto;
     display: none;
 }
 
 .radio_label,
-.new_radio_label {
+.new_radio_label,
+.checkbox_label,
+.new_checkbox_label {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -288,17 +291,23 @@ form h3 {
     transition: color 150ms ease-in;
 }
 
-.new_radio_label { color: #c1c1c1; }
+.new_radio_label,
+.new_checkbox_label { color: #c1c1c1; }
 
-.radio_label:hover      { color: #009BFF; }
-.new_radio_label:hover  { color: #b0b0b0; }
+.radio_label:hover,
+.checkbox_label:hover       { color: #009BFF; }
+.new_radio_label:hover,
+.new_checkbox_label:hover   { color: #b0b0b0; }
 
 .field > .radio_label,
-.field > .new_radio_label {
+.field > .new_radio_label,
+.field > .checkbox_label,
+.field > .new_checkbox_label {
     margin-bottom: 10px;
 }
 
-.radio {
+.radio,
+.checkbox {
     box-sizing: border-box;
     position: relative;
     display: inline-block;
@@ -310,10 +319,15 @@ form h3 {
     border-radius: 50%;
 }
 
-.new_radio_label .radio         { border-color: #c1c1c1; }
-.new_radio_label:hover .radio   { border-color: #b0b0b0; }
+.checkbox { border-radius: 0px; }
 
-.radio:after {
+.new_radio_label .radio,
+.new_checkbox_label .checkbox       { border-color: #c1c1c1; }
+.new_radio_label:hover .radio,
+.new_checkbox_label:hover .checkbox { border-color: #b0b0b0; }
+
+.radio:after,
+.checkbox:after {
     content: "";
     position: absolute;
     top: 0;
@@ -328,12 +342,17 @@ form h3 {
     transition: background-color 150ms ease-in-out;
 }
 
-input[type="radio"]:checked + .radio:after {
+.checkbox:after { border-radius: 0px; }
+
+input[type="radio"]:checked + .radio:after,
+input[type="checkbox"]:checked + .checkbox:after {
     background: #009BFF;
 }
 
 .radio_label input,
-.new_radio_label input {
+.new_radio_label input,
+.checkbox_label input,
+.new_checkbox_label input {
     height: 20px;
     line-height: 20px;
     padding: 0;
@@ -342,20 +361,26 @@ input[type="radio"]:checked + .radio:after {
 }
 
 .radio_label input:hover,
-.new_radio_label input:hover {
+.new_radio_label input:hover,
+.checkbox_label input:hover,
+.new_checkbox_label input:hover {
     background: none;
     color: #000000;
 }
 
 .radio_label .btn,
-.new_radio_label .btn {
+.new_radio_label .btn,
+.checkbox_label .btn,
+.new_checkbox_label .btn {
     text-align: center;
     margin: 0 0 0 10px;
     color: #FFFFFF;
 }
 
 .radio_label .btn:hover,
-.new_radio_label .btn:hover {
+.new_radio_label .btn:hover,
+.checkbox_label .btn:hover,
+.new_checkbox_label .btn:hover {
     color: #FFFFFF;
 }
 
