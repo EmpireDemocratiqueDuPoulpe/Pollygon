@@ -120,8 +120,8 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: end;
-    width: 400px;
+    justify-content: flex-end;
+    width: 500px;
     height: 95px;
 }
 
@@ -141,6 +141,7 @@ header {
 }
 
 .navbarIcon span {
+    flex-shrink: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
