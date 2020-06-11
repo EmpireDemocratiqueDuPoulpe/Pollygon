@@ -32,7 +32,7 @@
             <ul>
                 <li><a href="#">Notre &eacute;quipe</a></li>
                 <li><a href="https://www.cia.gov/fr">Big Brother</a></li>
-                <li><a href="mailto:pollygon-support@gmail.com"><i class="fas fa-envelope"></i> pollygon-support@gmail.com</a></li>
+                <li><a href="mailto:pollygon.surveys@gmail.com"><i class="fas fa-envelope"></i> pollygon.surveys&#64;gmail.com</a></li>
                 <li><a href="tel:+33629328714"><i class="fas fa-phone-alt"></i> +33 6 29 32 87 14</a></li>
             </ul>
         </div>
