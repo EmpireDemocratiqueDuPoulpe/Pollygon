@@ -25,7 +25,7 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Créez vos sondages en toute simplicité.</h2>
+                    <h2>Créez vos sondages en toute simplicité</h2>
                 </div>
 
                 <div class="iCBody">
@@ -42,14 +42,14 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Analysez vos sondages afin d’améliorer votre vision.</h2>
+                    <h2>Analysez vos sondages afin d’améliorer votre vision</h2>
                 </div>
 
                 <div class="iCBody">
                     <p>
-                        La fonction Analyse de Pollygon permet de tirer le meilleur parti des résultats de vos sondages 
-                        à l’aide de graphiques simples et explicites.La visualisation de données peut être filtrée pour affiner 
-                        au mieux vos résultats. 
+                        La fonction Analyse de Pollygon permet de tirer le meilleur parti des résultats de vos sondages à l’aide 
+                        de graphiques simples et explicites.La visualisation de données peut être filtrée pour affiner au mieux 
+                        vos résultats. Pollygon vous aide à améliorer votre prise de décision.
                     </p>
                     <img src="./assets/images/index_img/analyze.jpg" alt="Analyze picture">
                 </div>
@@ -59,13 +59,14 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Améliorez vos sondages.</h2>
+                    <h2>Améliorez vos sondages</h2>
                 </div>
 
                 <div class="iCBody">
                     <img src="./assets/images/index_img/upgrade.png" alt="Upgrade picture">
                     <p>
                         Pollygon propose des offres adaptées à votre situation, dans le but de répondre le plus fidèlement à vos besoins.
+                        Que vous soyez un particulier ou une entreprise, Pollygon vous apporte la solution qu’il vous faut. 
                         Pour plus d’informations,<a href="" draggable="false">cliquez ici.</a>
                     </p>
                 </div>
@@ -75,13 +76,13 @@
         <div class="index_content_wrapper">
             <div class="index_content">
                 <div class="iCHead">
-                    <h2>Vos sondages accessibles partout.</h2>
+                    <h2>Vos sondages accessibles partout</h2>
                 </div>
 
                 <div class="iCBody">
                     <p>
-                        Pollygon vous permet de gérer vos sondages depuis une large sélection de supports. 
-                        Afin d’être disponible où et quand vous le souhaitez.
+                        Pollygon vous permet de gérer vos sondages depuis une large sélection de supports : téléphone, tablette, 
+                        ordinateur et même télévision. Afin d’être disponible où et quand vous le souhaitez.
                     </p>
                     <img src="./assets/images/index_img/responsive.png" alt="Responsive picture">
                 </div>
