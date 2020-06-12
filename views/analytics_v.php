@@ -8,8 +8,6 @@
     </head>
     <body>
 
-        <input type="button" onclick="ALERT();" value="TYSTSIDTIQSD">
-
         <!-- Navbar -->
         <?php include_once(ROOT."/views/models/navbar.php"); ?>
 
