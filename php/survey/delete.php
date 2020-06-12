@@ -23,8 +23,9 @@ foreach ($surveys as $key => $id) {
 PDOFactory::sendQuery(
     $db,
     'DELETE FROM surveys WHERE owner_id = :owner_id AND survey_id IN ('.$params_str.');
-            DELETE FROM questions WHERE survey_id IN ('.$params_str.');
-            DELETE FROM answers WHERE survey_id IN ('.$params_str.');',
+         DELETE FROM choices WHERE question_id IN (SELECT question_id FROM questions WHERE survey_id IN ('.$params_str.'));
+         DELETE FROM questions WHERE survey_id IN ('.$params_str.');
+         DELETE FROM answers WHERE survey_id IN ('.$params_str.');',
     $params,
     false
 );

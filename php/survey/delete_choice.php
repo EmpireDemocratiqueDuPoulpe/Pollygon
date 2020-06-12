@@ -6,7 +6,6 @@ $ChoiceManager = new Choice($db);
 ############################
 # Check vars
 ############################
-var_dump($_GET);
 
 $survey_id = $_GET["survey"] ?? null;
 $selected = $_GET["selected"] ?? null;

@@ -1164,6 +1164,9 @@ footer p {
 
 #sVQuestionView .deleteChoice svg rect { fill: #f44336; }
 
+#sVQuestionView .new_radio_label ~ div,
+#sVQuestionView .new_checkbox_label ~ div { margin-top: 20px; }
+
 /** New question **/
 #new_question_wrapper {
     position: absolute;
