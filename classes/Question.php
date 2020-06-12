@@ -678,10 +678,16 @@ class Question {
                             </tr>
                         </thead>
                         <tbody>
-                            ' . $answers . '
+                            ' . html_entity_decode($answers) . '
                         </tbody>
                     </table>';
             }
+
+            if ($question_type = "number") {
+                //$question_view = '<div id="numericChart ' . $question_id . '"></div><script type="text/javascript">drawNumericChart(' . $survey_id . ',' . $question_id . ');' . '</script>';
+                $question_view = '<div id="numericChart ' . $question_id . '"></div><script type="text/javascript">alertogogol('. $survey_id . ',' . $question_id .');</script>';
+            }
+
         }
 
         return $question_title . $question_view;

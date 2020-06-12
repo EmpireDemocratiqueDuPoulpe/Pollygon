@@ -1,3 +1,34 @@
+google.charts.load('current', {packages: ['corechart']});
+google.charts.load('current', {'packages':['corechart'], 'language': 'fr'});
+
+function ALERTJENAIPLEINLECUL() {
+    alert("CACAHAHAHONSAMUSEMDR");
+}
+
+function drawNumericChart(survey_id, question_id){
+    var data = new google.visualization.DataTable();
+    data.addColumn('number', 'Individuals');
+    data.addColumn('number', 'Answer value');
+
+    data.addRows([
+
+    ]);
+
+    var options = {
+        hAxis: {
+            title: 'Nombred d\'individus',
+            logScale: true
+        },
+        vAxis: {
+            title: 'Réponse numérique',
+            logScale: false
+        },
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('numericChart' + question_id));
+    chart.draw(data, options);
+}
+
 window.onload = () => {
 
     T.init();
@@ -6,8 +37,6 @@ window.onload = () => {
     var survey_id=uri.substring(uri.lastIndexOf("survey=")+7,uri.lastIndexOf("&"));
 
     if (window.location.search.includes("selected=-2")) {
-        google.charts.load('current', {packages: ['corechart']});
-        google.charts.load('current', {'packages':['corechart'], 'language': 'fr'});
         google.charts.setOnLoadCallback(drawAgeChart);
         google.charts.setOnLoadCallback(drawJobChart);
         google.charts.setOnLoadCallback(drawGenderChart);
@@ -187,8 +216,6 @@ window.onload = () => {
             });
 
         }
-
-
 
         function barMouseOver(e) {
             barsVisualization.setSelection([e]);
