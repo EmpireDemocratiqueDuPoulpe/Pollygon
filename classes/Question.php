@@ -418,7 +418,7 @@ class Question {
 
                     if ($editMode) {
                         $display = '<input type="text" id="question_multiple_title_'.$id.'" name="question_multiple_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
-                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
+                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice.php?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
                                         '.file_get_contents(ROOT."/assets/images/icons/del_survey.svg").'
                                     </a>';
                     }
