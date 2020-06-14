@@ -38,11 +38,5 @@
         <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="./assets/js/analytics.js"></script>
 
-        <script>
-            function alertogogol(survey_id, question_id) {
-                ALERTJENAIPLEINLECUL(survey_id, question_id);
-            }
-        </script>
-
     </body>
 </html>

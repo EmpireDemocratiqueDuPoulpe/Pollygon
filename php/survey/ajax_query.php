@@ -159,6 +159,76 @@ if(isset($_POST["query"])){
         echo json_encode($dash_countries_stats);
 
     }
+    if($_POST["query"] == "numeric_stats"){
+
+        $survey_id = $_POST["survey_id"];
+        $question_id = $_POST["question_id"];
+
+        $numeric_array_stats = [];
+
+        $numeric_stats = PDOFactory::sendQuery(
+            $db,
+            'SELECT value, COUNT(*) AS count FROM answers WHERE question_id=:question_id AND survey_id=:survey_id
+                  GROUP BY value ORDER BY count DESC;',
+            ["survey_id" => $survey_id,
+             "question_id" => $question_id]
+        );
+
+        foreach ($numeric_stats as $stats){
+            array_push($numeric_array_stats, array($stats["value"], $stats["count"]));
+        }
+
+        echo json_encode($numeric_array_stats);
+
+
+
+    }
+    if($_POST["query"] == "qcmoru_stats"){
+
+        $survey_id = $_POST["survey_id"];
+        $question_id = $_POST["question_id"];
+
+        $qcm_array_stats = [];
+        $qcm_array_choices = [];
+
+        $choice_number = 0;
+
+        $qcm_choices = PDOFactory::sendQuery(
+            $db,
+            'SELECT title FROM choices WHERE question_id=:question_id;',
+            ["question_id" => $question_id]
+        );
+
+        foreach ($qcm_choices as $choice){
+            array_push($qcm_array_choices, $choice["title"]);
+            array_push($qcm_array_stats, [$choice_number => ["choice" => $choice["title"], "individuals" => 0]]);
+            $choice_number++;
+        }
+
+        $qcm_stats = PDOFactory::sendQuery(
+            $db,
+            'SELECT value FROM answers WHERE question_id=:question_id AND survey_id=:survey_id;',
+            ["survey_id" => $survey_id,
+             "question_id" => $question_id]
+        );
+
+        foreach ($qcm_stats as $answer){
+            foreach ($qcm_array_choices as $choice){
+                if (strpos($answer["value"], $choice) !== false) {
+                    $i = 0;
+                    foreach ($qcm_array_stats as $stat){
+                        if($stat[$i]["choice"] == $choice) {
+                            $qcm_array_stats[$i][$i]["individuals"] += 1;
+                        }
+                        $i += 1;
+                    }
+                }
+            }
+        }
+
+        echo json_encode($qcm_array_stats);
+
+    }
 }
 
 

@@ -663,7 +663,7 @@ class Question {
             // Set title
             $question_title = '<h2>' . $question_title . '</h2>';
 
-            if ($question_type = "input") {
+            if ($question_type == "input") {
                 $answers = $this->getResponseInput($survey_id, $question_id);
                 $question_view = '
                     <table class="table">
@@ -683,9 +683,16 @@ class Question {
                     </table>';
             }
 
-            if ($question_type = "number") {
-                //$question_view = '<div id="numericChart ' . $question_id . '"></div><script type="text/javascript">drawNumericChart(' . $survey_id . ',' . $question_id . ');' . '</script>';
-                $question_view = '<div id="numericChart ' . $question_id . '"></div><script type="text/javascript">alertogogol('. $survey_id . ',' . $question_id .');</script>';
+            if ($question_type == "number") {
+                $question_view = '<div id="numericChart" data-survey-id="' . $survey_id . '" data-question-id="' . $question_id . '"></div>';
+            }
+
+            if ($question_type == "multiple") {
+                $question_view = '<div id="QCMChart" data-survey-id="' . $survey_id . '" data-question-id="' . $question_id . '"></div>';
+            }
+
+            if ($question_type == "unique") {
+                $question_view = '<div id="QCUChart" data-survey-id="' . $survey_id . '" data-question-id="' . $question_id . '"></div>';
             }
 
         }
