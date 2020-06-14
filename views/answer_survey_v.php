@@ -9,9 +9,6 @@
         <!-- Navbar -->
         <?php include_once(ROOT."/views/models/navbar.php"); ?>
 
-        <!-- Error/success box -->
-        <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
-
         <!-- Survey viewer -->
         <div id="survey_viewer">
             <div id="sVQuestionList">
@@ -21,6 +18,9 @@
             </div>
 
             <div id="sVQuestionView">
+                <!-- Error/success box -->
+                <?php if(isset($messages) && !empty($messages)) echo $messages; ?>
+
                 <?= $questionView; ?>
             </div>
         </div>

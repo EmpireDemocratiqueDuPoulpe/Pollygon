@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 12 juin 2020 à 11:30
+-- Généré le :  ven. 12 juin 2020 à 12:53
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -39,19 +39,7 @@ CREATE TABLE IF NOT EXISTS `answers` (
   KEY `question_id` (`question_id`),
   KEY `survey_id` (`survey_id`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `answers`
---
-
-INSERT INTO `answers` (`answer_id`, `question_id`, `survey_id`, `owner_id`, `value`) VALUES
-(53, 95, 55, 1, 'vfdvsvcx'),
-(54, 96, 55, 1, 'cxvcxvx'),
-(55, 95, 55, 3, 'dsfsdfsdfsdfsdf'),
-(56, 96, 55, 3, 'sdfsfsfsdfsfsd'),
-(57, 95, 55, 6, 'sfsdfsdfsdfs'),
-(58, 96, 55, 6, 'fsfsdfsdfsdf');
+) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -66,115 +54,7 @@ CREATE TABLE IF NOT EXISTS `choices` (
   `title` varchar(255) NOT NULL DEFAULT 'Nouvelle option',
   PRIMARY KEY (`choice_id`),
   KEY `question_id` (`question_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `choices`
---
-
-INSERT INTO `choices` (`choice_id`, `question_id`, `title`) VALUES
-(1, 121, 'Abc'),
-(2, 121, 'def'),
-(3, 121, 'ghi'),
-(4, 121, 'jhl'),
-(5, 121, 'mno'),
-(6, 121, 'pqr'),
-(7, 121, 'stu'),
-(8, 121, 'vwx'),
-(9, 121, 'yz'),
-(10, 122, 'Nouvelle option'),
-(11, 122, 'Nouvelle option'),
-(12, 122, 'Nouvelle option'),
-(13, 122, 'Nouvelle option'),
-(14, 122, 'Nouvelle option'),
-(15, 122, 'Nouvelle option'),
-(16, 123, 'Nouvelle option'),
-(17, 123, 'Nouvelle option'),
-(18, 123, 'Nouvelle option'),
-(19, 123, 'Nouvelle option'),
-(20, 123, 'Nouvelle option'),
-(21, 123, 'Nouvelle option'),
-(22, 125, 'Nouvelle option'),
-(23, 125, 'Nouvelle option'),
-(24, 125, 'Nouvelle option'),
-(25, 125, 'Nouvelle option'),
-(26, 125, 'Nouvelle option'),
-(27, 125, 'Nouvelle option'),
-(28, 125, 'Nouvelle option'),
-(29, 125, 'Nouvelle option'),
-(30, 127, 'Nouvelle option'),
-(31, 127, 'qsdq'),
-(32, 127, 'qdssqdqs'),
-(33, 127, 'qsdsqdqsd'),
-(34, 127, 'Nouvelle option'),
-(35, 130, 'Nouvelle option'),
-(42, 133, 'ui xd'),
-(37, 130, 'Nouvelle option'),
-(41, 133, 'ui'),
-(39, 130, 'Nouvelle option'),
-(40, 130, 'Nouvelle option'),
-(43, 133, 'je c pa'),
-(44, 133, 'haha fast car go vrooom'),
-(45, 135, 'dfgfdg'),
-(46, 135, 'Nouvelledgfdfgdfg option'),
-(47, 135, 'Nouvelledfgdfg option'),
-(48, 135, 'fg'),
-(70, 145, 'Nouvelle option'),
-(69, 145, 'Nouvelle option'),
-(68, 144, 'Nouvelle option'),
-(67, 144, 'Nouvelle option'),
-(66, 141, 'Nouvelle option'),
-(65, 141, 'Nouvelle option'),
-(64, 141, 'Nouvelle option'),
-(63, 141, 'Nouvelle option'),
-(62, 141, 'Nouvelle option'),
-(61, 139, 'Nouvelle option'),
-(60, 139, 'Nouvelle option'),
-(71, 145, 'Nouvelle option'),
-(72, 146, 'Nouvelle option'),
-(73, 146, 'Nouvelle option'),
-(74, 146, 'Nouvelle option'),
-(75, 146, 'Nouvelle option'),
-(76, 146, 'Nouvelle option'),
-(77, 148, 'a'),
-(78, 148, 'b'),
-(79, 148, 'c'),
-(80, 148, 'Nouvelle option'),
-(81, 150, 'Nouvelle option'),
-(82, 150, 'Nouvelle option'),
-(83, 151, 'Nouvelle option'),
-(84, 151, 'Nouvelle option'),
-(85, 152, 'a'),
-(86, 152, 'b'),
-(87, 152, 'c'),
-(88, 152, 'd'),
-(89, 155, 'Nouvelle option'),
-(90, 155, 'Nouvelle option'),
-(94, 159, 'Nouvelle option'),
-(92, 156, 'Nouvelle option'),
-(93, 156, 'Nouvelle option'),
-(95, 159, 'Nouvelle option'),
-(96, 160, 'Nouvelle option'),
-(97, 160, 'Nouvelle option'),
-(98, 161, 'Nouvelle option'),
-(99, 161, 'a'),
-(100, 161, 'a'),
-(101, 161, 'b'),
-(102, 179, 'Nouvelle option'),
-(103, 179, 'Nouvelle option'),
-(104, 180, 'Nouvelle option'),
-(105, 180, 'Nouvelle option'),
-(106, 185, 'UHU'),
-(107, 185, 'Scotch'),
-(108, 185, '3M'),
-(109, 185, 'Cléopâtre'),
-(110, 185, 'Marque distributeur'),
-(111, 185, 'Autres'),
-(112, 186, 'Le bâton'),
-(113, 186, 'Le pot'),
-(114, 186, 'Le pinceau'),
-(115, 186, 'La patafix'),
-(116, 186, 'Ton CACA');
+) ENGINE=MyISAM AUTO_INCREMENT=159 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -190,15 +70,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `type` varchar(255) NOT NULL,
   PRIMARY KEY (`question_id`),
   KEY `survey_id` (`survey_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=188 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `questions`
---
-
-INSERT INTO `questions` (`question_id`, `survey_id`, `title`, `type`) VALUES
-(95, 55, 'Nouvelle question', 'input'),
-(96, 55, 'Nouvelle question', 'input');
+) ENGINE=MyISAM AUTO_INCREMENT=207 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -216,14 +88,7 @@ CREATE TABLE IF NOT EXISTS `surveys` (
   `finished` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`survey_id`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `surveys`
---
-
-INSERT INTO `surveys` (`survey_id`, `owner_id`, `title`, `creation_date`, `members`, `finished`) VALUES
-(55, 1, 'Nouveau sondage', '1970-01-01', 12, 1);
+) ENGINE=MyISAM AUTO_INCREMENT=110 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

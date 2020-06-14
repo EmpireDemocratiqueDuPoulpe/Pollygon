@@ -49,8 +49,7 @@ $answers_count = count($answers);
 $last_answer = $AnswerManager->getLastAnswerFromUser($survey_id, $_SESSION["user_id"]);
 $selected_id = -1;
 
-if ($answers_count == count($questions_id)) {
-    $SurveyManager->addMembers($survey_id, 1);
+if ($AnswerManager->isLastAnswer($survey_id, $_SESSION["user_id"])) {
     setSuccess(SURVEY_ANSWERED);
     redirectTo("./home.php");
 }

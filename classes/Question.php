@@ -358,7 +358,7 @@ class Question {
 
                     if ($editMode) {
                         $display = '<input type="text" id="question_unique_title_'.$id.'" name="question_unique_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
-                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice.php?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
+                        $delete = '<a class="deleteChoice" href="./php/survey/delete_choice.php?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
                                         '.file_get_contents(ROOT."/assets/images/icons/del_survey.svg").'
                                     </a>';
                     }
@@ -395,7 +395,7 @@ class Question {
 
                     $html .= '
                         <div class="radio_label">
-                            <input class="btn filled smaller-2" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
+                            <input class="btn filled smaller" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
                         </div>
                     ';
                 }
@@ -418,7 +418,7 @@ class Question {
 
                     if ($editMode) {
                         $display = '<input type="text" id="question_multiple_title_'.$id.'" name="question_multiple_title_'.$id.'" placeholder="Nouvelle option" value="'.$value.'" required>';
-                        $delete = '<a class="deleteChoice" href="./php/survey/deleteChoice.php?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
+                        $delete = '<a class="deleteChoice" href="./php/survey/delete_choice.php?survey='.$survey_id.'&selected='.$question["question_id"].'&choice='.$id.'">
                                         '.file_get_contents(ROOT."/assets/images/icons/del_survey.svg").'
                                     </a>';
                     }
@@ -453,7 +453,7 @@ class Question {
 
                     $html .= '
                         <div class="checkbox_label">
-                            <input class="btn filled smaller-2" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
+                            <input class="btn filled smaller" type="submit" name="setChoices" value="ENREGISTRER OPTS.">
                         </div>
                     ';
                 }
@@ -567,6 +567,21 @@ class Question {
     }
 
     // REMOVE
+    public function delete(int $question_id) : bool {
+        PDOFactory::sendQuery(
+            $this->_db,
+            'DELETE FROM questions WHERE question_id = :question_id;
+                DELETE FROM choices WHERE question_id = :question_id;',
+            ["question_id" => $question_id],
+            false
+        );
+
+        return !((bool) PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT question_id FROM questions WHERE question_id = :question_id',
+            ["question_id" => $question_id]
+        ));
+    }
 
     // CHECK
 
@@ -602,7 +617,7 @@ class Question {
         $question = $this->get($survey_id, $question_id);
         $question_title = $question["title"];
         $question_type = $question["type"];
-        $formURI = $editMode ? "./php/survey/set_question_title.php" : "./php/survey/set_question_response.php";
+        $formURI = $editMode ? "./php/survey/edit_question.php" : "./php/survey/set_question_response.php";
         $disabledAnswer = $editMode ? "disabled" : "";
 
         // Set title
@@ -619,6 +634,7 @@ class Question {
             <input type="hidden" id="survey_id" name="survey_id" value="'.$survey_id.'">
             <input type="hidden" id="question_id" name="question_id" value="'.$question_id.'">';
 
+        // Add submit buttons
         $submit_btn = "";
 
         if (!$editMode AND !$analytics) {
@@ -626,6 +642,8 @@ class Question {
 
             if (!is_null($answer_id))
                 $id_inputs .= '<input type="hidden" id="answer_id" name="answer_id" value="'.$answer_id.'">';
+        } else if ($editMode) {
+            $submit_btn = '<input class="btn filled red smaller" type="submit" name="deleteQuestion" value="SUPPRIMER QUESTION">';
         }
 
         return

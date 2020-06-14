@@ -31,6 +31,16 @@ class Answer {
         }
     }
 
+    public function getLastAnswerValueFromUser(int $survey_id, int $user_id) {
+        $last_answer = PDOFactory::sendQuery(
+            $this->_db,
+            'SELECT answer_id, question_id, survey_id, owner_id, value FROM answers WHERE survey_id = :survey_id AND owner_id = :owner_id ORDER BY answer_id DESC LIMIT 1',
+            ["survey_id" => $survey_id, "owner_id" => $user_id]
+        );
+
+        return $last_answer;
+    }
+
     public function getNumberOfAnsweredSurveys(int $user_id) : int {
         $number = PDOFactory::sendQuery(
             $this->_db,
@@ -123,4 +133,29 @@ class Answer {
     // REMOVE
 
     // CHECK
+    public function isLastAnswer(int $survey_id, int $user_id) : bool {
+        // Get count of answer
+        $answers_count = PDOFactory::sendQuery($this->_db, 'SELECT COUNT(*) AS count FROM answers WHERE owner_id = :owner_id', ["owner_id" => $user_id]);
+
+        if (!$answers_count) { return false; }
+        else                { $answers_count = $answers_count[0]["count"]; }
+
+        // Get count of question
+        $questions_count = PDOFactory::sendQuery($this->_db, 'SELECT COUNT(*) AS count FROM questions WHERE survey_id = :survey_id', ["survey_id" => $survey_id]);
+
+        if (!$questions_count)  { return false; }
+        else                    { $questions_count = $questions_count[0]["count"]; }
+
+        // Get value of the last answer
+        $last_answer = $this->getLastAnswerValueFromUser($survey_id, $user_id);
+
+        if ($last_answer) {
+            $last_answer = strlen($last_answer[0]["value"]) > 0;
+        } else {
+            $last_answer = false;
+        }
+
+        // Compare and return
+        return ($answers_count >= $questions_count) AND $last_answer;
+    }
 }
