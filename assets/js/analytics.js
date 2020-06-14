@@ -58,13 +58,15 @@ function drawQCMorUChart(){
     var div = $("#QCMChart");
     var div_ID = "";
 
-    if(!div.length){
-        var div = $("#QCUChart");
-    }else{div_ID = "QCMChart"}
+    if (div.length) {
+        div_ID = "QCMChart";
+    } else {
+        div = $("#QCUChart");
 
-    if(!div.length){
-        return;
-    }else{div_ID = "QCUChart"}
+        if (div.length) {
+            div_ID = "QCUChart"
+        } else return;
+    }
 
     var question_id = div.data().questionId;
     var survey_id = div.data().surveyId;
